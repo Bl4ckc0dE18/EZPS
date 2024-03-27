@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(isset($_SESSION['admin'])){
-    header('location:home.php');
+    header('location:home');
   }
 ?>
 <?php include 'includes/header.php'; ?>

@@ -1,4 +1,4 @@
-<?php $posistion = $user['position']; ?>
+<?php $position = $user['position']; ?>
 
 
 <aside class="main-sidebar"  style="height:100%">
@@ -17,9 +17,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
-        <li class=""><a href="home.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>   
-              <li><a href="attendance.php"><i class="fa fa-th-list"></i> <span>Attendance</span></a></li>  
+              <li><a href="attendance"><i class="fa fa-th-list"></i> <span>Attendance</span></a></li>  
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
@@ -29,22 +29,22 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <?php if($posistion == 'Admin' ||$posistion == 'Human Resources' ){?>
-            <li><a href="employee.php"><i class="fa fa-circle-o"></i> Employee List</a></li>    
-            <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Schedules</a></li>
-            <li><a href="leave.php"><i class="fa fa-circle-o"></i> Manage Employees Leave</a></li>
+          <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+            <li><a href="employee"><i class="fa fa-circle-o"></i> Employee List</a></li>    
+            <li><a href="schedule"><i class="fa fa-circle-o"></i> Schedules</a></li>
+            <li><a href="leave"><i class="fa fa-circle-o"></i> Manage Employees Leave</a></li>
             
             <?php }?>
 
-            <?php if($posistion == 'Admin' ||$posistion == 'Accountant' ){?>
-            <li><a href="bonus.php"><i class="fa fa-circle-o"></i> Bonus</a></li>
+            <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
+            <li><a href="bonus"><i class="fa fa-circle-o"></i> Bonus</a></li>
             <?php }?>
           </ul>
         </li>
         <!--  -->
 
         <?php 
-            if($posistion == 'Admin' ||$posistion == 'Accountant' ){
+            if($position == 'Admin' ||$position == 'Accountant' ){
               ?>
         <li class="treeview">
           <a href="#">
@@ -56,12 +56,12 @@
           </a>
           <ul class="treeview-menu">
 
-            <li><a href="benefits.php"><i class="fa fa-circle-o"></i> Benefit Records</a></li>
-            <li><a href="sss.php"><i class="fa fa-circle-o"></i> SSS</a></li>
-            <li><a href="pagibig.php"><i class="fa fa-circle-o"></i> PAG-IBIG</a></li>
-            <li><a href="philhealth.php"><i class="fa fa-circle-o"></i> PHILHEALTH</a></li> 
-            <li><a href="loan.php"><i class="fa fa-circle-o"></i> Loan</a></li>
-            <li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
+            <li><a href="benefits"><i class="fa fa-circle-o"></i> Benefit Records</a></li>
+            <li><a href="sss"><i class="fa fa-circle-o"></i> SSS</a></li>
+            <li><a href="pagibig"><i class="fa fa-circle-o"></i> PAG-IBIG</a></li>
+            <li><a href="philhealth"><i class="fa fa-circle-o"></i> PHILHEALTH</a></li> 
+            <li><a href="loan"><i class="fa fa-circle-o"></i> Loan</a></li>
+            <li><a href="cashadvance"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
 
           </ul>
         </li>
@@ -71,20 +71,20 @@
         
         <!--  -->
         
-        <?php if($posistion == 'Admin' ||$posistion == 'Human Resources' ){?>
-        <li><a href="position.php"><i class="fa fa-building"></i> <span>Positions</span></a></li>
-        <?php } if($posistion == 'Admin' ){?>
-        <li><a href="user.php"><i class="fa fa-user"></i> <span>User</span></a></li>
+        <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+        <li><a href="position"><i class="fa fa-building"></i> <span>Positions</span></a></li>
+        <?php } if($position == 'Admin' ){?>
+        <li><a href="user"><i class="fa fa-user"></i> <span>User</span></a></li>
         <?php }?>
-        <?php if($posistion == 'Admin' ||$posistion == 'Human Resources' ){?>
-        <li><a href="audit.php"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
+        <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+        <li><a href="audit"><i class="fa fa-history"></i> <span>Audit Trail Record</span></a></li>
         <?php }?>
         <li class="header">PRINTABLES</li>
-        <?php if($posistion == 'Admin' ||$posistion == 'Accountant' ){?>
-        <li><a href="payroll.php"><i class="fa fa-columns"></i> <span>Payroll</span></a></li>
-        <?php } if($posistion == 'Admin' ||$posistion == 'Human Resources' ){?>
-        <li><a href="schedule_employee.php"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
-        <li><a href="dtr.php"><i class="fa fa-calendar"></i><span>Date and Time Record</span></a></li>
+        <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
+        <li><a href="payroll"><i class="fa fa-columns"></i> <span>Payroll</span></a></li>
+        <?php } if($position == 'Admin' ||$position == 'Human Resources' ){?>
+        <li><a href="schedule_employee"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
+        <li><a href="dtr"><i class="fa fa-calendar"></i><span>Date and Time Record</span></a></li>
        
         <?php }?>
         <!-- <li class="header">
