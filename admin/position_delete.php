@@ -40,6 +40,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: position.php');
+	header('location: position');
 	
 ?>

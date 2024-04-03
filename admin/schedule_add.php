@@ -36,6 +36,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: schedule.php');
+	header('location: schedule');
 
 ?>

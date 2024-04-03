@@ -47,5 +47,5 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: user.php');
+	header('location: user');
 ?>

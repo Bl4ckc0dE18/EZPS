@@ -39,5 +39,5 @@
 		$_SESSION['error'] = 'Select user to edit first';
 	}
 
-	header('location: user.php');
+	header('location: user');
 ?>

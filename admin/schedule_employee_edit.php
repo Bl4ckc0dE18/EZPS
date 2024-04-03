@@ -42,5 +42,5 @@
 		$_SESSION['error'] = 'Select schedule to edit first';
 	}
 
-	header('location: schedule_employee.php');
+	header('location: schedule_employee');
 ?>

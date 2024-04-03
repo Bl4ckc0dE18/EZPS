@@ -21,6 +21,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: sss.php');
+	header('location: sss');
 
 ?>
