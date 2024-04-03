@@ -18,6 +18,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location:benefits.php');
+	header('location:benefits');
 
 ?>

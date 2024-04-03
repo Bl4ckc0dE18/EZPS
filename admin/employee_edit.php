@@ -50,5 +50,5 @@
 		$_SESSION['error'] = 'Select employee to edit first';
 	}
 
-	header('location: employee.php');
+	header('location: employee');
 ?>

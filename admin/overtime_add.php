@@ -27,6 +27,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: overtime.php');
+	header('location: overtime');
 
 ?>

@@ -128,7 +128,7 @@
                             }
     
                 		}
-                        header('location: payroll.php');
+                        header('location: payroll');
                
             }
         }
@@ -138,7 +138,7 @@
 
 		
 	
-    header('location: payroll.php');
+    header('location: payroll');
 
 
 ?>

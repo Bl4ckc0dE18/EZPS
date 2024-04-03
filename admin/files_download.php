@@ -62,6 +62,6 @@ $stmt->close();
 $conn->close();
 
 // Redirect to home.php
-header('location: home.php');
+header('location: home');
 exit; // Ensure script execution stops after the redirect
 ?>

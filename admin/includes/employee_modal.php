@@ -1,6 +1,6 @@
 <!-- Add -->
 <div class="modal fade" id="addnew">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <div class="modal-content">
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,62 +10,82 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="employee_add.php" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="employee_id" class="col-sm-3 control-label">Employee ID</label>
+                    <label for="firstname" class="col-sm-2 control-label">Firstname</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    </div>
+
+                    
+                    <label for="employee_id" class="col-sm-2 control-label">Employee ID</label>
+
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="employee_id" name="employee_id" readonly placeholder="Automated">
                     </div>
+                                        
+
+                   
                 </div>
 
                 <div class="form-group">
-                    <label for="employee_rfid" class="col-sm-3 control-label">Employee RFID</label>
+                  	
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="employee_rfid" name="employee_rfid">
-                    </div>
-                </div>
+                    <label for="firstname" class="col-sm-2 control-label">Middlename</label>
 
-                <div class="form-group">
-                  	<label for="firstname" class="col-sm-3 control-label">Firstname</label>
-
-                  	<div class="col-sm-9">
+                  	<div class="col-sm-4">
                     	<input type="text" class="form-control" id="firstname" name="firstname" required>
                   	</div>
+
+                    <label for="employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
+
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="employee_rfid" name="employee_rfid">
+                    </div>
+
+                   
                 </div>
                 <div class="form-group">
-                  	<label for="lastname" class="col-sm-3 control-label">Lastname</label>
+                  <label for="lastname" class="col-sm-2 control-label">Lastname</label>
 
-                  	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="lastname" name="lastname" required>
-                  	</div>
-                </div>
-                <div class="form-group">
-                  	<label for="address" class="col-sm-3 control-label">Address</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                  </div>
 
-                  	<div class="col-sm-9">
-                      <textarea class="form-control" name="address" id="address"></textarea>
-                  	</div>
-                </div>
-                <div class="form-group">
-                  	<label for="datepicker_add" class="col-sm-3 control-label">Birthdate</label>
+                  <label for="datepicker_add" class="col-sm-2 control-label">Birthdate</label>
 
-                  	<div class="col-sm-9"> 
+                  	<div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_add" name="birthdate">
                       </div>
                   	</div>
                 </div>
-                <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Contact Info</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="contact" name="contact">
+                <div class="form-group">
+                  	<label for="address" class="col-sm-2 control-label">Address</label>
+
+                  	<div class="col-sm-4">
+                      <!-- <input type="text" class="form-control" id="address" name="address" required> -->
+                      <textarea class="form-control" name="address" id="address" style="resize: none;"></textarea>
+
+                  	</div>
+
+                    <label for="photo" class="col-sm-2 control-label">Photo</label>
+
+                    <div class="col-sm-4">
+                      <input type="file" name="photo" id="photo">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="gender" class="col-sm-3 control-label">Gender</label>
+                    <label for="contact" class="col-sm-2 control-label">Contact Info</label>
 
-                    <div class="col-sm-9"> 
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="contact" name="contact">
+                    </div>
+
+
+                    <label for="gender" class="col-sm-2 control-label">Gender</label>
+
+                    <div class="col-sm-4"> 
                       <select class="form-control" name="gender" id="gender" required>
                         <option value="" selected>- Select -</option>
                         <option value="Male">Male</option>
@@ -73,26 +93,24 @@
                       </select>
                     </div>
                 </div>
-                <!--  -->
                 <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Email</label>
+                    <label for="contact" class="col-sm-2 control-label">Email</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="email" name="email">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Password</label>
 
-                    <div class="col-sm-9">
+                    <label for="contact" class="col-sm-2 control-label">Password</label>
+
+                    <div class="col-sm-4">
                       <input type="password" class="form-control" id="password" name="password">
                     </div>
                 </div>
                 <!--  -->
                 <div class="form-group">
-                    <label for="position" class="col-sm-3 control-label">Position</label>
+                    <label for="position" class="col-sm-2 control-label">Position</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <select class="form-control" name="position" id="position" required>
                         <option value="" selected>- Select -</option>
                         <?php
@@ -106,74 +124,69 @@
                         ?>
                       </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="schedule" class="col-sm-3 control-label">Schedule</label>
+                    <label for="gender" class="col-sm-2 control-label">Day Off</label>
 
-                    <div class="col-sm-9">
-                      <select class="form-control" id="schedule" name="schedule" required>
-                        <option value="" selected>- Select -</option>
-                        <?php
-                          $sql = "SELECT * FROM schedules";
-                          $query = $conn->query($sql);
-                          while($srow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
-                            ";
-                          }
-                        ?>
-                      </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="gender" class="col-sm-3 control-label">Day Off</label>
+                      <div class="col-sm-4"> 
+                        <select class="form-control" name="dayoff" id="dayoff" required>
+                          <option value="" selected>- Select -</option>
+                          <option value="SUN">SUN</option>
+                          <option value="MON">MON</option>
+                          <option value="TUE">TUE</option>
+                          <option value="WED">WED</option>
+                          <option value="THU">THU</option>
+                          <option value="FRI">FRI</option>
+                          <option value="SAT">SAT</option>
+                        </select>
+                      </div>
 
-                    <div class="col-sm-9"> 
-                      <select class="form-control" name="dayoff" id="dayoff" required>
-                        <option value="" selected>- Select -</option>
-                        <option value="SUN">SUN</option>
-                        <option value="MON">MON</option>
-                        <option value="TUE">TUE</option>
-                        <option value="WED">WED</option>
-                        <option value="THU">THU</option>
-                        <option value="FRI">FRI</option>
-                        <option value="SAT">SAT</option>
-                      </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="eleave" class="col-sm-3 control-label">Leave Day</label>
 
-                    <div class="col-sm-9">
+                </div>
+            
+                <div class="form-group">
+                <label for="schedule" class="col-sm-2 control-label">Schedule</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control" id="schedule" name="schedule" required>
+                      <option value="" selected>- Select -</option>
+                      <?php
+                        $sql = "SELECT * FROM schedules";
+                        $query = $conn->query($sql);
+                        while($srow = $query->fetch_assoc()){
+                          echo "
+                            <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
+                          ";
+                        }
+                      ?>
+                    </select>
+                </div>
+                    
+
+                    <label for="eleave" class="col-sm-2 control-label">Leave Day</label>
+
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="eleave" name="eleave">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="datepicker_employee_sadd" class="col-sm-3 control-label">Date of Start Contract</label>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="datepicker_employee_sadd" class="col-sm-2 control-label">Date of Start Contract</label>
 
-                    <div class="col-sm-9"> 
+                    <div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_employee_sadd" name="datepicker_employee_sadd" required>
                       </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="datepicker_employee_add" class="col-sm-3 control-label">Date of end contract</label>
 
-                    <div class="col-sm-9"> 
+                    <label for="datepicker_employee_add" class="col-sm-2 control-label">Date of end contract</label>
+
+                    <div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_employee_add" name="datepicker_employee_add" required>
                       </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo</label>
-
-                    <div class="col-sm-9">
-                      <input type="file" name="photo" id="photo">
-                    </div>
-                </div>
-                
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -186,7 +199,7 @@
 
 <!-- Edit -->
 <div class="modal fade" id="edit">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <div class="modal-content">
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -197,84 +210,89 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="employee_edit.php">
             		<input type="hidden" class="empid" name="id">
-                <div class="form-group">
-                    <label for="edit_employee_id" class="col-sm-3 control-label">Employee ID</label>
 
-                    <div class="col-sm-9">
+                <div class="form-group">
+                    <label for="edit_firstname" class="col-sm-2 control-label">Firstname</label>
+
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="edit_firstname" name="firstname">
+                    </div>
+               
+                    <label for="edit_employee_id" class="col-sm-2 control-label">Employee ID</label>
+
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="edit_employee_id" name="employee_id" readonly>
                     </div>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="edit_employee_rfid" class="col-sm-3 control-label">Employee RFID</label>
+                    <label for="firstname" class="col-sm-2 control-label">Middlename</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    </div>
+
+                    <label for="edit_employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
+
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="edit_employee_rfid" name="employee_rfid">
                     </div>
                 </div>
 
+                
                 <div class="form-group">
-                    <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
+                    <label for="edit_lastname" class="col-sm-2 control-label">Lastname</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_firstname" name="firstname">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_lastname" class="col-sm-3 control-label">Lastname</label>
-
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="edit_lastname" name="lastname">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_address" class="col-sm-3 control-label">Address</label>
 
-                    <div class="col-sm-9">
-                      <textarea class="form-control" name="address" id="edit_address"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="datepicker_edit" class="col-sm-3 control-label">Birthdate</label>
+                    <label for="datepicker_edit" class="col-sm-2 control-label">Birthdate</label>
 
-                    <div class="col-sm-9"> 
+                    <div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_edit" name="birthdate">
                       </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_contact" class="col-sm-3 control-label">Contact Info</label>
+                    <label for="edit_address" class="col-sm-2 control-label">Address</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_contact" name="contact">
+                    <div class="col-sm-4">
+                      <textarea class="form-control" name="address" id="edit_address"  style="resize: none;"></textarea>
+                    </div>
+
+                    <label for="contact" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="edit_email" name="email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_gender" class="col-sm-3 control-label">Gender</label>
+                    <label for="edit_contact" class="col-sm-2 control-label">Contact Info</label>
 
-                    <div class="col-sm-9"> 
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="edit_contact" name="contact">
+                    </div>
+
+                    <label for="edit_gender" class="col-sm-2 control-label">Gender</label>
+
+                    <div class="col-sm-4"> 
                       <select class="form-control" name="gender" id="edit_gender">
                         <option selected id="gender_val"></option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
                     </div>
+
                 </div>
                 <!--  -->
-                <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Email</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_email" name="email">
-                    </div>
-                </div>
-                
                 <!--  -->
                 <div class="form-group">
-                    <label for="edit_position" class="col-sm-3 control-label">Position</label>
+                    <label for="edit_position" class="col-sm-2 control-label">Position</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <select class="form-control" name="position" id="edit_position">
                         <option selected id="position_val"></option>
                         <?php
@@ -288,11 +306,26 @@
                         ?>
                       </select>
                     </div>
+                    <label for="dayoff_edit" class="col-sm-2 control-label">Day Off</label>
+
+                    <div class="col-sm-4"> 
+                      <select class="form-control" name="dayoff_edit" id="dayoff_edit" required>
+                        <option value="" selected>- Select -</option>
+                        <option value="SUN">SUN</option>
+                        <option value="MON">MON</option>
+                        <option value="TUE">TUE</option>
+                        <option value="WED">WED</option>
+                        <option value="THU">THU</option>
+                        <option value="FRI">FRI</option>
+                        <option value="SAT">SAT</option>
+                      </select>
+                    </div>
+
                 </div>
                 <div class="form-group">
-                    <label for="edit_schedule" class="col-sm-3 control-label">Schedule</label>
+                    <label for="edit_schedule" class="col-sm-2 control-label">Schedule</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <select class="form-control" id="edit_schedule" name="schedule">
                         <option selected id="schedule_val"></option>
                         <?php
@@ -306,49 +339,32 @@
                         ?>
                       </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="dayoff_edit" class="col-sm-3 control-label">Day Off</label>
+                    <label for="edit_eleave" class="col-sm-2 control-label">Leave Day</label>
 
-                    <div class="col-sm-9"> 
-                      <select class="form-control" name="dayoff_edit" id="dayoff_edit" required>
-                        <option value="" selected>- Select -</option>
-                        <option value="SUN">SUN</option>
-                        <option value="MON">MON</option>
-                        <option value="TUE">TUE</option>
-                        <option value="WED">WED</option>
-                        <option value="THU">THU</option>
-                        <option value="FRI">FRI</option>
-                        <option value="SAT">SAT</option>
-                      </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_eleave" class="col-sm-3 control-label">Leave Day</label>
-
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                       <input type="text" class="form-control" id="edit_eleave" name="eleave">
                     </div>
+                    
                 </div>
-                <div class="form-group">
-                    <label for="datepicker_employee_sedit" class="col-sm-3 control-label">Date of Start Contract</label>
 
-                    <div class="col-sm-9"> 
+                <div class="form-group">
+                <label for="datepicker_employee_sedit" class="col-sm-2 control-label">Date of Start Contract</label>
+
+                    <div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_employee_sedit" name="datepicker_employee_sedit" required>
                       </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="datepicker_employee_edit" class="col-sm-3 control-label">Date of End Contract</label>
+                    <label for="datepicker_employee_edit" class="col-sm-2 control-label">Date of End Contract</label>
 
-                    <div class="col-sm-9"> 
+                    <div class="col-sm-4"> 
                       <div class="date">
                         <input type="text" class="form-control" id="datepicker_employee_edit" name="datepicker_employee_edit" required>
                       </div>
                     </div>
                 </div>
+
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>

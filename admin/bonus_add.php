@@ -36,6 +36,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: bonus.php');
+	header('location: bonus');
 
 ?>

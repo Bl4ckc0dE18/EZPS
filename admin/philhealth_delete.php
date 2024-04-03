@@ -15,6 +15,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: philhealth.php');
+	header('location: philhealth');
 	
 ?>

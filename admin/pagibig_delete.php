@@ -15,6 +15,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: pagibig.php');
+	header('location: pagibig');
 	
 ?>

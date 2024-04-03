@@ -75,6 +75,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 	
-	header('location: attendance.php');
+	header('location: attendance');
 
 ?>

@@ -17,6 +17,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location:cashadvance.php');
+	header('location:cashadvance');
 
 ?>

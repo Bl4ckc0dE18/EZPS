@@ -26,6 +26,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: cashadvance.php');
+	header('location: cashadvance');
 
 ?>

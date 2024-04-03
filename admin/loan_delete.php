@@ -38,6 +38,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: loan.php');
+	header('location: loan');
 	
 ?>

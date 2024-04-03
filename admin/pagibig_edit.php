@@ -22,6 +22,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location:pagibig.php');
+	header('location:pagibig');
 
 ?>

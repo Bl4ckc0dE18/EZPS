@@ -21,6 +21,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location:bonus.php');
+	header('location:bonus');
 
 ?>
