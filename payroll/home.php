@@ -70,7 +70,7 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="employee" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -91,7 +91,7 @@
               <div class="icon">
                 <i class="ion ion-log-out"></i>
               </div>
-              <a href="leave.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="leave" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->  
@@ -116,7 +116,7 @@
               <div class="icon">
                 <i class="ion ">₱</i>
               </div>
-              <a href="payroll.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="payroll" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -141,7 +141,7 @@
               <div class="icon">
                 <i class="ion ">₱</i>
               </div>
-              <a href="benefits.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="benefits" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
