@@ -179,9 +179,9 @@
           </div>
           <!-- ./col -->  
           
-            <div class="col-lg-3 col-xs-6">
+            <!-- <div class="col-lg-3 col-xs-6"> -->
             <!-- small box -->
-            <div class="small-box bg-teal">
+            <!-- <div class="small-box bg-teal">
               <div class="inner">
                 <h3>Biometrics</h3>
                 <p>Attendance</p>
@@ -192,7 +192,7 @@
               <a href="#biometrics" data-toggle="modal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
 
             </div>
-          </div>
+          </div> -->
           <!-- ./col -->
             <?php }?>
         <!-- Small boxes (End box) -->

@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Audit Trail Record
+        Schedules
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -52,7 +52,7 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Date</th>
+                <th>Date</th>
                   <th>Time</th>
                   <th>Name</th>
                   <th>Description</th>
@@ -60,19 +60,16 @@
                 </thead>
                 <tbody>
                   <?php
-                    //$sql = "SELECT * FROM audit_trail_record WHERE datefrom >= '$from' AND dateto <= '$to'";
-                    $sql = "SELECT * FROM audit_trail_record ";
+                    $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
-                          
-                          <td>".date('M d, Y', strtotime($row['audit_date']))."</td>
-                          <td>".date('h:i A', strtotime($row['audit_time']))."</td>
-                          <td>".$row['user']."</td>
-                          <td>".$row['description']."</td>
+                          <td>".$row['employee_id']."</td>
+                          <td>".$row['firstname'].' '.$row['lastname']."</td>
+                          <td>".date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out']))."</td>
                           <td>
-                              <a href='#view' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-eye'></i> Edit</a> 
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['empid']."'><i class='fa fa-edit'></i> Edit</button>
                           </td>
                         </tr>
                       ";
