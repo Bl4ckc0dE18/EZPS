@@ -344,7 +344,7 @@ $(function(){
         pointHighlightStroke: 'rgba(210, 214, 222, 1)',
         data                : <?php echo $leave; ?>
       }
-      ,
+      /*,
       {
         label               : 'Absent',
         fillColor           : 'rgba(217, 83, 79, 1)',
@@ -354,7 +354,7 @@ $(function(){
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(217, 83, 79, 1)',
         data                : <?php echo $leave; ?>
-      }
+      }*/
 
     ]
   }
