@@ -8,32 +8,64 @@
 
 		$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
 
-
+		$no = 1;
 		$query = $conn->query($sql);
 		//$total = 0;
 		//$total1 = 0;
 		while($row = $query->fetch_assoc()){
+			$total = $row['netpay'];
 			
-			$contents .= '
+			/**/$contents .= '
 			<tr>
-				<td align="center">'.$row['employee_name'].'</td>
-				<td align="center">'.$row['employee_id'].'</td>
-				<td align="center">'.$row['employee_id'].'</td>
-				<td align="center">'.$row['paystatus'].'</td>
-				<td align="center">'.number_format($row['netpay'], 2).'</td>
+				<td  align="center">'.$no++.'</td>
+				<td  align="center">'.$row['employee_name'].'</td>
+				
+				<td  align="center"></td>
+
+				<td  align="center">'.$row['employee_id'].'</td>
+				
+				<td  align="right">'.number_format($row['netpay'], 2).'</td>
+				<td  align="right">PERA</td>
+				
+				<td align="right">AC</td>
+				<td width="7%" align="right">GAE</td>
+
+				
+				<td align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				<td align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				<td align="center"><b>f<br>g<br>h<br>i<br>j</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				<td align="center"><b>k<br>l<br>m<br>n<br>o</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				<td align="center"><b>p<br>q<br>r<br>s<br>t</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				<td align="center"><b>u<br>v<br>w<br>x<br>y</b></td>
+				<td align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+
+				
+				<td  width="7%" align="right">TD </td>
+				<td width="7%"align="right">NAE  </td>
+
 			</tr>
 			';
 			
 		}
-		//$total = $row['total_net_pay'];
+	 
 		
 
-		//$contents .= '
-			//<tr>
-				//<td colspan="3" align="right"><b>Total</b></td>
-				//<td align="center"><b>'.number_format($total, 2).'</b></td>
-		//	</tr>
-		//';
+		/*$contents .= '
+			<tr>
+				<td colspan="3" align="right"><b>Total</b></td>
+				<td align="center"><b>'.number_format($total, 2).'</b></td>
+			</tr>
+		';*/
 		return $contents;
 	}
 		
@@ -56,11 +88,12 @@
     $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
     $pdf->SetDefaultMonospacedFont('helvetica');  
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
-    $pdf->SetMargins(PDF_MARGIN_LEFT, '10', PDF_MARGIN_RIGHT);  
+    //$pdf->SetMargins(PDF_MARGIN_LEFT, '10', PDF_MARGIN_RIGHT,'10');  
+	$pdf->SetMargins('3', '10', PDF_MARGIN_RIGHT);  
     $pdf->setPrintHeader(false);  
     $pdf->setPrintFooter(false);  
     $pdf->SetAutoPageBreak(TRUE, 10);  
-    $pdf->SetFont('helvetica', '', 7);  
+    $pdf->SetFont('helvetica', '', 5);  
     $pdf->AddPage();  
     $content = '';  
     $content .= '
@@ -68,24 +101,43 @@
 	<h4 align="center">'.$from_title." - ".$to_title.'</h4>
 	<table border="1" cellspacing="0" cellpadding="3">  
 	<tr>  
-		<th width="3%"  align="center"><b>No</b></th>
-		<th width="8%"  align="center"><b>Name</b></th>
-		<th width="5%"  align="center"><b>Position</b></th>
-		<th width="6%"  align="center"><b>Employee ID</b></th>
-		<th width="6%"  align="center"><b>Monthly Salary</b></th>
-		<th width="6%"  align="center" colspan="2"><b>Other Compensation</b></th>
-		<th width="6%" align="center" ><b>Gross Amount </b></th>
-		<th width="6%" colspan="6" align="center" ><b>Deductions</b></th>
-		<th width="6%" align="center" ><b>TOTAL DEDUCTIONS</b></th>
-		<th width="6%"  align="center" ><b>NET AMOUNT DUE<br>* 1st half<br>. 2nd half</b></th>
+		<th width="3%" rowspan="2" align="center"><b><br><br><br><br>NO</b></th>
+		<th width="8%" rowspan="2" align="center"><b><br><br><br><br>NAME</b></th>
+		<th width="6%" rowspan="2" align="center"><b><br><br><br><br>POSITION</b></th>
+		<th width="4%" rowspan="2" align="center"><b><br><br><br><br>EMPLO<br>YEE <br>NO</b></th>
+		<th width="6%" rowspan="2" align="center"><b><br><br><br><br>MONTHLY SALARY</b></th>
+		<th width="12%" height="2" rowspan="1"  align="center"><b><br>OTHER COMPENSATION</b></th>
+
+		<th width="7%" rowspan="2"	align="center" ><b><br><br><br><br>GROSS AMOUNT <BR>EARNED</b></th>
+		<th width="42%" rowspan="1" colspan="7" align="center" ><b><br><br>DEDUCTIONS</b></th>
 		
+		<th width="7%" rowspan="2" align="center" ><b><br><br><br><br>TOTAL<br>DEDUCTIONS</b></th>
+		<th width="7%" rowspan="2" align="center" ><b><br><br><br><br>NET AMOUNT DUE<br> 1st half<br>. 2nd half</b></th>
 	</tr>
 	<tr>
-			<td colspan="4"></td> <!-- Empty cells for Employee Name, Position, Employee ID, and Monthly Salary -->
-			<th width="6%" align="center"><b>Personal Economic Relief Allowance</b></th>
-			<th width="6%" align="center"><b>Additional Compens.</b></th>
-			<td></td> <!-- Empty cell for Status -->
-			<td></td> <!-- Empty cell for Net Pay -->
+			
+			<th width="6%" align="center"><b><br>PERSONAL<br>ECONOMIC<br>RELIEF<br>ALLOWANCE</b></th>
+			<th width="6%" align="center"><b><br><br>ADDITIONAL COMPENS.</b></th>
+
+			<th width="2%" align="center"><b>@<br>#<br>.<br>&<br>!</b></th>
+			<th width="5%"><b>Disallowance<br>Ref-Sal<br>Ref-Ocom<br>NHMC<br>MP2</b></th>
+
+			<th width="2%" align="center"><b>a<br>b<br>c<br>d<br>e</b></th>
+			<th width="5%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
+
+			<th width="2%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
+			<th width="5%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GFAL</b></th>
+
+        	<th width="2%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
+			<th width="5%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>
+
+        	<th width="2%" align="center"><b>p<br>q<br>r<br>s<br>t</b></th>
+			<th width="5%"><b>HDMF MPL<br>H\'DMF Res<br>HDMF Con<br>LBP<br>TUPM-Cd</b></th>
+
+        	<th width="2%" align="center"><b>u<br>v<br>w<br>x<br>y</b></th>
+			<th width="5%"><b>Fin Ass<br>GSIS Educ<br>TUPAEA<br>TUPFA<br>HDMF Eme</b></th>
+
+			
 	</tr>
 
       ';  
