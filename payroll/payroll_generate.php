@@ -171,12 +171,48 @@
 			</tr>
 
 			<tr>
+				<td border="1" rowspan="1"  align="center">B</td>
+				<td colspan="9" align="left">CERTIFIED: Supporting documents complete and proper;
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				and crash available in the amount of P</td>
+				
 				<td border="1" rowspan="1"  align="center">D</td>
-				<td colspan="9" align="left">CERTIFIED: Service duly rendered as stated</td>
-				<td border="1" rowspan="1"  align="center">D</td>
-				<td colspan="10" align="left">CERTIFIED: Service duly rendered as stated</td>
+				<td colspan="13" class="right-border" align="left">CERTIFIED: Each employee whom name appears shown has been 
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				paid the amount indicated opposite is/her name.</td>
 			</tr>
 
+			<tr>
+				<td class="left-border" rowspan="1"  align="center"></td>
+				<td colspan="9" align="left"></td>
+				
+				<td class="left-border" rowspan="1"  align="center"></td>
+				<td colspan="9" align="left"></td>
+
+				<td colspan="1" align="left">OR No.</td>
+				<td colspan="3" class="right-border" align="left">_________________</td>
+
+			</tr>
+
+			<tr>
+				<td colspan="2" class="left-border bottom-border" rowspan="1"  align="center"></td>
+				<td colspan="8" class="bottom-border" align="left"><b>CATALINO A. FORTES JR.</b>
+				<br>Head, Accountant Services</td>
+				
+				<td class="left-border bottom-border" rowspan="1"  align="center"></td>
+					<td class="bottom-border" colspan="9" align="left"> __________________________________________________________________<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					S.D.O
+				</td>
+
+				<td class="bottom-border" colspan="1" align="left">Date:</td>
+				<td colspan="3" class="bottom-border right-border" align="left">_________________</td>
+
+			</tr>
+			
+			
 			
 		';
 		return $contents;
@@ -224,8 +260,12 @@
 			
 	</style>
 
-	<h2 align="center">EZ PAYROLL SYSTEM</h2>
-	<h4 align="center">'.$from_title." - ".$to_title.'</h4>
+	<h2 align="center">POWER BY EZ PAYROLL SYSTEM</h2>
+	<p align="center"><b>TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES<br>
+	Ayala Blvd. Ermita, Manila<br>
+	For the period'.$from_title." - ".$to_title.'</b></p>
+	<h4 align="left">We acknowledge receipt of cash shown opposite names as full comppensation for services rendered for the period covered.<br>
+	<b>ADMINSTRATIVE SECTOR</b></h4>
 	<table border="0" cellspacing="0" cellpadding="3">  
 
 	<tr>  
