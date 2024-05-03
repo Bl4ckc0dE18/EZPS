@@ -16,6 +16,7 @@
 			
 			$netPay = $row['netpay'];
 			$totalSalary += $netPay; 
+			
 			/**/$contents .= '
 			<style>
 				.right-border {
