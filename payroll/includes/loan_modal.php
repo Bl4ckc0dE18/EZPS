@@ -42,12 +42,22 @@
                         <option value='GSIS Opin'>GSIS Opin</option>
                         <option value='GSIS OpLo'>GSIS OpLo</option>
                         <option value='GSIS GFAL'>GSIS GFAL</option>
-                        <option value='Disallowance'>Disallowance</option>
-                        <option value='Disallowance'>Disallowance</option>
-                        <option value='Disallowance'>Disallowance</option>
-                        <option value='Disallowance'>Disallowance</option>
-                        <option value='Disallowance'>Disallowance</option>
-                        <option value='Disallowance'>Disallowance</option>
+                        <option value='GSIS HIP'>GSIS HIP</option>
+                        <option value='GSIS CPL'>GSIS CPL</option>
+                        <option value='GSIS SOS'>GSIS SOS</option>
+                        <option value='GSIS Eplan'>GSIS Eplan</option>
+                        <option value='GSIS Ecard'>GSIS Ecard</option>
+                        <option value='HDMF MPL'>HDMF MPL</option>
+                        <option value="H'DMF Res">H'DMF Res</option>
+                        <option value='LBP'>LBP</option>
+                        <option value='TUPM-Cd'>TUPM-Cd</option>
+                        <option value='Fin Ass'>Fin Ass</option>
+                        <option value='GSIS Educ'>GSIS Educ</option>
+                        <option value='TUPAEA'>TUPAEA</option>
+                        <option value="TUPFA">TUPFA</option>
+                        <option value="HDMF Eme">HDMF Eme</option>
+
+
                       </select>
                     </div>
                   
