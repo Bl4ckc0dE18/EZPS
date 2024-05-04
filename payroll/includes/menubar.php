@@ -53,7 +53,7 @@
           <ul class="treeview-menu">
           <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
             
-            <li><a href="schedule"><i class="fa fa-circle-o"></i> Schedules</a></li>
+            <li><a href="schedule_employees"><i class="fa fa-circle-o"></i> Schedules</a></li>
             <li><a href="leave"><i class="fa fa-circle-o"></i> Manage Employee Schedules</a></li>
             <li><a href="schedule_employee"><i class="fa fa-clock-o"></i> <span> Print Schedule</span></a></li>
             <?php }?>

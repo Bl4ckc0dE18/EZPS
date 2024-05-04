@@ -57,24 +57,21 @@
                   <th>Day</th>
                   <th>Time In</th>
                   <th>Time Out</th>
-                  <th>Tools</th>
+                 
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM schedules";
+                    $sql = "SELECT * FROM employee_schedule";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
-                        <td>".date('h:i A', strtotime($row['time_in']))."</td>
-                        <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                        <td>".date('h:i A', strtotime($row['time_in']))."</td>
+                        <td>".$row['employee_id']."</td>
+                        <td>".$row['name']."</td>
+                        <td>".$row['schedule_day']."</td>
+                          <td>".date('h:i A', strtotime($row['time_in']))."</td>
                           <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                          <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
+                          
                         </tr>
                       ";
                     }
@@ -89,7 +86,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/schedule_modal.php'; ?>
+  <?php include 'includes/schedule_employees_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
