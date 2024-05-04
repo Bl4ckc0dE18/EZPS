@@ -29,10 +29,28 @@
 
                 <div class="form-group">
                     <label for="description" class="col-sm-3 control-label">Description</label>
-
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="description" name="description" required>
+                      <select class="form-control" name="description" id="description">                       
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Ref-Sal'>Ref-Sal</option>
+                        <option value='Ref-Ocom'>Ref-Ocom</option>
+                        <option value='NHMC'>NHMC</option>
+                        <option value='MP2'>MP2</option>
+                        <option value='GSIS MPL'>GSIS MPL</option>
+                        <option value='GSIS Pol'>GSIS Pol</option>
+                        <option value='GSIS ELA'>GSIS ELA</option>
+                        <option value='GSIS Opin'>GSIS Opin</option>
+                        <option value='GSIS OpLo'>GSIS OpLo</option>
+                        <option value='GSIS GFAL'>GSIS GFAL</option>
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Disallowance'>Disallowance</option>
+                        <option value='Disallowance'>Disallowance</option>
+                      </select>
                     </div>
+                  
                 </div>
 
                 <div class="form-group">

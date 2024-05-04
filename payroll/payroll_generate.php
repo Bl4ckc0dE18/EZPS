@@ -296,7 +296,7 @@
 			<th class="bottom-border right-border" width="5%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
 
 			<th class="bottom-border" width="2%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
-			<th class="bottom-border right-border" width="5%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GFAL</b></th>
+			<th class="bottom-border right-border" width="5%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GSIS GFAL</b></th>
 
         	<th class="bottom-border" width="2%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
 			<th class="bottom-border right-border" width="5%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>

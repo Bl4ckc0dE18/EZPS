@@ -42,7 +42,26 @@
           </ul>
         </li>
         <!--  -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-clock-o"></i>
+            <span>Schedules</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+            
+            <li><a href="schedule"><i class="fa fa-circle-o"></i> Schedules</a></li>
+            <li><a href="leave"><i class="fa fa-circle-o"></i> Manage Employee Schedules</a></li>
+            <li><a href="schedule_employee"><i class="fa fa-clock-o"></i> <span> Print Schedule</span></a></li>
+            <?php }?>
 
+            
+          </ul>
+        </li>
+        <!--  -->
         <?php 
             if($position == 'Admin' ||$position == 'Accountant' ){
               ?>
@@ -83,7 +102,7 @@
         <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
         <li><a href="payroll"><i class="fa fa-columns"></i> <span>Payroll</span></a></li>
         <?php } if($position == 'Admin' ||$position == 'Human Resources' ){?>
-        <li><a href="schedule_employee"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
+        
         <li><a href="dtr"><i class="fa fa-calendar"></i><span>Date and Time Record</span></a></li>
        
         <?php }?>
