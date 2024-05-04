@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Schedules
+        Employee Schedules
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -57,23 +57,61 @@
                   <th>Day</th>
                   <th>Time In</th>
                   <th>Time Out</th>
+                  <th>Tools</th>
                  
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM employee_schedule";
+                   $sql = "SELECT employee_id,name,GROUP_CONCAT(id) AS ids,
+                   GROUP_CONCAT(schedule_day) AS schedule_days, 
+                   GROUP_CONCAT(time_in) AS time_ins, 
+                   GROUP_CONCAT(time_out) AS time_outs
+                    FROM employee_schedule 
+                    GROUP BY employee_id";
+                   // $sql = "SELECT * FROM employee_schedule";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+
+                      $ids = explode(',', $row['ids']);
+                      $schedule_days = explode(',', $row['schedule_days']);
+                      $time_ins = explode(',', $row['time_ins']);
+                      $time_outs = explode(',', $row['time_outs']);
                       echo "
                         <tr>
                         <td>".$row['employee_id']."</td>
-                        <td>".$row['name']."</td>
-                        <td>".$row['schedule_day']."</td>
-                          <td>".date('h:i A', strtotime($row['time_in']))."</td>
-                          <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                          
+                        <td>".$row['name']."<td>";
+                        foreach ($schedule_days as $index => $schedule_day) {
+                          echo $schedule_day;
+                          if ($index < count($schedule_days) - 1) {
+                              echo "<br>";
+                              
+                          }
+                      }
+                      echo "<td>";
+                            foreach ($time_ins as $index => $time_in) {
+                              $formatted_time_in = date('h:i A', strtotime($time_in));
+                              echo $formatted_time_in;
+                              if ($index < count($time_ins) - 1) {
+                                  echo "<br>";
+                              }
+                          }
+                      echo "<td>";
+                          foreach ($time_outs as $index => $time_out) {
+                            $formatted_time_out = date('h:i A', strtotime($time_out));
+                            echo $formatted_time_out."<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='$ids[$index]'><span class='fa fa-edit'></span></a> ";
+                            if ($index < count($time_outs) - 1) {
+                                echo "<br>";
+                            }
+                      }    
+                      echo "</td>
+                            <td>                              
+                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>                        
+                            </td>
                         </tr>
-                      ";
+                        ";
+
+
+                          
                     }
                   ?>
                 </tbody>
