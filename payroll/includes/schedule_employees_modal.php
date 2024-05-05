@@ -72,17 +72,47 @@
 </div>
 
 <!-- Edit -->
-<div class="modal fade" id="edit">
+<div class="modal fade" id="edit_schedule">
     <div class="modal-dialog">
         <div class="modal-content">
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Update Schedule</b></h4>
+            	<h4 class="modal-title timeid"><b>Update Schedule</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="schedule_edit.php">
+            	<form class="form-horizontal" method="POST" action="schedule_employees_edit.php">
             		<input type="hidden" id="timeid" name="id">
+
+					<div class="form-group">
+                    		<label for="schedule_day" class="col-sm-3 control-label">Employee ID</label>
+						<div class="col-sm-9">
+							<label class="control-label" id="employee_id_edit" name="employee_id_edit"></label>
+						</div>
+                	</div>
+
+					<div class="form-group">
+                    		<label for="employee_name_edit" class="col-sm-3 control-label">Employee Name</label>
+						<div class="col-sm-9">
+							<label class=" control-label" id="employee_name_edit" name="employee_name_edit"	></label>
+						</div>
+                	</div>
+
+					<div class="form-group">
+                    	<label for="schedule_day_edit" class="col-sm-3 control-label">Schedule Day</label>
+							<div class="col-sm-9">
+							<select class="form-control" name="schedule_day_edit" id="schedule_day_edit">
+							
+								<option value="SUN">SUN</option>
+								<option value="MON">MON</option>
+								<option value="TUE">TUE</option>
+								<option value="WED">WED</option>
+								<option value="THU">THU</option>
+								<option value="FRI">FRI</option>
+								<option value="SAT">SAT</option>
+							</select>
+							</div>
+                </div>	
                 <div class="form-group">
                     <label for="edit_time_in" class="col-sm-3 control-label">Time In</label>
 
@@ -105,6 +135,7 @@
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
             	<button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i> Update</button>
+				<button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
             	</form>
           	</div>
         </div>

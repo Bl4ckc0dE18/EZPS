@@ -98,14 +98,15 @@
                       echo "<td>";
                           foreach ($time_outs as $index => $time_out) {
                             $formatted_time_out = date('h:i A', strtotime($time_out));
-                            echo $formatted_time_out."<a href='#edit_item' data-toggle='modal' class='pull-right edit_item' data-id='$ids[$index]'><span class='fa fa-edit'></span></a> ";
+                            echo $formatted_time_out."<a href='#edit_schedule' data-toggle='modal' class='pull-right' data-id='$ids[$index]'onclick='getRow(".$ids[$index].")'><span class='fa fa-edit'></span></a> ";
                             if ($index < count($time_outs) - 1) {
                                 echo "<br>";
                             }
                       }    
                       echo "</td>
                             <td>                              
-                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>                        
+                                <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>               
+                                <a href='#print' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-print'></i> Print</a>                        
                             </td>
                         </tr>
                         ";
@@ -129,9 +130,9 @@
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
-  $('.edit').click(function(e){
+  $('.edit_schedule').click(function(e){
     e.preventDefault();
-    $('#edit').modal('show');
+    $('#edit_schedule').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
@@ -147,15 +148,19 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'schedule_row.php',
+    url: 'schedule_employees_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
+      //edit
       $('#timeid').val(response.id);
+      $('#employee_id_edit').html(response.employee_id);
+      $('#employee_name_edit').html(response.name);
       $('#edit_time_in').val(response.time_in);
       $('#edit_time_out').val(response.time_out);
       $('#del_timeid').val(response.id);
-      $('#del_schedule').html(response.time_in+' - '+response.time_out);
+      //delete
+      $('#del_schedule').html(response.name);
     }
   });
 }
