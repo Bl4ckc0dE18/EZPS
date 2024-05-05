@@ -161,6 +161,8 @@ function getRow(id){
       $('#del_timeid').val(response.id);
       //delete
       $('#del_schedule').html(response.name);
+      //print
+      $('#del_schedule').html(response.name);
     }
   });
 }
