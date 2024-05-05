@@ -143,9 +143,12 @@
                 </div>
             
                 <div class="form-group">
-                <label for="schedule" class="col-sm-2 control-label">Schedule</label>
-
+                <!-- <label for="schedule" class="col-sm-2 control-label">Schedule</label> -->
+                <label for="basic_salary" class="col-sm-2 control-label">Basic Salary</label>
                 <div class="col-sm-4">
+                      <input type="text" class="form-control" id="basic_salary" name="basic_salary">
+                    </div>
+                <!-- <div class="col-sm-4">
                     <select class="form-control" id="schedule" name="schedule" required>
                       <option value="" selected>- Select -</option>
                       <?php
@@ -158,7 +161,7 @@
                         }
                       ?>
                     </select>
-                </div>
+                </div> -->
                     
 
                     <label for="eleave" class="col-sm-2 control-label">Leave Day</label>
@@ -323,7 +326,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="edit_schedule" class="col-sm-2 control-label">Schedule</label>
+                    <!-- <label for="edit_schedule" class="col-sm-2 control-label">Schedule</label>
 
                     <div class="col-sm-4">
                       <select class="form-control" id="edit_schedule" name="schedule">
@@ -338,7 +341,12 @@
                           }
                         ?>
                       </select>
-                    </div>
+                    </div> -->
+
+                    <label for="basic_salary" class="col-sm-2 control-label">Basic Salary</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" id="basic_salary" name="basic_salary">
+                      </div>
                     <label for="edit_eleave" class="col-sm-2 control-label">Leave Day</label>
 
                     <div class="col-sm-4">

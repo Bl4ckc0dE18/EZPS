@@ -65,7 +65,7 @@
 		}
 	}
 	else{
-		$_SESSION['error'] = 'Select item to delete first or Fill up edit form first';
+		$_SESSION['error'] = 'Fill up edit form first or Select item to delete first';
 	}
 
 	header('location:schedule_employees');
