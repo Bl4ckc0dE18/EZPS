@@ -104,9 +104,10 @@
                             }
                       }    
                       echo "</td>
-                            <td>                              
+                            <td>                       
+                                <a href='#print' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-print'></i> Print</a>                               
                                 <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>               
-                                <a href='#print' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-print'></i> Print</a>                        
+                                
                             </td>
                         </tr>
                         ";
@@ -161,8 +162,9 @@ function getRow(id){
       $('#del_timeid').val(response.id);
       //delete
       $('#del_schedule').html(response.name);
+      $('#employee_id_delete').val(response.employee_id);
       //print
-      $('#del_schedule').html(response.name);
+      $('#print_schedule').html(response.name);
     }
   });
 }
