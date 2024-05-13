@@ -55,8 +55,7 @@ include 'includes/header.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        // Modify your SQL query to fetch data from the necessary tables 
-                                       // $sql = "SELECT * FROM leave_record WHERE leave_status like '$look' ";
+                                       
                                             $sql = "SELECT employees.*, employees.id AS empid, position.*, 
                                                
                                                 GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') AS work_loads,
