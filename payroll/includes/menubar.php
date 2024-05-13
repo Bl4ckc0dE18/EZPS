@@ -54,7 +54,7 @@
           <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
             
             <li><a href="schedule_employees"><i class="fa fa-circle-o"></i> Employee Schedules</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Work Load</a></li>
+            <li><a href="work_load"><i class="fa fa-circle-o"></i> Work Load</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span> Print Schedule</span></a></li>
             <?php }?>
 

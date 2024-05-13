@@ -83,8 +83,8 @@
                           <td>".$row['position']."</td>
                           <td>".$row['created_on']."</td>
                           <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                          <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-success btn-sm edit_user_password btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Password</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                           

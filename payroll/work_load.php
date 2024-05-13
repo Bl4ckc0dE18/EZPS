@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Employee Schedules
+        Employee Work Load Schedules
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -55,62 +55,76 @@
                   <th>Employee No</th>
                   <th>Name</th>
                   <th>Day</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Tools</th>
-                 
+                  <th>Load</th>
+                  <th>Tools</th>               
                 </thead>
                 <tbody>
                   <?php
-                   $sql = "SELECT employee_id,name,GROUP_CONCAT(id) AS ids,
-                   GROUP_CONCAT(schedule_day) AS schedule_days, 
-                   GROUP_CONCAT(time_in) AS time_ins, 
-                   GROUP_CONCAT(time_out) AS time_outs
-                    FROM employee_schedule 
+                  // $sql = "SELECT * FROM work_load";
+                   $sql = "SELECT employee_id,name,
+                   GROUP_CONCAT(id) AS ids,
+                   GROUP_CONCAT(schedule_load) AS schedule_loads, 
+                   GROUP_CONCAT(time_load) AS time_loads 
+                    FROM work_load 
                     GROUP BY employee_id";
-                   // $sql = "SELECT * FROM employee_schedule";
+
+                    
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-
-                      $ids = explode(',', $row['ids']);
-                      $schedule_days = explode(',', $row['schedule_days']);
-                      $time_ins = explode(',', $row['time_ins']);
-                      $time_outs = explode(',', $row['time_outs']);
-                      echo "
-                        <tr>
-                        <td>".$row['employee_id']."</td>
-                        <td>".$row['name']."<td>";
-                        foreach ($schedule_days as $index => $schedule_day) {
-                          echo $schedule_day;
-                          if ($index < count($schedule_days) - 1) {
-                              echo "<br>";
-                              
-                          }
-                      }
-                      echo "<td>";
-                            foreach ($time_ins as $index => $time_in) {
-                              $formatted_time_in = date('h:i A', strtotime($time_in));
-                              echo $formatted_time_in;
-                              if ($index < count($time_ins) - 1) {
+                        $ids = explode(',', $row['ids']);
+                        $schedule_loads = explode(',', $row['schedule_loads']);
+                       
+                        $time_loads = explode(',', $row['time_loads']);
+                        echo "
+                          <tr>
+                          <td>".$row['employee_id']."</td>
+                          <td>".$row['name']."<td>";
+                          foreach ($schedule_loads as $index => $schedule_load) {
+                            echo $schedule_load;
+                            if ($index < count($schedule_loads) - 1) {
+                                echo "<br>";
+                                
+                            }
+                        }
+                        echo "<td>";
+                            foreach ($time_loads as $index => $time_load) {
+                             
+                              echo $time_load."<a href='#edit_schedule' data-toggle='modal' class='pull-right' data-id='$ids[$index]'onclick='getRow(".$ids[$index].")'><span class='fa fa-edit'></span></a> ";
+                              if ($index < count($time_loads) - 1) {
                                   echo "<br>";
                               }
-                          }
-                      echo "<td>";
-                          foreach ($time_outs as $index => $time_out) {
-                            $formatted_time_out = date('h:i A', strtotime($time_out));
-                            echo $formatted_time_out."<a href='#edit_schedule' data-toggle='modal' class='pull-right' data-id='$ids[$index]'onclick='getRow(".$ids[$index].")'><span class='fa fa-edit'></span></a> ";
-                            if ($index < count($time_outs) - 1) {
-                                echo "<br>";
-                            }
-                      }    
-                      echo "</td>
+                        }    
+                        echo "</td>
+                              <td>                       
+                                 
+                                  <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>               
+                                  
+                              </td>
+                          </tr>
+                          ";
+                    
+
+
+
+
+
+
+
+
+                      /*echo "
+                        <tr>
+                            <td>".$row['employee_id']."</td>
+                            <td>".$row['name']."</td>
+                            <td>".$row['schedule_load']."</td>
+                            <td>".$row['time_load']."</td> 
+                        
                             <td>                       
                                
                                 <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>               
                                 
                             </td>
                         </tr>
-                        ";
+                        ";*/
 
 
                           
@@ -126,7 +140,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/schedule_employees_modal.php'; ?>
+  <?php include 'includes/work_load_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
