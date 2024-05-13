@@ -42,63 +42,76 @@ include 'includes/header.php';
                             <div class="box-body">
                                 <table id="example1" class="table table-bordered">
                                     <thead>
-                                        <th>Employee ID</th>
-                                        <th>Photo</th>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Schedule</th>
-                                        <th>Member Since</th>
-                                        <th>Tools</th>
+                                        <tr>
+                                            <th>Employee ID</th>
+                                            <th>Photo</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Work Schedule</th>
+                                            <th>Work Load</th>
+                                            <th>Member Since</th>
+                                            <th>Tools</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                   $sql = "SELECT 
-                                   employees.id AS empid, 
-                                   employees.employee_id,
-                                   employees.firstname COLLATE latin1_swedish_ci AS firstname, 
-                                   employees.lastname COLLATE latin1_swedish_ci AS lastname, 
-                                   position.description COLLATE latin1_swedish_ci AS description,
-                                   GROUP_CONCAT(DISTINCT CONCAT(DATE_FORMAT(time_in, '%h:%i %p'), ' - ', DATE_FORMAT(time_out, '%h:%i %p')) COLLATE latin1_swedish_ci SEPARATOR ', ') AS schedule_time
-                               FROM 
-                                   employees 
-                               LEFT JOIN 
-                                   position ON position.id = employees.position_id 
-                               LEFT JOIN 
-                                   employee_schedule ON employee_schedule.employee_id = employees.employee_id
-                               GROUP BY 
-                                   employees.employee_id";
-                       
-                         
-                          
-                           
+                                        // Modify your SQL query to fetch data from the necessary tables 
+                                       // $sql = "SELECT * FROM leave_record WHERE leave_status like '$look' ";
+                                            $sql = "SELECT employees.*, employees.id AS empid, position.*, 
+                                               
+                                                GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') AS work_loads,
+                                                GROUP_CONCAT(CONCAT(employee_schedule.schedule_day, ' ', TIME_FORMAT(employee_schedule.time_in, '%h:%i %p'), ' - ', TIME_FORMAT(employee_schedule.time_out, '%h:%i %p')) SEPARATOR '\n <br>') AS work_schedules
+                                                FROM 
+                                                    employees 
+                                                LEFT JOIN 
+                                                    position ON position.id = employees.position_id 
+                                                LEFT JOIN 
+                                                    employee_schedule ON  employee_schedule.employee_id = employees.employee_id
+                                                LEFT JOIN 
+                                                    work_load ON work_load.employee_id = employees.employee_id
+                                                GROUP BY 
+                                                    employees.id    ";
+
+
+                                        // Execute the query
                                         $query = $conn->query($sql);
 
+                                        // Check for errors
                                         if (!$query) {
-                                            // Query failed, handle the error
-                                            die("Error executing the query: " . $conn->error);
-                                        }
-
-                                        while ($row = $query->fetch_assoc()) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $row['employee_id']; ?></td>
-                                                <td><img src="<?php echo (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a></td>
-                                                <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
-                                                <td><?php echo $row['description']; ?></td>
-                                                <td><?php echo $row['schedule_time']; ?></td>
-                                                <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
-                                                <td>
-                                                    <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                                                    <button class="btn btn-success btn-sm edit_employee_password btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Password</button>
-                                                    <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
-                                                    <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i>View ID</button>
-                                                </td>
-                                            </tr>
+                                            // Query failed
+                                            echo "Error: " . $conn->error;
+                                        } else {
+                                            // Query succeeded
+                                            // Fetch and display data
+                                            while ($row = $query->fetch_assoc()) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $row['employee_id']; ?></td>
+                                                    <td>
+                                                        <!-- Adjust this part according to your photo field -->
+                                                        <img src="<?php echo (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/profile.jpg'; ?>" width="30px" height="30px">
+                                                        <!-- Assuming you have an edit photo modal -->
+                                                        <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a>
+                                                    </td>
+                                                    <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
+                                                    <td><?php echo $row['description']; ?></td>
+                                                    <td><?php echo $row['work_schedules']; ?></td>
+                                                    <td><?php echo $row['work_loads']; ?></td>
+                                                    <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
+                                                    <td>
+                                                        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
+                                                        <button class="btn btn-success btn-sm edit_employee_password btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Password</button><br><br><br>
+                                                        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
+                                                        <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i>View ID</button>
+                                                    </td>
+                                                </tr>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
