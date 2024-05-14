@@ -55,22 +55,17 @@ include 'includes/header.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                       
-                                            $sql = "SELECT employees.*, employees.id AS empid, position.*, 
-                                               
-                                                GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') AS work_loads,
-                                                GROUP_CONCAT(CONCAT(employee_schedule.schedule_day, ' ', TIME_FORMAT(employee_schedule.time_in, '%h:%i %p'), ' - ', TIME_FORMAT(employee_schedule.time_out, '%h:%i %p')) SEPARATOR '\n <br>') AS work_schedules
+                                        // SQL query
+                                        $sql = "SELECT 
+                                                    employees.*, 
+                                                    employees.id AS empid, 
+                                                    position.*, 
+                                                    (SELECT GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
+                                                    (SELECT GROUP_CONCAT(CONCAT(employee_schedule.schedule_day, ' ', TIME_FORMAT(employee_schedule.time_in, '%h:%i %p'), ' - ', TIME_FORMAT(employee_schedule.time_out, '%h:%i %p')) SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
                                                 FROM 
                                                     employees 
                                                 LEFT JOIN 
-                                                    position ON position.id = employees.position_id 
-                                                LEFT JOIN 
-                                                    employee_schedule ON  employee_schedule.employee_id = employees.employee_id
-                                                LEFT JOIN 
-                                                    work_load ON work_load.employee_id = employees.employee_id
-                                                GROUP BY 
-                                                    employees.id    ";
-
+                                                    position ON position.id = employees.position_id";
 
                                         // Execute the query
                                         $query = $conn->query($sql);
@@ -98,13 +93,15 @@ include 'includes/header.php';
                                                     <td><?php echo $row['work_loads']; ?></td>
                                                     <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                                                     <td>
-                                                        <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
+                                                       
+                                                        
+                                                         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
                                                         <button class="btn btn-success btn-sm edit_employee_password btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Password</button><br><br><br>
                                                         <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
                                                         <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i>View ID</button>
                                                     </td>
                                                 </tr>
-                                        <?php
+                                                <?php
                                             }
                                         }
                                         ?>
