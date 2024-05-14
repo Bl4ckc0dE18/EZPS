@@ -81,8 +81,7 @@
                           <td>".number_format($row['loanbalance'], 2)."</td>
                                                                           
                           <td>
-                            
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                            <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>
                           </td>
                         </tr>
                       ";
