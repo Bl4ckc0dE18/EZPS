@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 11:00 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: May 13, 2024 at 07:39 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
   `photo` varchar(200) NOT NULL,
   `position` varchar(255) NOT NULL,
   `created_on` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -56,8 +56,8 @@ INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `pho
 
 CREATE TABLE `admin_position` (
   `id` int(11) NOT NULL,
-  `position` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `position` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_position`
@@ -82,17 +82,21 @@ CREATE TABLE `attendance` (
   `time_out` time NOT NULL,
   `num_hr` double NOT NULL,
   `num_ot` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attendance`
 --
 
 INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `num_ot`) VALUES
-(200, 25, '2024-02-26', '02:03:38', 1, '00:00:00', 0, 0),
-(202, 25, '2024-05-15', '15:42:29', 4, '15:42:45', 0, 0),
-(203, 25, '2024-05-15', '15:43:22', 4, '15:47:50', 0, 0),
-(208, 25, '2024-05-15', '16:35:28', 4, '00:00:00', 0, 0);
+(193, 30, '2024-02-22', '01:31:34', 1, '01:31:36', 0, 0),
+(194, 30, '2024-02-22', '01:31:38', 2, '01:31:48', 0, 0),
+(195, 30, '2024-02-22', '01:31:49', 2, '01:31:51', 0, 0),
+(196, 30, '2024-02-22', '01:31:52', 2, '01:31:54', 0, 0),
+(197, 30, '2024-02-22', '01:31:56', 2, '01:31:57', 0, 0),
+(198, 30, '2024-02-22', '01:31:59', 2, '01:32:02', 0, 0),
+(199, 30, '2024-02-22', '01:32:06', 2, '00:00:00', 0, 0),
+(200, 25, '2024-02-26', '02:03:38', 1, '00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -104,9 +108,9 @@ CREATE TABLE `audit_trail_record` (
   `id` int(11) NOT NULL,
   `audit_date` date NOT NULL,
   `audit_time` time NOT NULL,
-  `user` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `user` varchar(255) CHARACTER SET latin1 NOT NULL,
   `description` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `audit_trail_record`
@@ -163,21 +167,7 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (454, '2024-05-14', '01:23:37', 'Angelo Cruz', 'Schedule added  and  date 2024-05-14'),
 (455, '2024-05-14', '01:23:51', 'Angelo Cruz', 'Schedule added  and  date 2024-05-14'),
 (456, '2024-05-14', '01:23:57', 'Angelo Cruz', 'Schedule added  and  date 2024-05-14'),
-(457, '2024-05-14', '01:24:17', 'Angelo Cruz', 'Schedule added  and  date 2024-05-14'),
-(458, '2024-05-14', '03:40:05', 'Angelo Cruz', 'Schedule deleted 1 date 2024-05-14'),
-(459, '2024-05-14', '03:40:07', 'Angelo Cruz', 'Schedule deleted 2 date 2024-05-14'),
-(460, '2024-05-14', '03:40:10', 'Angelo Cruz', 'Schedule deleted 3 date 2024-05-14'),
-(461, '2024-05-14', '04:02:59', 'Angelo Cruz', 'Employee deleted 202330 date 2024-05-14'),
-(462, '2024-05-15', '15:44:53', 'Angelo Cruz', 'Employee updated 202325 date 2024-05-15'),
-(463, '2024-05-15', '15:47:04', 'Angelo Cruz', 'Added new leave for employee id number 202325 date 2024-05-15'),
-(464, '2024-05-15', '15:47:04', 'Angelo Cruz', 'Added new leave for employee id number 202325 date 2024-05-16'),
-(465, '2024-05-15', '15:47:25', 'Angelo Cruz', 'Employee updated 202325 date 2024-05-15'),
-(466, '2024-05-15', '16:08:54', 'Angelo Cruz', 'Employee updated 202325 date 2024-05-15'),
-(467, '2024-05-15', '16:09:07', 'Angelo Cruz', 'Delete leave for employee id number 202325 date 2024-05-15'),
-(468, '2024-05-15', '16:09:07', 'Angelo Cruz', 'Delete leave for employee id number 202325 date 2024-05-15'),
-(469, '2024-05-15', '16:09:07', 'Angelo Cruz', 'Delete leave for employee id number 202325 date 2024-05-15'),
-(470, '2024-05-15', '16:09:07', 'Angelo Cruz', 'Delete leave for employee id number 202325 date 2024-05-16'),
-(471, '2024-05-15', '16:09:07', 'Angelo Cruz', 'Rejected leave for employee id number 202325 date 2024-05-16');
+(457, '2024-05-14', '01:24:17', 'Angelo Cruz', 'Schedule added  and  date 2024-05-14');
 
 -- --------------------------------------------------------
 
@@ -190,7 +180,7 @@ CREATE TABLE `cashadvance` (
   `date_advance` date NOT NULL,
   `employee_id` varchar(15) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -202,7 +192,7 @@ CREATE TABLE `deductions` (
   `id` int(11) NOT NULL,
   `description` varchar(100) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `deductions`
@@ -225,7 +215,6 @@ CREATE TABLE `employees` (
   `employee_rfid` varchar(255) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
-  `required_hour` text NOT NULL,
   `address` text NOT NULL,
   `birthdate` date NOT NULL,
   `contact_info` varchar(100) NOT NULL,
@@ -240,19 +229,20 @@ CREATE TABLE `employees` (
   `photo` varchar(200) NOT NULL,
   `created_on` date NOT NULL,
   `end_contract` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `employee_id`, `employee_rfid`, `firstname`, `lastname`, `required_hour`, `address`, `birthdate`, `contact_info`, `gender`, `email`, `password`, `position_id`, `basic_salary`, `day_off`, `e_leave`, `created_by`, `photo`, `created_on`, `end_contract`) VALUES
-(25, '202325', '0413180931', 'Angelo', 'Cruz', '25', 'Quezon City', '2001-04-18', '099999999999', 'Male', 'angelo.cruz@tup.edu.ph', '$2y$10$4dQWPmgJ6/Im8YdA0rgm1.3wbrVSlmT8f2ltm/Y3yzumbkeSBmqIu', 1, 0, 'WED', 23, 'admin', 'twbbsis-15e80f31-bc4d-4eda-b812-508a96643c92.jpg', '2023-07-13', '2024-11-01'),
-(26, '202326', '0411714435', 'Andrei Niko', 'Perez', '26', 'Manila City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$bGCLzHujg0Xh1EGv.nfkX.s/SrVFp7UOQZ7cvCIjhtcH9LsOZb0G.', 1, 2, 'SAT', 12, 'admin', 'Perez.png', '2023-07-13', '2024-07-13'),
-(27, '202327', '0411306643', 'Cyrille Jaye', 'Hilario', '27', 'Caloocan CityCaloocan CityCaloocan CityCaloocan City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$zsmdlhQOIVNTGnKbgJA/8OKcWGqef.8jgNn6nKTrcvVG0EdBPURsm', 5, 2, 'SUN', 12, 'admin', 'Hilario.png', '2023-07-13', '2024-07-13'),
-(28, '202328', '0411698371', 'Jared Ivan', 'Bruno', '28', 'Navotas City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$3xRO3QbfW6LHv1ZA2gopdeDzoIqNp/4lJeAfbtKouqqeAxhaa38.e', 1, 2, 'THU', 12, 'admin', 'Bruno.png', '2023-07-13', '2024-07-13'),
-(31, '202331', '0412382675', 'Jerard', 'Baria', '31', '319 E-Ugbo Street Velasquez Tondo, Manila', '2002-01-01', '099999999999', 'Female', 'jerard.baria@tup.edu.ph', '$2y$10$Wxx.dhbG1Z/6t1R4G11.4eguAmrLaQFxnliBrwq2XbXOq9jF/QyGm', 6, 2, 'SAT', 12, 'admin', 'Baria.png', '2023-07-14', '2024-07-14'),
-(38, '202438', '3988882163', '21', '21', '', '21', '2024-01-30', '12dasd', 'Male', '2121', '$2y$10$EVi1AOXvQgEcZTBQV60Wbuu7Oggd1PQ0N7vY5UUdAklllpGC.IOqS', 5, 2, 'WED', 12121, 'Angelo Cruz', '', '2024-01-30', '2024-01-22');
+INSERT INTO `employees` (`id`, `employee_id`, `employee_rfid`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `email`, `password`, `position_id`, `basic_salary`, `day_off`, `e_leave`, `created_by`, `photo`, `created_on`, `end_contract`) VALUES
+(25, '202325', '0413180931', 'Angelo', 'Cruz', 'Quezon City', '2001-04-18', '099999999999', 'Male', 'angelo.cruz@tup.edu.ph', '$2y$10$4dQWPmgJ6/Im8YdA0rgm1.3wbrVSlmT8f2ltm/Y3yzumbkeSBmqIu', 1, 2, 'WED', 24, 'admin', 'twbbsis-15e80f31-bc4d-4eda-b812-508a96643c92.jpg', '2023-07-13', '2024-11-01'),
+(26, '202326', '0411714435', 'Andrei Niko', 'Perez', 'Manila City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$bGCLzHujg0Xh1EGv.nfkX.s/SrVFp7UOQZ7cvCIjhtcH9LsOZb0G.', 1, 2, 'SAT', 12, 'admin', 'Perez.png', '2023-07-13', '2024-07-13'),
+(27, '202327', '0411306643', 'Cyrille Jaye', 'Hilario', 'Caloocan CityCaloocan CityCaloocan CityCaloocan City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$zsmdlhQOIVNTGnKbgJA/8OKcWGqef.8jgNn6nKTrcvVG0EdBPURsm', 5, 2, 'SUN', 12, 'admin', 'Hilario.png', '2023-07-13', '2024-07-13'),
+(28, '202328', '0411698371', 'Jared Ivan', 'Bruno', 'Navotas City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$3xRO3QbfW6LHv1ZA2gopdeDzoIqNp/4lJeAfbtKouqqeAxhaa38.e', 1, 2, 'THU', 12, 'admin', 'Bruno.png', '2023-07-13', '2024-07-13'),
+(30, '202330', '3988882163', 'Admin', 'Admin', '111', '2023-07-01', '099999999999', 'Male', '', '$2y$10$Wxx.dhbG1Z/6t1R4G11.4eguAmrLaQFxnliBrwq2XbXOq9jF/QyGm', 1, 2, 'FRI', 12, 'admin', 'HARMONY AND UNITY.jpg', '2023-07-14', '2024-07-14'),
+(31, '202331', '0412382675', 'Jerard', 'Baria', '319 E-Ugbo Street Velasquez Tondo, Manila', '2002-01-01', '099999999999', 'Female', 'jerard.baria@tup.edu.ph', '$2y$10$Wxx.dhbG1Z/6t1R4G11.4eguAmrLaQFxnliBrwq2XbXOq9jF/QyGm', 6, 2, 'SAT', 12, 'admin', 'Baria.png', '2023-07-14', '2024-07-14'),
+(38, '202438', '3988882163', '21', '21', '21', '2024-01-30', '12dasd', 'Male', '2121', '$2y$10$EVi1AOXvQgEcZTBQV60Wbuu7Oggd1PQ0N7vY5UUdAklllpGC.IOqS', 5, 2, 'WED', 12121, 'Angelo Cruz', '', '2024-01-30', '2024-01-22');
 
 -- --------------------------------------------------------
 
@@ -264,12 +254,12 @@ CREATE TABLE `employee_bonus` (
   `id` int(11) NOT NULL,
   `applied_on` date NOT NULL,
   `invoice_id` double NOT NULL,
-  `employee_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `employee_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `description` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `employee_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `description` text CHARACTER SET latin1 NOT NULL,
   `amount` double NOT NULL,
-  `bonus_status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `bonus_status` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee_bonus`
@@ -287,18 +277,21 @@ INSERT INTO `employee_bonus` (`id`, `applied_on`, `invoice_id`, `employee_id`, `
 
 CREATE TABLE `employee_schedule` (
   `id` int(11) NOT NULL,
-  `employee_id` text NOT NULL,
-  `name` text NOT NULL,
-  `schedule_day` text NOT NULL,
+  `employee_id` text CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `name` text CHARACTER SET latin1 NOT NULL,
+  `schedule_day` text CHARACTER SET latin1 NOT NULL,
   `time_in` time NOT NULL,
   `time_out` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee_schedule`
 --
 
 INSERT INTO `employee_schedule` (`id`, `employee_id`, `name`, `schedule_day`, `time_in`, `time_out`) VALUES
+(1, '202325', 'Angelo Cruz', 'SUN', '20:00:00', '12:00:00'),
+(2, '202325', 'Angelo Cruz', 'MON', '09:00:00', '13:00:00'),
+(3, '202325', 'Angelo Cruz', 'TUE', '10:00:00', '14:00:00'),
 (4, '202328', 'Jared Ivan Bruno', 'MON', '08:00:00', '12:00:00'),
 (10, '202325', 'Angelo Cruz', 'MON', '14:00:00', '20:00:00'),
 (12, '202328', 'Jared Ivan Bruno', 'SUN', '07:00:00', '20:00:00');
@@ -311,24 +304,23 @@ INSERT INTO `employee_schedule` (`id`, `employee_id`, `name`, `schedule_day`, `t
 
 CREATE TABLE `leave_record` (
   `id` int(11) NOT NULL,
-  `employee_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `employee_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `department` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `employee_id` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `department` varchar(255) CHARACTER SET latin1 NOT NULL,
   `reason` longtext CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `datefrom` date NOT NULL,
   `dateto` date NOT NULL,
-  `leave_status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `leave_comment` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `leave_status` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `leave_comment` text CHARACTER SET latin1 NOT NULL,
   `applied_on` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `leave_record`
 --
 
 INSERT INTO `leave_record` (`id`, `employee_name`, `employee_id`, `department`, `reason`, `datefrom`, `dateto`, `leave_status`, `leave_comment`, `applied_on`) VALUES
-(21, 'Angelo Cruz', '202325', 'Programmer', 'Sick', '2024-04-08', '2024-02-09', 'Pending', 'For Review', '2024-04-08'),
-(22, ' sdas Cruz', '202325', 'Programmer', 'Sick', '2024-05-15', '2024-05-16', 'Rejected', 'Rejected by : Angelo Cruz Check Date : 2024-05-15', '2024-05-15');
+(21, 'Angelo Cruz', '202325', 'Programmer', 'Sick', '2024-04-08', '2024-02-09', 'Pending', 'For Review', '2024-04-08');
 
 -- --------------------------------------------------------
 
@@ -339,7 +331,7 @@ INSERT INTO `leave_record` (`id`, `employee_name`, `employee_id`, `department`, 
 CREATE TABLE `loan` (
   `id` int(11) NOT NULL,
   `employee_id` double NOT NULL,
-  `employee_name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_name` text CHARACTER SET latin1 NOT NULL,
   `description` text NOT NULL,
   `loanamount` double NOT NULL,
   `monthstopay` double NOT NULL,
@@ -348,7 +340,7 @@ CREATE TABLE `loan` (
   `semimonths` double NOT NULL,
   `loanpay` double NOT NULL,
   `loanbalance` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `loan`
@@ -356,8 +348,7 @@ CREATE TABLE `loan` (
 
 INSERT INTO `loan` (`id`, `employee_id`, `employee_name`, `description`, `loanamount`, `monthstopay`, `permonths`, `semiloan`, `semimonths`, `loanpay`, `loanbalance`) VALUES
 (10, 202325, 'Angelo Cruz', 'Car Loan', 15000, 6, 2500, 5, 1250, 8750, 6250),
-(11, 202325, 'Angelo Cruz', 'Bonus', 500, 1, 500, -1, 250, 750, -250),
-(12, 202325, 'Angelo Cruz', 'Disallowance', 5000, 6, 833.33333333333, 12, 416.66666666667, 0, 5000);
+(11, 202325, 'Angelo Cruz', 'Bonus', 500, 1, 500, -1, 250, 750, -250);
 
 -- --------------------------------------------------------
 
@@ -371,7 +362,7 @@ CREATE TABLE `overtime` (
   `hours` double NOT NULL,
   `rate` double NOT NULL,
   `date_overtime` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -386,7 +377,7 @@ CREATE TABLE `pagibig` (
   `er` double NOT NULL,
   `ee` double NOT NULL,
   `total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pagibig`
@@ -406,8 +397,8 @@ INSERT INTO `pagibig` (`id`, `f`, `t`, `er`, `ee`, `total`) VALUES
 CREATE TABLE `payslip` (
   `id` int(11) NOT NULL,
   `invoice_id` double NOT NULL,
-  `employee_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `employee_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_name` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `employee_id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `rate` double NOT NULL,
   `totalhours` double NOT NULL,
   `otrate` double NOT NULL,
@@ -421,22 +412,22 @@ CREATE TABLE `payslip` (
   `erph` double NOT NULL,
   `eeph` double NOT NULL,
   `totalph` double NOT NULL,
-  `loan_description` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `loan_amount` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `loan_description` text CHARACTER SET latin1 NOT NULL,
+  `loan_amount` text CHARACTER SET latin1 NOT NULL,
   `totalbenifitsdeduction` double NOT NULL,
   `totaleeer` double NOT NULL,
-  `deduction_status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `dpaidby` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `deduction_status` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `dpaidby` varchar(255) CHARACTER SET latin1 NOT NULL,
   `cashadvance` double NOT NULL,
   `totaldeduction` double NOT NULL,
   `gross` double NOT NULL,
   `netpay` double NOT NULL,
-  `paystatus` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `ppaidby` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `generateby` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `paystatus` varchar(11) CHARACTER SET latin1 NOT NULL,
+  `ppaidby` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `generateby` varchar(255) CHARACTER SET latin1 NOT NULL,
   `datefrom` date NOT NULL,
   `dateto` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `payslip`
@@ -468,7 +459,7 @@ CREATE TABLE `philhealth` (
   `er` double NOT NULL,
   `ee` double NOT NULL,
   `total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `philhealth`
@@ -488,7 +479,7 @@ CREATE TABLE `position` (
   `description` varchar(150) NOT NULL,
   `rate` double NOT NULL,
   `ot` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `position`
@@ -509,7 +500,7 @@ CREATE TABLE `schedules` (
   `id` int(11) NOT NULL,
   `time_in` time NOT NULL,
   `time_out` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `schedules`
@@ -532,7 +523,7 @@ CREATE TABLE `sss` (
   `er` double NOT NULL,
   `ee` double NOT NULL,
   `total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sss`
@@ -552,11 +543,11 @@ INSERT INTO `sss` (`id`, `f`, `t`, `er`, `ee`, `total`) VALUES
 
 CREATE TABLE `work_load` (
   `id` int(255) NOT NULL,
-  `employee_id` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `name` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `schedule_load` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `time_load` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `employee_id` text CHARACTER SET latin1 NOT NULL,
+  `name` text CHARACTER SET latin1 NOT NULL,
+  `schedule_load` text CHARACTER SET latin1 NOT NULL,
+  `time_load` text CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `work_load`
@@ -566,7 +557,8 @@ INSERT INTO `work_load` (`id`, `employee_id`, `name`, `schedule_load`, `time_loa
 (1, '202325', 'Angelo Cruz', 'SUN', '3'),
 (2, '202325', 'Angelo Cruz', 'WED', '3'),
 (3, '202327', 'Cyrille Jaye Hilario', 'THU', '3'),
-(4, '202328', 'Jared Ivan Bruno', 'SUN', '3');
+(4, '202328', 'Jared Ivan Bruno', 'SUN', '3'),
+(5, '202328', 'Jared Ivan Bruno', 'SUN', '3');
 
 --
 -- Indexes for dumped tables
@@ -706,13 +698,13 @@ ALTER TABLE `admin_position`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=472;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
@@ -748,13 +740,13 @@ ALTER TABLE `employee_schedule`
 -- AUTO_INCREMENT for table `leave_record`
 --
 ALTER TABLE `leave_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `overtime`
