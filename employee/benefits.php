@@ -115,7 +115,7 @@
                           
                           
                           <td>
-                            <button class='btn btn-primary btn-sm btn-flat 'id='".$row['invoice_id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> View</button>
+                            <a href='#edit' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                           </td>
                         </tr>
                       ";
