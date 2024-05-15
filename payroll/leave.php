@@ -107,7 +107,7 @@
                                     
                                     <td>
                                       <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                      <button class='btn btn-primary btn-sm btn-flat view' data-id='".$row['id']."'><i class='fa fa-eye'></i> View</button>
+                                     
                                      
                                     </td>
                                     

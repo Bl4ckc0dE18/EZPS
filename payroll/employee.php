@@ -159,6 +159,7 @@ include 'includes/header.php';
                 data: {
                     id: id
                 },
+                
                 dataType: 'json',
                 success: function(response) {
                     $('.empid').val(response.empid);
@@ -169,6 +170,7 @@ include 'includes/header.php';
                     $('#employee_name').html(response.firstname + ' ' + response.lastname);
                     $('#edit_firstname').val(response.firstname);
                     $('#edit_lastname').val(response.lastname);
+                    $('#edit_hour').val(response.required_hour);
                     $('#edit_address').val(response.address);
                     $('#datepicker_edit').val(response.birthdate);
                     $('#edit_contact').val(response.contact_info);

@@ -6,6 +6,7 @@
 		$employee_rfid = $_POST['employee_rfid'];
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
+		$hour = $_POST['hour'];
 		$address = $_POST['address'];
 		$birthdate = $_POST['birthdate'];
 		$contact = $_POST['contact'];
@@ -29,8 +30,8 @@
 		
 		
 		$employee_id = 0;
-		$sql = "INSERT INTO employees (employee_id, employee_rfid,firstname, lastname, address, birthdate, contact_info, gender,email ,password,position_id, schedule_id,day_off, e_leave,created_by,photo, created_on,end_contract) 
-		VALUES ('$employee_id','$employee_rfid', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender','$email','$password', '$position', '$schedule', '$day_off','$e_leave','$created_by','$filename', '$date_contract_start','$date_contract_end')";
+		$sql = "INSERT INTO employees (employee_id, employee_rfid,firstname, lastname,required_hour, address, birthdate, contact_info, gender,email ,password,position_id, schedule_id,day_off, e_leave,created_by,photo, created_on,end_contract) 
+		VALUES ('$employee_id','$employee_rfid', '$firstname', '$lastname','$hour', '$address', '$birthdate', '$contact', '$gender','$email','$password', '$position', '$schedule', '$day_off','$e_leave','$created_by','$filename', '$date_contract_start','$date_contract_end')";
 		if($conn->query($sql)){
 			$sqle = "SELECT * FROM employees WHERE employee_id = '$employee_id'";
 			$querye = $conn->query($sqle);

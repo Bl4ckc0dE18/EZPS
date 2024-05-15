@@ -63,7 +63,7 @@ if (isset($_POST['employee']))
                                 if ($conn->query($sqlup)) {
                                     $output['image'] = "./images/" . $roweid['photo'];
                                     $output['time'] = 'Time out : ' . $time_check;
-                                    $output['employee_id'] = $employee;
+                                    $output['employee_id'] = $eids;
                                     $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                                     $output['status'] = 'Employee On Leave';
                                 }
@@ -84,7 +84,7 @@ if (isset($_POST['employee']))
                             if ($conn->query($sql)) {
                                 $output['image'] = "./images/" .$roweid['photo'];
                                 $output['time'] = 'Time in : ' .$time_check;
-                                $output['employee_id'] = $employee;
+                                $output['employee_id'] = $eids;
                                 $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                                 $output['status'] = 'Employee On Leave';
                             } else {
@@ -102,7 +102,7 @@ if (isset($_POST['employee']))
                         if ($conn->query($sql)) {
                             $output['image'] = "./images/" .$roweid['photo'];
                             $output['time'] = 'Time in : ' .$time_check;
-                            $output['employee_id'] = $employee;
+                            $output['employee_id'] = $eids;
                             $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                             $output['status'] = 'Employee On Leave ';
                         } else {
@@ -147,7 +147,7 @@ if (isset($_POST['employee']))
                                     if ($conn->query($sqlup)) {
                                         $output['image'] = "./images/" . $roweid['photo'];
                                         $output['time'] = 'Time out : ' . $time_check;
-                                        $output['employee_id'] = $employee;
+                                        $output['employee_id'] = $eids;
                                         $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                                         $output['status'] = 'Employee Day Off';
                                     }
@@ -168,7 +168,7 @@ if (isset($_POST['employee']))
                                 if ($conn->query($sql)) {
                                     $output['image'] = "./images/" .$roweid['photo'];
                                     $output['time'] = 'Time in : ' .$time_check;
-                                    $output['employee_id'] = $employee;
+                                    $output['employee_id'] = $eids;
                                     $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                                     $output['status'] = 'Employee Day Off';
                                 } else {
@@ -186,7 +186,7 @@ if (isset($_POST['employee']))
                             if ($conn->query($sql)) {
                                 $output['image'] = "./images/" .$roweid['photo'];
                                 $output['time'] = 'Time in : ' .$time_check;
-                                $output['employee_id'] = $employee;
+                                $output['employee_id'] = $eids;
                                 $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
                                 $output['status'] = 'Employee Day Off';
                             } else {
@@ -202,7 +202,7 @@ if (isset($_POST['employee']))
 
 
 
-                        
+
 
                         }  // End Validation in Schedule
                 }// End Validation in leave   

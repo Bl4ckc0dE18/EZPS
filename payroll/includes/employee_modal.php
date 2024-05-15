@@ -30,11 +30,11 @@
                 <div class="form-group">
                   	
 
-                    <label for="firstname" class="col-sm-2 control-label">Middlename</label>
+                    <label for="lastname" class="col-sm-2 control-label">Lastname</label>
 
-                  	<div class="col-sm-4">
-                    	<input type="text" class="form-control" id="firstname" name="firstname" required>
-                  	</div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    </div>
 
                     <label for="employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
 
@@ -45,11 +45,11 @@
                    
                 </div>
                 <div class="form-group">
-                  <label for="lastname" class="col-sm-2 control-label">Lastname</label>
+                  <label for="hour" class="col-sm-2 control-label">Required Hour</label>
 
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="lastname" name="lastname" required>
-                  </div>
+                    <input type="text" class="form-control" id="hour" name="hour">
+                  </div> 
 
                   <label for="datepicker_add" class="col-sm-2 control-label">Birthdate</label>
 
@@ -230,11 +230,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="firstname" class="col-sm-2 control-label">Middlename</label>
+                <label for="edit_lastname" class="col-sm-2 control-label">Lastname</label>
 
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control" id="firstname" name="firstname" required>
-                    </div>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="edit_lastname" name="lastname" required>
+                </div>
 
                     <label for="edit_employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
 
@@ -245,11 +245,11 @@
 
                 
                 <div class="form-group">
-                    <label for="edit_lastname" class="col-sm-2 control-label">Lastname</label>
+                    <label for="edit_hour" class="col-sm-2 control-label">Required Hour</label>
 
                     <div class="col-sm-4">
-                      <input type="text" class="form-control" id="edit_lastname" name="lastname">
-                    </div>
+                      <input type="text" class="form-control" id="edit_hour" name="edit_hour">
+                    </div> 
 
                     <label for="datepicker_edit" class="col-sm-2 control-label">Birthdate</label>
 
