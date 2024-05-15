@@ -15,7 +15,17 @@
 
     $generateby = $user['firstname'].' '.$user['lastname'];
 
-	$sql = "SELECT *, SUM(num_hr) AS total_hr, SUM(num_ot) AS total_ot, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+	$sql = "SELECT *, SUM(num_hr) AS total_hr, SUM(num_ot) AS total_ot, 
+    attendance.employee_id AS empid, employees.employee_id AS employee 
+    FROM 
+        attendance 
+    LEFT JOIN
+        employees ON employees.id=attendance.employee_id 
+    LEFT JOIN 
+        position ON position.id=employees.position_id 
+    WHERE date BETWEEN '$from' AND '$to' GROUP BY
+        attendance.employee_id ORDER BY 
+        employees.lastname ASC, employees.firstname ASC";
    
 	$query = $conn->query($sql);
 	while($row = $query->fetch_assoc()){
@@ -34,7 +44,9 @@
       	$carow = $caquery->fetch_assoc();
       	$cashadvance = $carow['cashamount'];
 
+        //total hour * rate
         $grossn = $row['rate'] * $row['total_hr'];
+
         $grossot = $row['ot'] * $row['total_ot'];
 		$gross = $grossn + $grossot;
         

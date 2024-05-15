@@ -200,6 +200,110 @@ if (isset($_POST['employee']))
                     // Start Validation in Schedule 
                     else{
 
+                        // row from employee table
+                        $row = $query->fetch_assoc();
+                        $id = $row['id'];
+                        $e_id = $row['employee_id'];
+                        $date_now = date('Y-m-d');
+                        $time_check = date('h:i:s A');
+
+                        $currentDay = date("D"); // "D" format represents the abbreviated day name.
+                        $uppercaseDay = strtoupper($currentDay);
+
+
+                        
+                        // Check if there is a time-in entry for today
+                        $asql = "SELECT * FROM attendance WHERE employee_id = '$id' AND date = '$date_now'";
+                        $aquery = $conn->query($asql);
+                        $arow = $aquery->fetch_assoc();
+
+                        // Checking for time out is 00:00:00
+                        $asql1 = "SELECT * FROM attendance WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id'";
+                        $aquery1 = $conn->query($asql1);
+                        $arow1 = $aquery1->fetch_assoc();
+                        $idsss= $arow1['id'];   
+
+                            if($aquery1->num_rows > 0){
+                                // time in
+                                
+                                if ($arow1['time_out'] == $timeoutvalue) {
+                                    //where attendance are update
+                                    //$output['status'] = 'Employee Day';
+                                    // TIME OUT
+                                    $lognow = date('H:i:s');
+                                    //id of attendance
+                                  
+
+                                    $sqlup = "UPDATE attendance SET time_out = '$lognow' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id'";
+
+                                    if ($conn->query($sqlup)) {
+                                        $output['image'] = "./images/" . $row['photo'];
+                                        $output['time'] = 'Time out : ' . $time_check;
+                                        $output['employee_id'] = $employee;
+                                        $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                       
+
+                                    } else {
+                                        $output['error'] = true;
+                                        $output['message'] = $conn->error;
+                                    }
+                                }
+                                
+                                else{
+                                    // time in
+                                    $output['error'] = true;
+                                    $output['message'] = '2';
+
+                                }
+
+                            }
+                            else{
+                                
+
+                                // search from employee_schedule where between time_in and time_out
+                                // base on certain day 
+                                $sql_employee_schedule = "SELECT *
+                                FROM employee_schedule
+                                WHERE schedule_day = '$uppercaseDay'
+                                AND ('$time_check' >= time_in OR '$time_check' <= time_in)
+                                AND '$time_check' <= time_out
+                                AND employee_id = '$e_id'";
+       
+
+
+                                // check schedule
+                                $query_employee_schedule = $conn->query($sql_employee_schedule);
+                                $row_employee_schedule = $query_employee_schedule->fetch_assoc();
+
+                                
+                                if($query_employee_schedule->num_rows > 0){
+                                    $logstatus = ($time_check > $row_employee_schedule['time_in']) ? 1 : 0;
+                                    $early_time_In = $row_employee_schedule['time_in'];
+    
+                                    $time_check_in = ($time_check > $row_employee_schedule['time_in']) ? $early_time_In : $time_check;
+
+                                    $sqlinsertattendance = "INSERT INTO attendance (employee_id, date, time_in, status) 
+                                    VALUES ('$id', '$date_now', '$time_check_in', '$logstatus')";
+
+                                        if ($conn->query($sqlinsertattendance)) {
+                                            $output['image'] = "./images/" . $row['photo'];
+                                            $output['time'] = 'Time in : ' . $time_check;
+                                            $output['employee_id'] = $employee;
+                                            $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                        } else {
+                                            $output['error'] = true;
+                                            $output['message'] = $conn->error;
+                                        }
+                                }
+                                else{
+                                    
+                                    $output['error'] = true;
+                                    $output['message'] = 'No Schedule';
+
+                                } 
+                                
+                                   
+                            }
 
 
 
