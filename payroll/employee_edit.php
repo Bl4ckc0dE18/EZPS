@@ -20,7 +20,7 @@
 		$date_contract_start = $_POST['datepicker_employee_sedit'];
 		$date_contract_end = $_POST['datepicker_employee_edit'];
 		
-		$sql = "UPDATE employees SET employee_id = '$employee_id',employee_rfid = '$employee_rfid', firstname = '$firstname', lastname = '$lastname', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', email = '$email', position_id = '$position', schedule_id = '$schedule', day_off = '$day_off', e_leave = '$e_leave', created_on = '$date_contract_start', end_contract = '$date_contract_end' WHERE id = '$empid'";
+		$sql = "UPDATE employees SET employee_id = '$employee_id',employee_rfid = '$employee_rfid', firstname = '$firstname', lastname = '$lastname', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', email = '$email', position_id = '$position', basic_salary = '$schedule', day_off = '$day_off', e_leave = '$e_leave', created_on = '$date_contract_start', end_contract = '$date_contract_end' WHERE id = '$empid'";
 		if($conn->query($sql)){
 			
 
