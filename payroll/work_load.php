@@ -163,7 +163,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'schedule_employees_row.php',
+    url: 'work_load_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
@@ -171,12 +171,15 @@ function getRow(id){
       $('#timeid').val(response.id);
       $('#employee_id_edit').html(response.employee_id);
       $('#employee_name_edit').html(response.name);
-      $('#edit_time_in').val(response.time_in);
+      $('#edit_load').val(response.time_load);
       $('#edit_time_out').val(response.time_out);
-      $('#del_timeid').val(response.id);
+      
+      $('#schedule_days_load').val(response.schedule_load).html(response.schedule_load);
+      
       //delete
       $('#del_schedule').html(response.name);
       $('#employee_id_delete').val(response.employee_id);
+      $('#del_timeid').val(response.id);
       //print
       $('#print_schedule').html(response.name);
     }

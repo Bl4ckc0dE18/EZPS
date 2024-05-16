@@ -90,7 +90,7 @@ $(function() {
     var textboxValue = $("#employee").val();
     $.ajax({
       type: 'POST',
-      url: 'operator/tryyy.php',
+      url: 'operator/attendance.php',
       data: attendance,
       dataType: 'json',
       success: function(response){

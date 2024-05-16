@@ -93,7 +93,7 @@
                     	<label for="schedule_day_edit" class="col-sm-3 control-label">Schedule Day</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="schedule_day_edit" id="schedule_day_edit">
-							
+								<option selected id="schedule_days_load"></option>
 								<option value="SUN">SUN</option>
 								<option value="MON">MON</option>
 								<option value="TUE">TUE</option>
@@ -105,21 +105,10 @@
 							</div>
                 </div>	
                 <div class="form-group">
-                    <label for="edit_time_in" class="col-sm-3 control-label">Time In</label>
+                    <label for="edit_load" class="col-sm-3 control-label">Load</label>
 
                     <div class="col-sm-9">
-                      <div class="bootstrap-timepicker">
-                        <input type="text" class="form-control timepicker" id="edit_time_in" name="time_in">
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_time_out" class="col-sm-3 control-label">Time out</label>
-
-                    <div class="col-sm-9">
-                      <div class="bootstrap-timepicker">
-                        <input type="text" class="form-control timepicker" id="edit_time_out" name="time_out">
-                      </div>
+						<input type="text" class="form-control" id="edit_load" name="edit_load" required>
                     </div>
                 </div>
           	</div>

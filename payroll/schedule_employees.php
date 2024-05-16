@@ -160,6 +160,8 @@ function getRow(id){
       $('#edit_time_in').val(response.time_in);
       $('#edit_time_out').val(response.time_out);
       $('#del_timeid').val(response.id);
+      $('#schedule_days').val(response.schedule_day).html(response.schedule_day);
+     
       //delete
       $('#del_schedule').html(response.name);
       $('#employee_id_delete').val(response.employee_id);

@@ -103,7 +103,7 @@
                     	<label for="schedule_day_edit" class="col-sm-3 control-label">Schedule Day</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="schedule_day_edit" id="schedule_day_edit">
-							
+								<option selected id="schedule_days"></option>
 								<option value="SUN">SUN</option>
 								<option value="MON">MON</option>
 								<option value="TUE">TUE</option>
