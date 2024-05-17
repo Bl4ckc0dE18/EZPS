@@ -225,6 +225,7 @@ if (isset($_POST['employee'])) {
                 $lognow = date('H:i:s');
                 //id of attendance
                 $idsss= $arow1['id'];
+                // FIRST VALIDATE THE TIME OUT IF LESS OR GREATER THAN THE TIME OUT VALUE IN SCHEDULE BEFORE UPDATING IT 
                 
                 $sqlup = "UPDATE attendance SET time_out = '$lognow' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id'";
         
