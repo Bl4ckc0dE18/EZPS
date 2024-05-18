@@ -41,6 +41,7 @@
         <p id="date_day"></p>
         <p id="date"></p>
         <p id="time" class="bold"></p>
+        
       </div>
   
       <div class="login-box-body bg-blue">
@@ -82,6 +83,7 @@ $(function() {
     $('#date').html(momentNow.format('dddd').substring(0,3).toUpperCase() + ' - ' + momentNow.format('MMMM DD, YYYY'));  
     //$('#date').html( momentNow.format('MMMM DD, YYYY'));  
     $('#time').html(momentNow.format('hh:mm:ss A'));
+    $('#times').html(momentNow.format('hh:mm:ss'));
   }, 100);
 
   $('#attendance').submit(function(e){

@@ -1,9 +1,11 @@
 <?php
 if (isset($_POST['employee'])) {
     $output = array('error' => false);
+    $timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
 
     include 'conn.php';
-    include 'timezone.php';
+    //include 'timezone.php';
 
     $employee = $_POST['employee'];
 
@@ -15,6 +17,8 @@ if (isset($_POST['employee'])) {
           
     //end contract
     $time_check = date('h:i:s A');
+    //$time_check =$_POST['times'];
+
     $timeoutvalue='00:00:00';
 
     if ($query->num_rows > 0) {
@@ -62,7 +66,7 @@ if (isset($_POST['employee'])) {
                 if( $erow['time_out']== $timeoutvalue){
                         $sqlup = "UPDATE attendance SET time_out = '$lognow' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$eids'";
                         if ($conn->query($sqlup)) {
-                            $output['image'] = "../images/" . $roweid['photo'];
+                            $output['image'] = "./images/" . $roweid['photo'];
                             $output['time'] = 'Time out : ' . $time_check;
                             $output['employee_id'] = $employee;
                             $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -83,7 +87,7 @@ if (isset($_POST['employee'])) {
                     VALUES ('$eids', '$date_now', '$lognow', '$timeoutvalue','$logstatus','$set','$set')";
 
                     if ($conn->query($sql)) {
-                        $output['image'] = "../images/" .$roweid['photo'];
+                        $output['image'] = "./images/" .$roweid['photo'];
                         $output['time'] = 'Time in : ' .$time_check;
                         $output['employee_id'] = $employee;
                         $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -101,7 +105,7 @@ if (isset($_POST['employee'])) {
                     VALUES ('$eids', '$date_now', '$lognow', '$timeoutvalue','$logstatus','$set','$set')";
 
                 if ($conn->query($sql)) {
-                    $output['image'] = "../images/" .$roweid['photo'];
+                    $output['image'] = "./images/" .$roweid['photo'];
                     $output['time'] = 'Time in : ' .$time_check;
                     $output['employee_id'] = $employee;
                     $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -146,7 +150,7 @@ if (isset($_POST['employee'])) {
                 if( $erow['time_out']== $timeoutvalue){
                         $sqlup = "UPDATE attendance SET time_out = '$lognow' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$eids'";
                         if ($conn->query($sqlup)) {
-                            $output['image'] = "../images/" . $roweid['photo'];
+                            $output['image'] = "./images/" . $roweid['photo'];
                             $output['time'] = 'Time out : ' . $time_check;
                             $output['employee_id'] = $employee;
                             $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -167,7 +171,7 @@ if (isset($_POST['employee'])) {
                     VALUES ('$eids', '$date_now', '$lognow', '$timeoutvalue','$logstatus','$set','$set')";
 
                     if ($conn->query($sql)) {
-                        $output['image'] = "../images/" .$roweid['photo'];
+                        $output['image'] = "./images/" .$roweid['photo'];
                         $output['time'] = 'Time in : ' .$time_check;
                         $output['employee_id'] = $employee;
                         $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -185,7 +189,7 @@ if (isset($_POST['employee'])) {
                     VALUES ('$eids', '$date_now', '$lognow', '$timeoutvalue','$logstatus','$set','$set')";
 
                 if ($conn->query($sql)) {
-                    $output['image'] = "../images/" .$roweid['photo'];
+                    $output['image'] = "./images/" .$roweid['photo'];
                     $output['time'] = 'Time in : ' .$time_check;
                     $output['employee_id'] = $employee;
                     $output['name'] = $roweid['firstname'] . ' ' . $roweid['lastname'];
@@ -208,7 +212,9 @@ if (isset($_POST['employee'])) {
         $id = $row['id'];
         //$output['message'] = $id;
         $date_now = date('Y-m-d');
-       
+        $time_checks = date('h:i:s A');
+        $time_check_log = date('H:i:s', strtotime($time_checks));
+
         // Check if there is a time-in entry for today
         $asql = "SELECT * FROM attendance WHERE employee_id = '$id' AND date = '$date_now'";
         $aquery = $conn->query($asql);
@@ -225,23 +231,194 @@ if (isset($_POST['employee'])) {
                 $lognow = date('H:i:s');
                 //id of attendance
                 $idsss= $arow1['id'];
+                $time_in_db= $arow1['time_in'];
                 // FIRST VALIDATE THE TIME OUT IF LESS OR GREATER THAN THE TIME OUT VALUE IN SCHEDULE BEFORE UPDATING IT 
                 
-                $sqlup = "UPDATE attendance SET time_out = '$lognow' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id'";
-        
-                if ($conn->query($sqlup)) {
-                    $output['image'] = "./images/" . $row['photo'];
-                    $output['time'] = 'Time out : ' . $time_check;
-                    $output['employee_id'] = $employee;
-                    $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
-                    //$output['message'] = $idsss; // Set a different message for time out
-							
+                //$output['time'] = 'Time out : ' . $time_in_db;
+                $time_check_db = date('H:i:s', strtotime($time_in_db));
 
-							
-                } else {
-                    $output['error'] = true;
-                    $output['message'] = $conn->error;
-                }
+                $sql_es_db = "SELECT *
+                FROM employee_schedule
+                WHERE schedule_day = '$uppercaseDay'
+                AND ('$time_check_db' <= time_in OR '$time_check_db' >= time_in)
+                AND '$time_check_db' < time_out
+                AND employee_id = '$employee'";
+                    $query_es_db = $conn->query($sql_es_db);
+                    $row_es_db = $query_es_db->fetch_assoc();
+                    $time_out_db = $row_es_db['time_out'];
+                    $time_check_out_db = date('H:i:s', strtotime($time_out_db));
+
+                    //Checking if less than or equal time out 
+                    $time_check_out_ot = ($time_check_log <= $time_check_out_db) ? 0 : 1;
+                    $time_check_out = ($time_check_log <= $time_check_out_db) ? $time_check_log: $time_check_out_db;
+                    /*$output['time'] = 'Time in : ' . $time_check_out;*/
+
+                    // NO OT 
+                        if($time_check_out_ot == 0){
+                            
+                            $sqlup = "UPDATE attendance SET time_out = '$time_check_out' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id' AND id ='$idsss'";
+        
+                            if ($conn->query($sqlup)) {
+                                $output['image'] = "./images/" . $row['photo'];
+                                $output['time'] = 'Time out : ' . $time_check;
+                                $output['employee_id'] = $employee;
+                                $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                //$output['message'] = $idsss; // Set a different message for time out
+                                $int = 0;
+
+                                $time_in = new DateTime($time_check_db);
+                                $time_out = new DateTime($time_check_out);
+    
+                                $interval = $time_in->diff($time_out);
+                                $hrs = $interval->format('%h');
+                                $mins = $interval->format('%i');
+                                $mins = $mins/60;
+                                $int = $hrs + $mins;
+
+                                $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '$idsss'";
+							    $conn->query($sql);
+                                
+                            } else {
+                                $output['error'] = true;
+                                $output['message'] = $conn->error;
+                            }
+                        }else {
+                            /**/
+                                $sql_out_db = "SELECT MAX(time_out) AS max_time_out
+                                FROM employee_schedule
+                                WHERE schedule_day = '$uppercaseDay'
+                                AND employee_id = '$employee'";
+
+                                    $query_out_db = $conn->query($sql_out_db);
+                                    $row_out_db = $query_out_db->fetch_assoc();
+
+                                    $time_out_db_max = $row_out_db['max_time_out'];
+                                    $time_out_dbs = date('H:i:s', strtotime($time_out_db_max));
+
+                                    $time_ot = ($time_check_log < $time_out_dbs) ? 0 : 1;
+
+                                        if($time_ot==0){
+                                            // Not over time
+                                            //$output['time'] = 'Time out: ' . $time_ot;
+
+                                            $sqlup = "UPDATE attendance SET time_out = '$time_check_out' WHERE time_out = '$timeoutvalue' AND date = '$date_now' AND employee_id = '$id' AND id ='$idsss'";
+        
+                                            if ($conn->query($sqlup)) {
+                                                $output['image'] = "./images/" . $row['photo'];
+                                                $output['time'] = 'Time out : ' . $time_check;
+                                                $output['employee_id'] = $employee;
+                                                $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                                //$output['message'] = $idsss; // Set a different message for time out
+                                                $time_in = new DateTime($time_check_db);
+                                                $time_out = new DateTime($time_check_out);
+                    
+                                                $interval = $time_in->diff($time_out);
+                                                $hrs = $interval->format('%h');
+                                                $mins = $interval->format('%i');
+                                                $mins = $mins/60;
+                                                $int = $hrs + $mins;
+                
+                                                $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '$idsss'";
+                                                $conn->query($sql);
+
+                                            } else {
+                                                $output['error'] = true;
+                                                $output['message'] = $conn->error;
+                                            }
+
+
+                                        }else{
+                                            //over time 
+                                            // calculate the working hours
+                                            
+                                            $time_in = new DateTime($time_check_db);
+                                            $time_out = new DateTime($time_check_out);
+                
+                                            $interval = $time_in->diff($time_out);
+                                            $hrs = $interval->format('%h');
+                                            $mins = $interval->format('%i');
+                                            $mins = $mins/60;
+                                            $int = $hrs + $mins;
+
+                                            // calcualate the overtime
+                                            
+                                            $time_in_ot = new DateTime($time_out_dbs);
+                                            $time_out_ot = new DateTime($time_check_log);
+                
+                                            $interval_ot = $time_in_ot->diff($time_out_ot);
+                                            $hrs_ot = $interval_ot->format('%h');
+                                            $mins_ot = $interval_ot->format('%i');
+                                            $mins_ot = $mins_ot/60;
+                                            $int_ot = $hrs_ot + $mins_ot;
+
+                                            //$output['time'] = 'OVER TIME: ' . $int_ot;
+
+                                            $sql_wl_db = "SELECT *
+                                            FROM work_load
+                                            WHERE schedule_load = '$uppercaseDay'
+                                            AND employee_id = '$employee'";
+                                                $query_wl_db = $conn->query($sql_wl_db);
+                                                $row_wl_db = $query_wl_db->fetch_assoc();
+
+                                               
+                                                // checking if employee have work load this day 
+                                                if ($query_wl_db->num_rows > 0 ){
+                                                    $time_out_load = $row_wl_db['time_load'];
+                                                    $output['time'] = 'over load: ';
+                                                    
+
+                                                    $time_overload = ($int_ot <= $time_out_load) ? 0 : 1;
+                                                    $time_overloads = ($int_ot <= $time_out_load) ? $int_ot  : $time_out_load;
+
+                                                    // checkin if the employee render the work load of time
+                                                    if($time_overload==0){
+                                                        //$output['time'] = 'Not Render Hour: '.$time_overloads;
+                                                        $output['image'] = "./images/" . $row['photo'];
+                                                        $output['time'] = 'Time out : ' . $time_check;
+                                                        $output['employee_id'] = $employee;
+                                                        $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                                        
+                                                        
+                                                        $sql = "UPDATE attendance SET time_out = '$time_check_out',num_hr = '$int' WHERE id = '$idsss'";
+                                                        $conn->query($sql);
+
+
+                                                    }else{
+                                                        //overload render that expecting hours  
+                                                        //$output['time'] = 'Render Hour: '.$time_overloads;
+
+                                                        $output['image'] = "./images/" . $row['photo'];
+                                                        $output['time'] = 'Time out q: ' . $time_check;
+                                                        $output['employee_id'] = $employee;
+                                                        $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+
+                                                        $sql = "UPDATE attendance SET time_out = '$time_check_out',num_hr = '$int',num_ot = '$time_overloads' WHERE id = '$idsss'";
+                                                        $conn->query($sql);
+                                                    }
+
+
+
+                                                }else{
+                                                    //just insert the update the attendance no work load
+                                                    //$output['time'] = 'no over load: ';
+                                                    $output['image'] = "./images/" . $row['photo'];
+                                                    $output['time'] = 'Time out : ' . $time_check;
+                                                    $output['employee_id'] = $employee;
+                                                    $output['name'] = $row['firstname'] . ' ' . $row['lastname'];
+                                                    
+                                                    
+                                                    $sql = "UPDATE attendance SET time_out = '$time_check_out', num_hr = '$int' WHERE id = '$idsss'";
+                                                    $conn->query($sql);
+                                                }
+
+
+
+                                        }
+                                    
+
+                                
+                        }
+               
             } 
             
             /* else {
@@ -274,14 +451,14 @@ if (isset($_POST['employee'])) {
        else{
                 // second insert in attendance
                 if ($aquery->num_rows > 0 ) {
-                    // first insert in attendance
-                        // search from employee_schedule where between time_in and time_out
+                    // second insert in attendance
+                         // search from employee_schedule where between time_in and time_out
                         // base on certain day 
                         $sql_es = "SELECT *
                         FROM employee_schedule
                         WHERE schedule_day = '$uppercaseDay'
-                        AND ('$time_check' <= time_in OR '$time_check' > time_in)
-                        AND '$time_check' <= time_out
+                        AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
+                        AND '$time_check_log' < time_out
                         AND employee_id = '$employee'";
                         
                          // check schedule
@@ -289,15 +466,27 @@ if (isset($_POST['employee'])) {
                         $row_es = $query_es->fetch_assoc();
 
                         if($query_es->num_rows > 0){
-                            $time_check = date('h:i:s A');
+                            
 
-                            $logstatus = ($time_check > $row_es['time_in']) ? 0 : 1;
+                           
 
                             $early_time_In = $row_es['time_in'];
 
-                            $time_check_in = ($time_check > $row_es['time_in']) ? $time_check : $early_time_In;
+                            //$time_check_in = ($time_check_log > $row_es['time_in']) ? $early_time_In : $time_check_log ;
+                            // Convert time strings to 24-hour format
+                           
+                            $time_in_24 = date('H:i:s', strtotime($row_es['time_in']));
+                            $early_time_In_24 = date('H:i:s', strtotime($early_time_In));
 
-                            $sql_attendance = "INSERT INTO attendance (employee_id, date, time_in, status) 
+                            // Compare 24-hour format times and assign accordingly
+                            $logstatus = ($time_check_log > $time_in_24) ? 0 : 1;
+                            $time_check_in = ($time_check_log > $time_in_24) ? $time_check_log: $early_time_In;
+
+                           
+                             /*$output['time'] = 'Time in : ' . $time_check_in;*/
+                           
+
+                           $sql_attendance = "INSERT INTO attendance (employee_id, date, time_in, status) 
                             VALUES ('$id', '$date_now', '$time_check_in', '$logstatus')";
 
                                 if ($conn->query($sql_attendance)) {
@@ -324,8 +513,8 @@ if (isset($_POST['employee'])) {
                         $sql_es = "SELECT *
                         FROM employee_schedule
                         WHERE schedule_day = '$uppercaseDay'
-                        AND ('$time_check' >= time_in OR '$time_check' <= time_in)
-                        AND '$time_check' <= time_out
+                        AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
+                        AND '$time_check_log' < time_out
                         AND employee_id = '$employee'";
                         
                          // check schedule
@@ -333,15 +522,27 @@ if (isset($_POST['employee'])) {
                         $row_es = $query_es->fetch_assoc();
 
                         if($query_es->num_rows > 0){
-                            $time_check = date('h:i:s A');
+                            
 
-                            $logstatus = ($time_check > $row_es['time_in']) ? 0 : 1;
+                           
 
                             $early_time_In = $row_es['time_in'];
 
-                            $time_check_in = ($time_check > $row_es['time_in']) ? $time_check : $early_time_In;
+                            //$time_check_in = ($time_check_log > $row_es['time_in']) ? $early_time_In : $time_check_log ;
+                            // Convert time strings to 24-hour format
+                           
+                            $time_in_24 = date('H:i:s', strtotime($row_es['time_in']));
+                            $early_time_In_24 = date('H:i:s', strtotime($early_time_In));
 
-                            $sql_attendance = "INSERT INTO attendance (employee_id, date, time_in, status) 
+                            // Compare 24-hour format times and assign accordingly
+                            $logstatus = ($time_check_log > $time_in_24) ? 0 : 1;
+                            $time_check_in = ($time_check_log > $time_in_24) ? $time_check_log: $early_time_In;
+
+                           
+                             /*$output['time'] = 'Time in : ' . $time_check_in;*/
+                           
+
+                           $sql_attendance = "INSERT INTO attendance (employee_id, date, time_in, status) 
                             VALUES ('$id', '$date_now', '$time_check_in', '$logstatus')";
 
                                 if ($conn->query($sql_attendance)) {
@@ -375,3 +576,4 @@ if (isset($_POST['employee'])) {
 
 echo json_encode($output);
 ?>
+
