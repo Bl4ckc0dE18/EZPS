@@ -4,19 +4,116 @@
 	function generateRow($from, $to, $conn){
 		$contents = '';
 		$totalSalary = 0; 
-		//$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
+		$totaldeduction_db_per_employee =0;
+		$totalDisallowance =0;
+		$totaldeduction_per_employee = 0;
+		$totaldeduction = 0;
+		$totalRefSal = 0;
 
+		/*$sql ="SELECT 
+		employee_id,
+		employee_id,
+		MAX(CASE WHEN datefrom >= '$from' AND dateto <= '$to' THEN netpay END) AS first_half,
+		MAX(CASE WHEN datefrom >= '$from' AND dateto <= '$to' THEN 0 END) AS second_half
+		FROM 
+			payslip
+		GROUP BY 
+			employee_id;
+		";*/
 		$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
+		
+		
+		//$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
 
 		$no = 1;
 		$query = $conn->query($sql);
 		//$total = 0;
 		//$total1 = 0;
 		while($row = $query->fetch_assoc()){
-			
+			$employee_id = $row['employee_id'];
 			$netPay = $row['netpay'];
 			$totalSalary += $netPay; 
+ 
 			
+
+			$totaldeduction_db = $row['totaldeduction'];
+			$totaldeduction_db_per_employee += $totaldeduction_db; 
+
+			$invoice_id = $row['invoice_id'];
+			// search employee 
+			$sql_employee = "SELECT * FROM employees WHERE employee_id = '$employee_id'";
+			$query_employee = $conn->query($sql_employee);
+			$row_employee = $query_employee->fetch_assoc();
+			$position_id = $row_employee['position_id'];
+			// search employee position
+			$sql_position = "SELECT * FROM position WHERE id = '$position_id'";
+			$query_position = $conn->query($sql_position);
+			$row_position = $query_position->fetch_assoc();
+			$position = $row_position['description'];
+			//checking if employee have add loans
+			
+			//Disallowance
+			$sql_Disallowance = "SELECT * FROM loan_transaction WHERE description = 'Disallowance' AND loan_id = '$invoice_id'";
+			$query_Disallowance = $conn->query($sql_Disallowance);
+			$row_Disallowance = $query_Disallowance->fetch_assoc();
+			if($query_Disallowance->num_rows > 0){
+				$Disallowance_value = number_format($row_Disallowance['loan_amount'], 2);
+				$Disallowance = $row_Disallowance['loan_amount'];
+				$netDisallowance = $Disallowance;
+				$totalDisallowance += $netDisallowance;
+
+			}else{
+				$Disallowance_value ='-';
+				$Disallowance = 0; 
+				$netDisallowance = $Disallowance;
+				$totalDisallowance += $netDisallowance;
+	
+			}
+			if($totalDisallowance == 0){
+				$totalDisallowance_value = '-';
+			}else{
+				$totalDisallowance_value = number_format($totalDisallowance, 2);
+			}
+
+
+			//Disallowance
+			$sql_RefSal =  "SELECT * FROM loan_transaction WHERE description = 'Ref-Sal' AND loan_id = '$invoice_id'";
+			$query_RefSal = $conn->query($sql_RefSal);
+			$row_RefSal = $query_RefSal->fetch_assoc();
+			if($query_RefSal->num_rows > 0){
+				$RefSal_value = number_format($row_RefSal['loan_amount'], 2);
+				$RefSal = $row_RefSal['loan_amount'];
+				$netRefSal = $RefSal;
+				$totalRefSal += $netRefSal;
+
+			}else{
+				$RefSal_value ='-';
+				$RefSal = 0; 
+				$netRefSal = $RefSal;
+				$totalRefSal += $RefSal;
+	
+			}
+			if($totalRefSal == 0){
+				$totalRefSal_value = '-';
+			}else{
+				$totalRefSal_value = number_format($totalRefSal, 2);
+			}
+			
+			//total deduction per employee
+			$totaldeduction_per_employee = $Disallowance +$RefSal;
+
+			//total deduction
+			$totaldeduction = $totaldeduction_per_employee;
+			$totaldeduction += $totaldeduction;
+			
+			
+			 
+
+			
+
+
+
+
 			/**/$contents .= '
 			<style>
 				.right-border {
@@ -30,7 +127,7 @@
 				<td border="1" align="center">'.$no++.'</td>
 				<td border="1" align="center">'.$row['employee_name'].'</td>
 				
-				<td border="1" align="center"></td>
+				<td border="1" align="center">'.$position.'</td>
 
 				<td border="1" align="center">'.$row['employee_id'].'</td>
 				
@@ -42,7 +139,7 @@
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
-				<td class="bottom-border right-border"  align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border"  align="right"><b>'.$Disallowance_value.'<br>'.$RefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -60,7 +157,7 @@
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
 
 				
-				<td border="1" width="7%" align="right">TD </td>
+				<td border="1" width="7%" align="right">'.number_format($totaldeduction_db, 2).'</td>
 				
 
 				<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
@@ -72,7 +169,7 @@
 			
 		}
 	 
-		
+		// total sheet
 
 		/**/$contents .= '
 		<style>
@@ -100,7 +197,7 @@
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>'.$totalDisallowance_value.'<br>'.$totalRefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -118,7 +215,7 @@
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
 
 				
-				<td border="1" width="7%" align="right">TD </td>
+				<td border="1" width="7%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
 				
 
 				<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
@@ -242,7 +339,7 @@
 	$pdf->SetMargins('3', '10', PDF_MARGIN_RIGHT);  
     $pdf->setPrintHeader(false);  
     $pdf->setPrintFooter(false);  
-    $pdf->SetAutoPageBreak(TRUE, 10);  
+    $pdf->SetAutoPageBreak(TRUE, 50);  
     $pdf->SetFont('helvetica', '', 5);  
     $pdf->AddPage();  
     $content = '';  

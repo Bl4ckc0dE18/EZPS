@@ -23,6 +23,11 @@
           <div class="form-group has-feedback">
             <input type="password" class="form-control" name="password" placeholder="Password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			
+          </div>
+		  <div class="form-group has-feedback">
+           
+			<a href='#forgot' data-toggle='modal'><i class='fa fa-edit'></i> Forgot password?</a>
           </div>
       		<div class="row">
     			<div class="col-xs-4">
@@ -42,7 +47,7 @@
   		}
   	?>
 </div>
-	
+<?php include 'includes/forgot_password_modal.php'; ?>
 <?php include 'includes/scripts.php' ?>
 </body>
 </html>

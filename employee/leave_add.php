@@ -39,6 +39,6 @@
 	}
 
 
-	header('location: leave.php');
+	header('location: leave');
 
 ?>
