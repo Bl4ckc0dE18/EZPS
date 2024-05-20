@@ -48,7 +48,7 @@
                         <option value="GSIS Eplan">GSIS Eplan</option>
                         <option value="GSIS Ecard">GSIS Ecard</option>
                         <option value="HDMF MPL">HDMF MPL</option>
-                        <option value="H'DMF Res">H'DMF Res</option>
+                        <option value="HDMF Res">HDMF Res</option>
                         <option value="LBP">LBP</option>
                         <option value="TUPM-Cd">TUPM-Cd</option>
                         <option value="Fin Ass">Fin Ass</option>
