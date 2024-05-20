@@ -2,7 +2,28 @@
 $totalDisallowance =0;
 $totalRef_Sal =0;
 $totalRef_Ocom =0;
-
+$totalNHMC =0;
+$totalMP2 =0;
+$totalGSIS_MPL =0;
+$totalGSIS_Pol =0;
+$totalGSIS_ELA =0;
+$totalGSIS_Opin =0;
+$totalGSIS_OpLo =0;
+$totalGSIS_GFAL =0;
+$totalGSIS_HIP =0;
+$totalGSIS_CPL =0;
+$totalGSIS_SOS =0;
+$totalGSIS_Eplan =0;
+$totalGSIS_Ecard =0;
+$totalHDMF_MPL =0;
+$totalHDMF_Res =0;
+$totalLBP =0;
+$totalTUPM_Cd =0;
+$totalFin_Ass =0;
+$totalGSIS_Educ =0;
+$totalTUPAEA =0;
+$totalTUPFA =0;
+$totalHDMF_Eme =0;
 
 
 //Disallowance
