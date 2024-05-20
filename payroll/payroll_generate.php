@@ -10,17 +10,29 @@
 		$totaldeduction = 0;
 		$totalRefSal = 0;
 
-		/*$sql ="SELECT 
+		$sql ="SELECT 
 		employee_id,
 		employee_id,
-		MAX(CASE WHEN datefrom >= '$from' AND dateto <= '$to' THEN netpay END) AS first_half,
-		MAX(CASE WHEN datefrom >= '$from' AND dateto <= '$to' THEN 0 END) AS second_half
+		netpay,
+		
+		invoice_id,
+		employee_name,
+		SUM(totaldeduction) AS total_totaldeduction,
+
+		MAX(CASE WHEN DAY(datefrom) <= 15 AND DAY(dateto) >= 15 THEN netpay ELSE 0 END) AS first_half,
+    	MAX(CASE WHEN DAY(datefrom) > 15 THEN netpay ELSE 0 END) AS second_half,
+		
+		MAX(CASE WHEN DAY(datefrom) <= 15 AND DAY(dateto) >= 15 THEN invoice_id ELSE 0 END) AS invoice_id1,
+    	MAX(CASE WHEN DAY(datefrom) > 15 THEN invoice_id ELSE 0 END) AS invoice_id2
 		FROM 
-			payslip
+		payslip
+		WHERE 
+			datefrom >= '$from' AND dateto <= '$to'
 		GROUP BY 
-			employee_id;
-		";*/
-		$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
+			employee_id
+			ORDER BY 
+   		datefrom;";
+		/*$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";*/
 		
 		
 		//$sql = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
@@ -36,10 +48,13 @@
  
 			
 
-			$totaldeduction_db = $row['totaldeduction'];
+			$totaldeduction_db = $row['total_totaldeduction'];
 			$totaldeduction_db_per_employee += $totaldeduction_db; 
 
-			$invoice_id = $row['invoice_id'];
+
+			$invoice_id1 = $row['invoice_id1'];
+			$invoice_id2 = $row['invoice_id2'];
+			//$invoice_id = $row['invoice_id'];
 			// search employee 
 			$sql_employee = "SELECT * FROM employees WHERE employee_id = '$employee_id'";
 			$query_employee = $conn->query($sql_employee);
@@ -53,12 +68,14 @@
 			//checking if employee have add loans
 			
 			//Disallowance
-			$sql_Disallowance = "SELECT * FROM loan_transaction WHERE description = 'Disallowance' AND loan_id = '$invoice_id'";
+			//$sql_Disallowance = "SELECT * FROM loan_transaction WHERE description = 'Disallowance' AND loan_id = '$invoice_id'";
+			$sql_Disallowance = "SELECT SUM(loan_amount) AS total_loan_amount FROM loan_transaction WHERE description = 'Disallowance' AND loan_id IN ('$invoice_id1', '$invoice_id2')";
+
 			$query_Disallowance = $conn->query($sql_Disallowance);
 			$row_Disallowance = $query_Disallowance->fetch_assoc();
 			if($query_Disallowance->num_rows > 0){
-				$Disallowance_value = number_format($row_Disallowance['loan_amount'], 2);
-				$Disallowance = $row_Disallowance['loan_amount'];
+				$Disallowance_value = number_format($row_Disallowance['total_loan_amount'], 2);
+				$Disallowance = $row_Disallowance['total_loan_amount'];
 				$netDisallowance = $Disallowance;
 				$totalDisallowance += $netDisallowance;
 
@@ -77,12 +94,12 @@
 
 
 			//Disallowance
-			$sql_RefSal =  "SELECT * FROM loan_transaction WHERE description = 'Ref-Sal' AND loan_id = '$invoice_id'";
+			$sql_RefSal =  "SELECT SUM(loan_amount) AS total_loan_amount FROM loan_transaction WHERE description = 'Ref-Sal' AND loan_id IN ('$invoice_id1', '$invoice_id2')";
 			$query_RefSal = $conn->query($sql_RefSal);
 			$row_RefSal = $query_RefSal->fetch_assoc();
 			if($query_RefSal->num_rows > 0){
-				$RefSal_value = number_format($row_RefSal['loan_amount'], 2);
-				$RefSal = $row_RefSal['loan_amount'];
+				$RefSal_value = number_format($row_RefSal['total_loan_amount'], 2);
+				$RefSal = $row_RefSal['total_loan_amount'];
 				$netRefSal = $RefSal;
 				$totalRefSal += $netRefSal;
 
@@ -161,7 +178,7 @@
 				
 
 				<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
-				<td class="bottom-border right-border" width="5%" align="right"><b>1st half<br><br>2nd half</b></td>
+				<td class="bottom-border right-border" width="5%" align="right"><b>'.number_format($row['first_half'], 2).'<br><br>'.number_format($row['second_half'], 2).'</b></td>
 
 
 			</tr>
@@ -218,8 +235,8 @@
 				<td border="1" width="7%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
 				
 
-				<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
-				<td class="bottom-border right-border" width="5%"align="right"><b>1st half<br><br>2nd half</b></td>
+				<td class="bottom-border" width="2%" align="center"><b>TL<br>*<br><br>.<br></b></td>
+				<td class="bottom-border right-border" width="5%"align="right"><b>1st half<br>1st half<br><br>2nd half</b></td>
 
 			</tr>
 		';

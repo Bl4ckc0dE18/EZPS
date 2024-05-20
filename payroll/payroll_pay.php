@@ -87,40 +87,40 @@
                                 $valueph = (($phrow['total'] / 100) * $gross);
 
 
-                                /*Loan*/
-                                $loansql = "SELECT * FROM loan WHERE employee_id = $employeeid AND loanbalance !=0";
-                                $loanquery = $conn->query($loansql);
+                                            /*Loan*/
+                                            $loansql = "SELECT * FROM loan WHERE employee_id = $employeeid AND loanbalance !=0";
+                                            $loanquery = $conn->query($loansql);
 
-                                $descriptionloan = '';  // Initialize variables to store descriptions
-                                $descriptionloanamount = '';  // and amounts
-                                $totalloan = 0;  // Initialize variable to store total loan amount
-                                
-                                while ($loanrow = $loanquery->fetch_assoc()) {
-                               // Check if the value is within the desired range
-                               // The value is within the range   
-                                $idloan=$loanrow['id']; 
-                                $semiloan=$loanrow['semiloan'] - 1; 
-                                $loanbalance=$loanrow['loanbalance'] - $loanrow['semimonths']; 
-                                $loanpay=$loanrow['loanpay'];
-                                $updateloanpay=$loanpay+$loanrow['semimonths'];
+                                            $descriptionloan = '';  // Initialize variables to store descriptions
+                                            $descriptionloanamount = '';  // and amounts
+                                            $totalloan = 0;  // Initialize variable to store total loan amount
+                                            
+                                            while ($loanrow = $loanquery->fetch_assoc()) {
+                                        // Check if the value is within the desired range
+                                        // The value is within the range   
+                                            $idloan=$loanrow['id']; 
+                                            $semiloan=$loanrow['semiloan'] - 1; 
+                                            $loanbalance=$loanrow['loanbalance'] - $loanrow['semimonths']; 
+                                            $loanpay=$loanrow['loanpay'];
+                                            $updateloanpay=$loanpay+$loanrow['semimonths'];
 
-                                $sqlloan = "UPDATE loan SET semiloan = '$semiloan' , loanbalance = '$loanbalance', loanpay = '$updateloanpay' WHERE id = '$idloan'";
-                                if($conn->query($sqlloan)){
-                                    $_SESSION['success'] = 'Payroll Generate added successfully';
-                                }
-                                else{
-                                    $_SESSION['error'] = $conn->error;
-                                }   
-                                $descriptionloan .= ' <br>'.$loanrow['description'];
-                                $descriptionloanamount .= ' <br>'.number_format($loanrow['semimonths'], 2);
-                                    $totalloan_per_loan = number_format($loanrow['semimonths'], 2);
-                                    $totalloan += $totalloan_per_loan; 
-                                // insert in loan_transanction
-                                $loan_description = $loanrow['description'];
-                                $loan_semimonths = number_format($loanrow['semimonths'], 2);
-                                
-                                $sql = "INSERT INTO loan_transaction (loan_id, description, loan_amount) VALUES ('$invocie_id', '$loan_description', '$loan_semimonths')";
-                                $conn->query($sql);
+                                            $sqlloan = "UPDATE loan SET semiloan = '$semiloan' , loanbalance = '$loanbalance', loanpay = '$updateloanpay' WHERE id = '$idloan'";
+                                            if($conn->query($sqlloan)){
+                                                $_SESSION['success'] = 'Payroll Generate added successfully';
+                                            }
+                                            else{
+                                                $_SESSION['error'] = $conn->error;
+                                            }   
+                                            $descriptionloan .= ' <br>'.$loanrow['description'];
+                                            $descriptionloanamount .= ' <br>'.number_format($loanrow['semimonths'], 2);
+                                                $totalloan_per_loan = number_format($loanrow['semimonths'], 2);
+                                                $totalloan += $totalloan_per_loan; 
+                                            // insert in loan_transanction
+                                            $loan_description = $loanrow['description'];
+                                            $loan_semimonths = number_format($loanrow['semimonths'], 2);
+                                            
+                                            $sql = "INSERT INTO loan_transaction (loan_id, description, loan_amount) VALUES ('$invocie_id', '$loan_description', '$loan_semimonths')";
+                                            $conn->query($sql);
 
                                 
 
