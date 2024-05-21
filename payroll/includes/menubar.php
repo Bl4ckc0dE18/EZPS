@@ -31,7 +31,7 @@
           <ul class="treeview-menu">
           <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
             <li><a href="employee"><i class="fa fa-circle-o"></i> Employee List</a></li>    
-            <li><a href="schedule"><i class="fa fa-circle-o"></i> Schedules</a></li>
+            <!-- <li><a href="schedule"><i class="fa fa-circle-o"></i> Schedules</a></li> -->
             <li><a href="leave"><i class="fa fa-circle-o"></i> Employees Leave</a></li>
             
             <?php }?>
@@ -55,7 +55,7 @@
             
             <li><a href="schedule_employees"><i class="fa fa-circle-o"></i> Employee Schedules</a></li>
             <li><a href="work_load"><i class="fa fa-circle-o"></i> Work Load</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span> Print Schedule</span></a></li>
+            <li><a href="schedule_employees_print"><i class="fa fa-circle-o"></i> <span> Print Schedule</span></a></li>
             <?php }?>
 
             

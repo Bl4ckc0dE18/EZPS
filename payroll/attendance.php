@@ -61,7 +61,12 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid 
+                    FROM attendance 
+                    LEFT JOIN 
+                      employees ON employees.id=attendance.employee_id 
+                    ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       //$status = ($row['status'])?'<span class="label label-warning pull-right">ontime</span>':'<span class="label label-danger pull-right">late</span>':'<span class="label label-danger pull-right">Break</span>';

@@ -62,9 +62,9 @@
                   <?php
                   // $sql = "SELECT * FROM work_load";
                    $sql = "SELECT employee_id,name,
-                   GROUP_CONCAT(id) AS ids,
-                   GROUP_CONCAT(schedule_load) AS schedule_loads, 
-                   GROUP_CONCAT(time_load) AS time_loads 
+                        GROUP_CONCAT(id) AS ids,
+                        GROUP_CONCAT(schedule_load) AS schedule_loads, 
+                        GROUP_CONCAT(time_load) AS time_loads 
                     FROM work_load 
                     GROUP BY employee_id";
 

@@ -4,19 +4,39 @@
 	function generateRow($conn){
 		$contents = '';
 		
-		$sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id";
+        $sql = "SELECT 
+        employees.*, 
+        employees.id AS empid, 
+        position.*, 
+        (SELECT GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
+        (SELECT GROUP_CONCAT(CONCAT(employee_schedule.schedule_day, ' ', TIME_FORMAT(employee_schedule.time_in, '%h:%i %p'), ' - ', TIME_FORMAT(employee_schedule.time_out, '%h:%i %p')) SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
+        FROM 
+            employees 
+        LEFT JOIN 
+            position ON position.id = employees.position_id";
+        $query = $conn->query($sql);
 
-		$query = $conn->query($sql);
-		$total = 0;
-		while($row = $query->fetch_assoc()){
-			$contents .= "
-			<tr>
-				<td>".$row['lastname'].", ".$row['firstname']."</td>
-				<td>".$row['employee_id']."</td>
-				<td>".date('h:i A', strtotime($row['time_in'])).' - '. date('h:i A', strtotime($row['time_out']))."</td>
-			</tr>
-			";
-		}
+            // Check for errors
+            if (!$query) {
+                // Query failed
+                echo "Error: " . $conn->error;
+            } else {
+                // Query succeeded
+                // Fetch and display data
+                while ($row = $query->fetch_assoc()) {
+                    $contents .= "
+                        <tr>
+                            <td>".$row['employee_id']."</td>
+                            <td>".$row['lastname'].", ".$row['firstname']."</td>
+                            <td>".$row['description']."</td>
+                            <td>".$row['work_schedules']."</td>
+                            <td>".$row['work_loads']."</td>
+                           
+                        </tr>
+                        ";
+                    
+                }
+            }
 
 		return $contents;
 	}
@@ -42,9 +62,11 @@
       	<h4 align="center">Employee Schedule</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
-           		<th width="40%" align="center"><b>Employee Name</b></th>
-                <th width="30%" align="center"><b>Employee ID</b></th>
-				<th width="30%" align="center"><b>Schedule</b></th> 
+           		<th width="15%" align="center"><b>Employee ID</b></th>
+                <th width="20%" align="center"><b>Employee Name</b></th>
+				<th width="20%" align="center"><b>Position</b></th> 
+                <th width="30%" align="center"><b>Work Schedule</b></th>
+				<th width="15%" align="center"><b>Work Load</b></th> 
            </tr>  
       ';  
     $content .= generateRow($conn); 
