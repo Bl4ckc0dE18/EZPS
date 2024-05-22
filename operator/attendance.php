@@ -22,14 +22,15 @@ if (isset($_POST['employee'])) {
     $timeoutvalue='00:00:00';
 
     if ($query->num_rows > 0) {
-            /**/$sqlend = "SELECT * FROM employees WHERE employee_id = '$employee' OR employee_rfid= '$employee'";
+    
+    /**/$sqlend = "SELECT * FROM employees WHERE employee_id = '$employee' OR employee_rfid= '$employee'";
         $queryend = $conn->query($sqlend);
         $rowed = $queryend->fetch_assoc();
 
         $date_contract = date('Y-m-d');
         $check_contract = $rowed['end_contract'];
-
-        if ($check_contract <= $date_contract ){
+        $check_regular = $rowed['regular'];
+        if ($check_contract <= $date_contract && $check_regular == 'NO' ){
             $output['error'] = true;
             $output['message'] = 'End Contract';
         } 

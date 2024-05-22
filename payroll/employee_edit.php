@@ -15,13 +15,13 @@
 		$email = $_POST['email'];
 		//$password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$position = $_POST['position'];
-		$schedule = $_POST['schedule'];
+		$regular = $_POST['edit_regular'];
 		$day_off = $_POST['dayoff_edit'];
 		$e_leave = $_POST['eleave'];
 		$date_contract_start = $_POST['datepicker_employee_sedit'];
 		$date_contract_end = $_POST['datepicker_employee_edit'];
 		
-		$sql = "UPDATE employees SET employee_id = '$employee_id',employee_rfid = '$employee_rfid', firstname = '$firstname', lastname = '$lastname',required_hour = '$edit_hour', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', email = '$email', position_id = '$position', basic_salary = '$schedule', day_off = '$day_off', e_leave = '$e_leave', created_on = '$date_contract_start', end_contract = '$date_contract_end' WHERE id = '$empid'";
+		$sql = "UPDATE employees SET employee_id = '$employee_id',employee_rfid = '$employee_rfid', firstname = '$firstname', lastname = '$lastname',required_hour = '$edit_hour', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', email = '$email', position_id = '$position', regular = '$regular', day_off = '$day_off', e_leave = '$e_leave', created_on = '$date_contract_start', end_contract = '$date_contract_end' WHERE id = '$empid'";
 		if($conn->query($sql)){
 			
 

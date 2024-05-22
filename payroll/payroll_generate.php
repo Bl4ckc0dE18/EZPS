@@ -60,11 +60,15 @@
 			$query_employee = $conn->query($sql_employee);
 			$row_employee = $query_employee->fetch_assoc();
 			$position_id = $row_employee['position_id'];
+
 			// search employee position
 			$sql_position = "SELECT * FROM position WHERE id = '$position_id'";
 			$query_position = $conn->query($sql_position);
 			$row_position = $query_position->fetch_assoc();
 			$position = $row_position['description'];
+			$sg = $row_position['sg'];
+			$step = $row_position['step'];
+			$monthly_salary = $row_position['monthly_salary'];
 			//checking if employee have add loans
 			
 			//Disallowance
@@ -74,10 +78,16 @@
 			$query_Disallowance = $conn->query($sql_Disallowance);
 			$row_Disallowance = $query_Disallowance->fetch_assoc();
 			if($query_Disallowance->num_rows > 0){
-				$Disallowance_value = number_format($row_Disallowance['total_loan_amount'], 2);
 				$Disallowance = $row_Disallowance['total_loan_amount'];
-				$netDisallowance = $Disallowance;
-				$totalDisallowance += $netDisallowance;
+
+				if($Disallowance == 0){
+					$RefSal_value ='-';
+				}
+				else{
+					$Disallowance_value = number_format($row_Disallowance['total_loan_amount'], 2);
+					$netDisallowance = $Disallowance;
+					$totalDisallowance += $netDisallowance;
+				}
 
 			}else{
 				$Disallowance_value ='-';
@@ -94,14 +104,25 @@
 
 
 			//Disallowance
-			$sql_RefSal =  "SELECT SUM(loan_amount) AS total_loan_amount FROM loan_transaction WHERE description = 'Ref-Sal' AND loan_id IN ('$invoice_id1', '$invoice_id2')";
+			$sql_RefSal =  "SELECT SUM(loan_amount) AS total_loan_amount 
+			FROM 
+				loan_transaction 
+			WHERE 
+				description = 'Ref-Sal' 
+				AND loan_id IN ('$invoice_id1', '$invoice_id2')";
 			$query_RefSal = $conn->query($sql_RefSal);
 			$row_RefSal = $query_RefSal->fetch_assoc();
 			if($query_RefSal->num_rows > 0){
-				$RefSal_value = number_format($row_RefSal['total_loan_amount'], 2);
 				$RefSal = $row_RefSal['total_loan_amount'];
-				$netRefSal = $RefSal;
-				$totalRefSal += $netRefSal;
+				
+				if($RefSal == 0){
+					$RefSal_value ='-';
+				}else{
+					$RefSal_value = number_format($row_RefSal['total_loan_amount'], 0);
+					
+					$netRefSal = $RefSal;
+					$totalRefSal += $netRefSal;
+				}
 
 			}else{
 				$RefSal_value ='-';
@@ -142,13 +163,13 @@
 			</style>
 			<tr>
 				<td border="1" align="center">'.$no++.'</td>
-				<td border="1" align="center">'.$row['employee_name'].'</td>
+				<td border="1" align="left">'.$row['employee_name'].'<br><br>STEP '.$step.'<br><br>SG '.$sg.'</td>
 				
-				<td border="1" align="center">'.$position.'</td>
+				<td border="1" align="left">'.$position.'<br><br>'.$step.'<br><br>'.$sg.'</td>
 
 				<td border="1" align="center">'.$row['employee_id'].'</td>
 				
-				<td border="1" align="right">'.number_format($row['netpay'], 2).'</td>
+				<td border="1" align="right">'.number_format($monthly_salary, 2).'</td>
 				<td border="1" align="right">PERA</td>
 				
 				<td border="1" align="right">AC</td>

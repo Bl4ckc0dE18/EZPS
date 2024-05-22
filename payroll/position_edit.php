@@ -7,7 +7,11 @@
 		$rate = $_POST['rate'];
 		$ot = $_POST['ot'];
 		
-		$sql = "UPDATE position SET description = '$title', rate = '$rate', ot = '$ot' WHERE id = '$id'";
+		$sg = $_POST['edit_sg_edit'];
+		$steps = $_POST['edit_steps_edit'];
+		$monthly_salary = $_POST['edit_monthly_salary'];
+		$position_code = $title.'_sg'.$sg.'_s'.$steps;
+		$sql = "UPDATE position SET description = '$title', rate = '$rate', ot = '$ot', sg = '$sg', step = '$steps', monthly_salary = '$monthly_salary', position_code = '$position_code' WHERE id = '$id'";
 		if($conn->query($sql)){
 			
 

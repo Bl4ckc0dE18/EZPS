@@ -108,7 +108,7 @@
                 </div>
                 <!--  -->
                 <div class="form-group">
-                    <label for="position" class="col-sm-2 control-label">Position</label>
+                    <label for="position" class="col-sm-2 control-label">Position Code</label>
 
                     <div class="col-sm-4">
                       <select class="form-control" name="position" id="position" required>
@@ -118,7 +118,7 @@
                           $query = $conn->query($sql);
                           while($prow = $query->fetch_assoc()){
                             echo "
-                              <option value='".$prow['id']."'>".$prow['description']."</option>
+                              <option value='".$prow['id']."'>".$prow['position_code']."</option>
                             ";
                           }
                         ?>
@@ -143,25 +143,16 @@
                 </div>
             
                 <div class="form-group">
-                <!-- <label for="schedule" class="col-sm-2 control-label">Schedule</label> -->
-                <label for="basic_salary" class="col-sm-2 control-label">Basic Salary</label>
-                <div class="col-sm-4">
-                      <input type="text" class="form-control" id="basic_salary" name="basic_salary">
-                    </div>
-                <!-- <div class="col-sm-4">
-                    <select class="form-control" id="schedule" name="schedule" required>
-                      <option value="" selected>- Select -</option>
-                      <?php
-                        $sql = "SELECT * FROM schedules";
-                        $query = $conn->query($sql);
-                        while($srow = $query->fetch_assoc()){
-                          echo "
-                            <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
-                          ";
-                        }
-                      ?>
-                    </select>
-                </div> -->
+               
+                  <label for="regular" class="col-sm-2 control-label">Regular</label>
+                    <div class="col-sm-4"> 
+                        <select class="form-control" name="regular" id="regular" required>
+                          <option value="" selected>- Select -</option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
+                      </div>
+                
                     
 
                     <label for="eleave" class="col-sm-2 control-label">Leave Day</label>
@@ -293,7 +284,7 @@
                 <!--  -->
                 <!--  -->
                 <div class="form-group">
-                    <label for="edit_position" class="col-sm-2 control-label">Position</label>
+                    <label for="edit_position" class="col-sm-2 control-label">Position Code</label>
 
                     <div class="col-sm-4">
                       <select class="form-control" name="position" id="edit_position">
@@ -303,7 +294,7 @@
                           $query = $conn->query($sql);
                           while($prow = $query->fetch_assoc()){
                             echo "
-                              <option value='".$prow['id']."'>".$prow['description']."</option>
+                              <option value='".$prow['id']."'>".$prow['position_code']."</option>
                             ";
                           }
                         ?>
@@ -313,7 +304,7 @@
 
                     <div class="col-sm-4"> 
                       <select class="form-control" name="dayoff_edit" id="dayoff_edit" required>
-                        <option value="" selected>- Select -</option>
+                        <option selected id="dayoff_val"></option>
                         <option value="SUN">SUN</option>
                         <option value="MON">MON</option>
                         <option value="TUE">TUE</option>
@@ -326,26 +317,15 @@
 
                 </div>
                 <div class="form-group">
-                    <!-- <label for="edit_schedule" class="col-sm-2 control-label">Schedule</label>
+              
 
-                    <div class="col-sm-4">
-                      <select class="form-control" id="edit_schedule" name="schedule">
-                        <option selected id="schedule_val"></option>
-                        <?php
-                          $sql = "SELECT * FROM schedules";
-                          $query = $conn->query($sql);
-                          while($srow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
-                            ";
-                          }
-                        ?>
-                      </select>
-                    </div> -->
-
-                    <label for="basic_salary" class="col-sm-2 control-label">Basic Salary</label>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" id="basic_salary" name="basic_salary">
+                <label for="edit_regular" class="col-sm-2 control-label">Regular</label>
+                    <div class="col-sm-4"> 
+                        <select class="form-control" name="edit_regular" id="edit_regular" required>
+                        <option selected id="regular_val"></option>
+                          <option value="YES">YES</option>
+                          <option value="NO">NO</option>
+                        </select>
                       </div>
                     <label for="edit_eleave" class="col-sm-2 control-label">Leave Day</label>
 

@@ -51,9 +51,14 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Position Title</th>
-                  <th>Rate per Hour</th>
-                  <th>Overtime Rate per Hour</th>
+                  <th>Position<br>Title</th>
+                  <th>Rate<br>per Hour</th>
+                  <!-- <th>Overtime</th> -->
+                  <th>Overtime Rate<br>per Hour</th>
+                  <th>Salary<br>Grade</th>
+                  <th>Steps</th>
+                  <th>Monthly<br>Salary</th>
+                  <th>Position<br>Code</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>
@@ -66,6 +71,10 @@
                           <td>".$row['description']."</td>
                           <td>".number_format($row['rate'], 2)."</td>
                           <td>".number_format($row['ot'], 2)."</td>
+                          <td>".$row['sg']."</td>
+                          <td>".$row['step']."</td>
+                          <td>".number_format($row['monthly_salary'], 2)."</td>
+                          <td>".$row['position_code']."</td>
                           <td>
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
@@ -115,6 +124,12 @@ function getRow(id){
       $('#edit_title').val(response.description);
       $('#edit_rate').val(response.rate);
       $('#edit_ot').val(response.ot);
+
+      $('#edit_sg').html(response.sg);
+      $('#edit_steps').html(response.step);
+
+      $('#edit_monthly_salary').val(response.monthly_salary);
+   
       $('#del_posid').val(response.id);
       $('#del_position').html(response.description);
     }

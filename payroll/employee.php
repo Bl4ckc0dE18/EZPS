@@ -88,7 +88,7 @@ include 'includes/header.php';
                                                         <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a>
                                                     </td>
                                                     <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
-                                                    <td><?php echo $row['description']; ?></td>
+                                                    <td><?php echo $row['position_code']; ?></td>
                                                     <td><?php echo $row['work_schedules']; ?></td>
                                                     <td><?php echo $row['work_loads']; ?></td>
                                                     <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
@@ -178,8 +178,9 @@ include 'includes/header.php';
                     $('#edit_password').val(response.password);
                     $('#gender_val').val(response.gender).html(response.gender);
                     $('#position_val').val(response.position_id).html(response.description);
-                    $('#basic_salary').val(response.basic_salary);
-                    $('#dayoff_edit').val(response.day_off);
+                    $('#regular_val').html(response.regular);
+
+                    $('#dayoff_val').html(response.day_off);
                     $('#edit_eleave').val(response.e_leave);
                     $('#datepicker_employee_sedit').val(response.created_on);
                     $('#datepicker_employee_edit').val(response.end_contract);

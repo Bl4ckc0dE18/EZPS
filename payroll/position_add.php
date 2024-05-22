@@ -6,6 +6,11 @@
 		$rate = $_POST['rate'];
 		$ot = $_POST['ot'];
 
+
+		$sg = $_POST['sg'];
+		$steps = $_POST['steps'];
+		$monthly_salary = $_POST['monthly_salary'];
+		$position_code = $title = $title.'_sg'.$sg.'_s'.$steps;
 		$sql = "INSERT INTO position (description, rate, ot) VALUES ('$title', '$rate', '$ot')";
 		if($conn->query($sql)){
 			

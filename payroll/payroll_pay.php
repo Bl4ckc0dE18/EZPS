@@ -48,6 +48,10 @@
         $grossn = $row['rate'] * $row['total_hr'];
 
         $grossot = $row['ot'] * $row['total_ot'];
+        //allowance
+
+
+        
 		$gross = $grossn + $grossot;
         
         $rate = $row['rate'];
