@@ -3,7 +3,9 @@
 
 	function generateRow($from, $to, $conn){
 		$contents = '';
-		$totalSalary = 0; 
+		$totalSalary = 0;
+		$totalMonthly_Salary = 0; 
+		
 		$totaldeduction_db_per_employee =0;
 		$totalDisallowance =0;
 		$totaldeduction_per_employee = 0;
@@ -69,6 +71,10 @@
 			$sg = $row_position['sg'];
 			$step = $row_position['step'];
 			$monthly_salary = $row_position['monthly_salary'];
+			
+
+			
+			$totalMonthly_Salary += $monthly_salary; 
 			//checking if employee have add loans
 			
 			//Disallowance
@@ -81,7 +87,7 @@
 				$Disallowance = $row_Disallowance['total_loan_amount'];
 
 				if($Disallowance == 0){
-					$RefSal_value ='-';
+					$Disallowance_value ='-';
 				}
 				else{
 					$Disallowance_value = number_format($row_Disallowance['total_loan_amount'], 2);
@@ -118,7 +124,7 @@
 				if($RefSal == 0){
 					$RefSal_value ='-';
 				}else{
-					$RefSal_value = number_format($row_RefSal['total_loan_amount'], 0);
+					$RefSal_value = number_format($row_RefSal['total_loan_amount'], 2);
 					
 					$netRefSal = $RefSal;
 					$totalRefSal += $netRefSal;
@@ -172,8 +178,8 @@
 				<td border="1" align="right">'.number_format($monthly_salary, 2).'</td>
 				<td border="1" align="right">PERA</td>
 				
-				<td border="1" align="right">AC</td>
-				<td border="1" width="7%" align="right">GAE</td>
+				<td border="1" align="right">-</td>
+				<td border="1" width="7%" align="right">'.number_format($netPay, 2).'</td>
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
@@ -227,11 +233,11 @@
 
 				<td border="1"  align="center"></td>
 				
-				<td border="1" align="right">'.number_format($totalSalary, 2).'</td>
+				<td border="1" align="right">'.number_format($totalMonthly_Salary, 2).'</td>
 				<td border="1" align="right">PERA</td>
 				
-				<td border="1" align="right">AC</td>
-				<td border="1" width="7%" align="right">GAE</td>
+				<td border="1" align="right">-</td>
+				<td border="1" width="7%" align="right">'.number_format($totalSalary, 2).'</td>
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
