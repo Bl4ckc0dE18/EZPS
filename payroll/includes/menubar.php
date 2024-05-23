@@ -19,7 +19,23 @@
         <li class="header"></li>
         <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>   
-              <li><a href="attendance"><i class="fa fa-th-list"></i> <span>Attendance</span></a></li>  
+             
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th-list"></i>
+            <span>Attendance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+            <li><a href="attendance"><i class="fa fa-circle-o"></i> Attendance List</a></li>              
+            <li><a href="attendance_overwrite"><i class="fa fa-circle-o"></i> Attendance Overwrite</a></li>        
+            <?php }?>
+          </ul>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
@@ -37,6 +53,7 @@
             <?php }?>
 
             <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
+              <li><a href="allowance"><i class="fa fa-circle-o"></i> Allowance</a></li>
             <li><a href="bonus"><i class="fa fa-circle-o"></i> Bonus</a></li>
             <?php }?>
           </ul>

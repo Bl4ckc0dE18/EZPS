@@ -5,7 +5,7 @@
         if(isset($_POST['edit_passowrd'])){
             //Loop search from verivication code in forgot passowrd
             $_SESSION['error'] = 'Cannot find account with the employee idqqqq';
-            header('location: forgot_password');
+            //header('location: forgot_password');
         
 
         }	

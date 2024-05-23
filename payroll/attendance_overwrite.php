@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Attendance
+        Attendance Overwrite
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -57,7 +57,7 @@
                   <th>Name</th>
                   <th>Time In</th>
                   <th>Time Out</th>
-                  <!-- <th>Tools</th> -->
+                  <th>Tools</th>
                 </thead>
                 <tbody>
                   <?php
@@ -92,7 +92,12 @@
                           <td>".$row['firstname'].' '.$row['lastname']."</td>
                           <td>".date('h:i A', strtotime($row['time_in'])).$status."</td>
                           <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                         
+                          <td>
+                            
+                          <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-edit'></i> Edit</a>
+                          <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-trash'></i> Delete</a>
+
+                        </td>
                         </tr>
                       ";
                     }
@@ -100,12 +105,7 @@
                   <!-- 
                     
                   
-                   <td>
-                            
-                            <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-edit'></i> Edit</a>
-                            <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-trash'></i> Delete</a>
-
-                          </td><button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['attid']."'><i class='fa fa-edit'></i> Edit</button>
+                   <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['attid']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['attid']."'><i class='fa fa-trash'></i> Delete</button> -->
                 </tbody>
               </table>
