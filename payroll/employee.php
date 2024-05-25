@@ -55,17 +55,21 @@ include 'includes/header.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        // SQL query
+                                        // SQL query 
                                         $sql = "SELECT 
-                                                    employees.*, 
-                                                    employees.id AS empid, 
-                                                    position.*, 
-                                                    (SELECT GROUP_CONCAT(work_load.schedule_load, ' ', work_load.time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
-                                                    (SELECT GROUP_CONCAT(CONCAT(employee_schedule.schedule_day, ' ', TIME_FORMAT(employee_schedule.time_in, '%h:%i %p'), ' - ', TIME_FORMAT(employee_schedule.time_out, '%h:%i %p')) SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
-                                                FROM 
-                                                    employees 
-                                                LEFT JOIN 
-                                                    position ON position.id = employees.position_id";
+                                        employees.*, 
+                                        employees.id AS empid, 
+                                        position.*, 
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_load, ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' ', TIME_FORMAT(time_in, '%h:%i %p'), ' - ', TIME_FORMAT(time_out, '%h:%i %p')) ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
+                                    FROM 
+                                        employees 
+                                    LEFT JOIN 
+                                        position ON position.id = employees.position_id
+                                    ORDER BY 
+                                        work_loads,
+                                        work_schedules;
+                                    ";
 
                                         // Execute the query
                                         $query = $conn->query($sql);
@@ -177,7 +181,7 @@ include 'includes/header.php';
                     $('#edit_email').val(response.email);
                     $('#edit_password').val(response.password);
                     $('#gender_val').val(response.gender).html(response.gender);
-                    $('#position_val').val(response.position_id).html(response.description);
+                    $('#position_val').val(response.position_id).html(response.position_code);
                     $('#regular_val').html(response.regular);
 
                     $('#dayoff_val').html(response.day_off);
