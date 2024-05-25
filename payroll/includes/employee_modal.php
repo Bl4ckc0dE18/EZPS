@@ -348,7 +348,7 @@
 
                     <div class="col-sm-4"> 
                       <div class="date">
-                        <input type="text" class="form-control" id="datepicker_employee_edit" name="datepicker_employee_edit" required>
+                        <input type="text" class="form-control" id="datepicker_employee_edit" name="datepicker_employee_edit" required >
                       </div>
                     </div>
                 </div>
@@ -453,3 +453,35 @@
         </div>
     </div>
 </div>    
+
+<!-- <script>
+  function checkRegularAndSubmit() {
+    var regularSelect = document.getElementById('edit_regular');
+    var datepickerEndContract = document.getElementById('datepicker_employee_edit');
+    var form = document.querySelector('form');
+    var submitButton = document.querySelector('[name="edit"]');
+
+    regularSelect.addEventListener('change', function() {
+      if (regularSelect.value === 'YES') {
+        datepickerEndContract.disabled = true;
+        datepickerEndContract.value = '';
+      } else {
+        datepickerEndContract.disabled = false;
+        datepickerEndContract.required = true;
+      }
+    });
+
+    submitButton.addEventListener('click', function(event) {
+      if (regularSelect.value === 'NO' && datepickerEndContract.value === '') {
+        event.preventDefault();
+        alert('Please fill in the Date of End Contract field.');
+      } else {
+        // If validation passes, you can submit the form
+        form.submit();
+      }
+    });
+  }
+
+  // Call the function to enable/disable the datepicker based on the 'Regular' select option
+  checkRegularAndSubmit();
+</script> -->

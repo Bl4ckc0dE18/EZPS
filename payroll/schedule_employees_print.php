@@ -138,8 +138,9 @@ function redirectToPagePrint(button) {
     }
 function redirectToPage2(tdElement) {
             var tdId = tdElement.id;
-            var nextPageURL = "employee_my_id.php?id=" + encodeURIComponent(tdId);
-            window.location.href = nextPageURL;
+            var nextPageURL = "schedule_print_employee.php?id=" + encodeURIComponent(tdId);
+            
+            window.open(nextPageURL, '_blank');
         }
 $(function(){
   $('.edit_schedule').click(function(e){

@@ -82,7 +82,7 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="schedule_employees_edit_delete.php">
-            		<input type="hidden" id="timeid" name="id">
+            		<input type="text" id="timeid" name="id">
 					
 					
 					<div class="form-group">

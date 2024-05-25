@@ -64,10 +64,10 @@
                   <?php
                    $sql = "SELECT employee_id, 
                    name, 
-                   GROUP_CONCAT(id) AS ids,
+                   GROUP_CONCAT(id ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS ids,
                    GROUP_CONCAT(schedule_day ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS schedule_days,
-                   GROUP_CONCAT(time_in ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_in) AS time_ins,
-                   GROUP_CONCAT(time_out ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_out) AS time_outs
+                   GROUP_CONCAT(time_in ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS time_ins,
+                   GROUP_CONCAT(time_out ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS time_outs
                   FROM employee_schedule
                   GROUP BY employee_id";
     
