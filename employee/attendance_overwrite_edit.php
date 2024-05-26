@@ -8,11 +8,22 @@
 		$time_in = date('H:i:s', strtotime($time_in));
 		$time_out = $_POST['edit_time_out'];
 		$time_out = date('H:i:s', strtotime($time_out));
-
-			// Check if the 'photo' file input is empty
+		$asql = "SELECT * FROM pre_attendance WHERE id = '$id'";
+		$aquery = $conn->query($asql);
+		$arow = $aquery->fetch_assoc();
+		$pre_comment = $arow['comment'];
+		$comment = $pre_comment."<br>----------------<br>Reviewd by : ".$user['firstname'].' '.$user['lastname'] ." <br><br><br>Employee check<br><br><br>"."Check Date : ". date("Y-m-d");
+			
+		// Check if the 'photo' file input is empty
 			if(empty($filename = $_FILES['photo']['name'])) {
 				
-				$_SESSION['error'] = 'enmpt';
+				$sql = "UPDATE pre_attendance SET date = '$date', time_in = '$time_in', time_out = '$time_out', comment = '$comment' WHERE id = '$id'";
+				if($conn->query($sql)){
+					$_SESSION['success'] = 'Employee attendance updated successfully';
+				}
+				else{
+					$_SESSION['error'] = $conn->error;
+				}
 				
 			} else {
 				

@@ -365,11 +365,12 @@ if (isset($_POST['employee'])) {
                                                 // checking if employee have work load this day 
                                                 if ($query_wl_db->num_rows > 0 ){
                                                     $time_out_load = $row_wl_db['time_load'];
-                                                    $output['time'] = 'over load: ';
+                                                    //$output['time'] = 'over load: ';
                                                     
 
                                                     $time_overload = ($int_ot <= $time_out_load) ? 0 : 1;
                                                     $time_overloads = ($int_ot <= $time_out_load) ? $int_ot  : $time_out_load;
+                                                    //$time_overloads = ($int_ot <= $time_out_load) ? 0  : $time_out_load;
 
                                                     // checkin if the employee render the work load of time
                                                     if($time_overload==0){

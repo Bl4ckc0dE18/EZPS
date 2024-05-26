@@ -99,17 +99,13 @@
                           <td>".$row['comment']."</td>
                           <td>";
                        if($row['status']=="Approved" || $row['status']=="Rejected" ){
-                          echo "
-                          
+                          echo "                         
                           <a  class='btn btn-primary btn-sm btn-flat' id='".$row['attid']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                         </td>";
-                      }
-                      
+                      }                   
                       else{
                         echo "
                         <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-edit'></i> Edit</a>
-                       
-                        
                         <a  class='btn btn-primary btn-sm btn-flat' id='".$row['attid']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                       </td>";
                       }
