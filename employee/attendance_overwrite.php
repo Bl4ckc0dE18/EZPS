@@ -45,9 +45,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <!-- <div class="box-header with-border">
+            <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
-            </div> -->
+            </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -58,20 +58,24 @@
                   <th>Time In</th>
                   <th>Time Out</th>
                   <th>Status</th>
-                  <th>Commet</th>
-                  
-                  
+                  <th>Commet</th> 
                   <th>Tools</th>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *,
-                    employees.employee_id AS empid, 
-                    pre_attendance.id AS attid 
-                    FROM pre_attendance 
-                    LEFT JOIN 
-                      employees ON employees.id=pre_attendance.employee_id 
-                    ORDER BY pre_attendance.date DESC, pre_attendance.time_in DESC";
+                      $look = $user['id'];
+                      $sql = "SELECT *,
+                                  employees.employee_id AS empid, 
+                                  pre_attendance.id AS attid 
+                              FROM pre_attendance 
+                              LEFT JOIN employees 
+                                  ON employees.id = pre_attendance.employee_id
+                              WHERE 
+                                  employees.id = $look 
+                              ORDER BY
+                                  pre_attendance.date DESC, pre_attendance.time_in DESC";
+                      
+
                     
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
@@ -98,19 +102,19 @@
                           <td>".$status."</td>
                           <td>".$row['comment']."</td>
                           <td>";
-                       if($row['status']=="Approved" || $row['status']=="Rejected" ){
+                       if($row['status']=="Approved"){
                           echo "
                           
                           <a  class='btn btn-primary btn-sm btn-flat' id='".$row['attid']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                         </td>";
-                      }
-                      
-                      else{
+                      }else{
                         echo "
                         <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-edit'></i> Edit</a>
                        
-                        
+                        <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-trash'></i> Delete</a>
                         <a  class='btn btn-primary btn-sm btn-flat' id='".$row['attid']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
+
+                        
                       </td>";
                       }
                         echo"</tr>
@@ -119,7 +123,7 @@
                   ?>
                   <!-- 
                     
-                  <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['attid']."' onclick='getRow(".$row['attid'].")'><i class='fa fa-trash'></i> Delete</a>
+                  
                    <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['attid']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['attid']."'><i class='fa fa-trash'></i> Delete</button> -->
                 </tbody>
@@ -138,6 +142,9 @@
 <?php include 'includes/scripts.php'; ?>
 <?php include 'includes/footer.php'; ?>
 <script>
+
+
+
 function redirectToPage2(tdElement) {
             var tdId = tdElement.id;
             var nextPageURL = "attendance_overwrite_print.php?id=" + encodeURIComponent(tdId);
@@ -169,13 +176,14 @@ function getRow(id){
     success: function(response){
       $('#datepicker_edit').val(response.date);
       $('#attendance_date').html(response.date);
-
       $('#edit_time_in').val(response.time_in);
       $('#edit_time_out').val(response.time_out);
-      $('#status_val').html(response.status);
-      
       $('#attid').val(response.attid);
       $('#employee_name').html(response.firstname+' '+response.lastname);
+    //  $('#edit_photo').val('<img src="../evidence/' + response.evidence + '" alt="Photo Evidence">');
+
+
+
       $('#del_attid').val(response.attid);
       $('#del_employee_name').html(response.firstname+' '+response.lastname);
     }
