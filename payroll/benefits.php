@@ -71,7 +71,8 @@
                   <th>Invoice Number</th>
                   <th>Employee Name</th>
                   <th>Employee ID</th>
-                  <th>SSS</th>
+                  <th>INTEG-INS</th>
+                  <th>INTEG-INS</th>
                   <th>PAG-IBIG</th>   
                   <th>PHILHEALTH</th>   
                   <th>Status</th>                 
@@ -110,7 +111,8 @@
                           <td>".$row['invoice_id']."</td>
                           <td>".$row['employee_name']."</td>
                           <td>".$row['employee_id']."</td>
-                          <td>".$row['totals']."</td>
+                          <td>".$row['gsis_total']."</td>
+                          <td>".$row['w_tax_total']."</td>
                           <td>".$row['totalp']."</td>                        
                           <td>".$row['totalph']."</td>
                           <td>".$check."</td>
