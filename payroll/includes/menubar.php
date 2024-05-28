@@ -54,7 +54,7 @@
 
             <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
               <li><a href="allowance"><i class="fa fa-circle-o"></i> Allowance</a></li>
-            <li><a href="bonus"><i class="fa fa-circle-o"></i> Bonus</a></li>
+            <!-- <li><a href="bonus"><i class="fa fa-circle-o"></i> Bonus</a></li> -->
             <?php }?>
           </ul>
         </li>
@@ -93,11 +93,13 @@
           <ul class="treeview-menu">
 
             <li><a href="benefits"><i class="fa fa-circle-o"></i> Benefit Records</a></li>
-            <li><a href="sss"><i class="fa fa-circle-o"></i> SSS</a></li>
+            <!-- <li><a href="sss"><i class="fa fa-circle-o"></i> SSS</a></li> -->
+            <li><a href="gsis"><i class="fa fa-circle-o"></i> GSIS</a></li>
             <li><a href="pagibig"><i class="fa fa-circle-o"></i> PAG-IBIG</a></li>
             <li><a href="philhealth"><i class="fa fa-circle-o"></i> PHILHEALTH</a></li> 
+            <li><a href="philhealth"><i class="fa fa-circle-o"></i> W/TAX</a></li> 
             <li><a href="loan"><i class="fa fa-circle-o"></i> Loan</a></li>
-            <li><a href="cashadvance"><i class="fa fa-circle-o"></i> Cash Advance</a></li>
+            <!-- <li><a href="cashadvance"><i class="fa fa-circle-o"></i> Cash Advance</a></li> -->
 
           </ul>
         </li>

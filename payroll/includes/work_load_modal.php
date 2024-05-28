@@ -71,7 +71,7 @@
             	<h4 class="modal-title timeid"><b>Update Schedule</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="schedule_employees_edit_delete.php">
+            	<form class="form-horizontal" method="POST" action="work_load_edit_delete.php">
             		<input type="hidden" id="timeid" name="id">
 					
 					
@@ -132,7 +132,7 @@
             	<h4 class="modal-title"><b>Deleting...</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="schedule_employees_delete.php">
+            	<form class="form-horizontal" method="POST" action="work_load_delete.php">
             		<input type="hidden" id="del_timeid" name="id">
 					<input type="hidden" id="employee_id_delete" name="employee_id_delete">
             		<div class="text-center">

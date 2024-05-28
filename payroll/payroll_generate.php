@@ -7,10 +7,17 @@
 		$totalMonthly_Salary = 0; 
 		
 		$totaldeduction_db_per_employee =0;
+		$totalallowance_db_per_employee = 0;
 		$totalDisallowance =0;
 		$totaldeduction_per_employee = 0;
 		$totaldeduction = 0;
 		$totalRefSal = 0;
+
+
+		//Mandatory deduction
+
+		$totaltotal_eeph_db_per_employee = 0;
+		$totaltotal_eep_db_per_employee = 0;
 
 		$sql ="SELECT 
 		employee_id,
@@ -19,7 +26,11 @@
 		
 		invoice_id,
 		employee_name,
+		SUM(eeph) AS total_eeph,
+		SUM(eep) AS total_eep,
+
 		SUM(totaldeduction) AS total_totaldeduction,
+		SUM(allowance) AS total_allowance,
 
 		MAX(CASE WHEN DAY(datefrom) <= 15 AND DAY(dateto) >= 15 THEN netpay ELSE 0 END) AS first_half,
     	MAX(CASE WHEN DAY(datefrom) > 15 THEN netpay ELSE 0 END) AS second_half,
@@ -48,10 +59,32 @@
 			$netPay = $row['netpay'];
 			$totalSalary += $netPay; 
  
-			
+			//1st
+			$totalfirst_half_db_per_employee = 0;
+			$totalsecond_half_db_per_employee = 0;
 
+			$first_half = $row['first_half'];
+			$totalfirst_half_db_per_employee += $first_half; 
+			//2nd
+			$second_half = $row['second_half'];
+			$totalsecond_half_db_per_employee += $second_half; 
+
+			//1stand2nd
+			$totalsalaryfirstandsecond = $totalfirst_half_db_per_employee + $totalsecond_half_db_per_employee;
+
+			//PHILHEALTH
+			$total_eeph = $row['total_eeph'];
+			$totaltotal_eeph_db_per_employee += $total_eeph;
+			//PAG-IBIG
+			$total_eep = $row['total_eep'];
+			$totaltotal_eep_db_per_employee += $total_eep;
+
+			//
 			$totaldeduction_db = $row['total_totaldeduction'];
 			$totaldeduction_db_per_employee += $totaldeduction_db; 
+			
+			$totalallowance = $row['total_allowance'];
+			$totalallowance_db_per_employee += $totalallowance; 
 
 
 			$invoice_id1 = $row['invoice_id1'];
@@ -176,7 +209,7 @@
 				<td border="1" align="center">'.$row['employee_id'].'</td>
 				
 				<td border="1" align="right">'.number_format($monthly_salary, 2).'</td>
-				<td border="1" align="right">PERA</td>
+				<td border="1" align="right">'.number_format($totalallowance, 2).'</td>
 				
 				<td border="1" align="right">-</td>
 				<td border="1" width="7%" align="right">'.number_format($netPay, 2).'</td>
@@ -186,7 +219,7 @@
 				<td class="bottom-border right-border"  align="right"><b>'.$Disallowance_value.'<br>'.$RefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($total_eeph, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>f<br>g<br>h<br>i<br>j</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -195,7 +228,7 @@
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>p<br>q<br>r<br>s<br>t</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($total_eep, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>u<br>v<br>w<br>x<br>y</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -234,7 +267,7 @@
 				<td border="1"  align="center"></td>
 				
 				<td border="1" align="right">'.number_format($totalMonthly_Salary, 2).'</td>
-				<td border="1" align="right">PERA</td>
+				<td border="1" align="right">'.number_format($totalallowance_db_per_employee, 2).'</td>
 				
 				<td border="1" align="right">-</td>
 				<td border="1" width="7%" align="right">'.number_format($totalSalary, 2).'</td>
@@ -244,7 +277,7 @@
 				<td class="bottom-border right-border" align="right"><b>'.$totalDisallowance_value.'<br>'.$totalRefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($totaltotal_eeph_db_per_employee, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>f<br>g<br>h<br>i<br>j</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -253,7 +286,7 @@
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>p<br>q<br>r<br>s<br>t</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($totaltotal_eep_db_per_employee, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>u<br>v<br>w<br>x<br>y</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -262,8 +295,8 @@
 				<td border="1" width="7%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
 				
 
-				<td class="bottom-border" width="2%" align="center"><b>TL<br>*<br><br>.<br></b></td>
-				<td class="bottom-border right-border" width="5%"align="right"><b>1st half<br>1st half<br><br>2nd half</b></td>
+				<td class="bottom-border" width="2%" align="center"><b><br><br>*<br><br>.<br></b></td>
+				<td class="bottom-border right-border" width="5%"align="right"><b>'.number_format($totalsalaryfirstandsecond, 2).'<br><br>'.number_format($totalfirst_half_db_per_employee , 2).'<br><br><br>'.number_format($totalsecond_half_db_per_employee , 2).'</b></td>
 
 			</tr>
 		';

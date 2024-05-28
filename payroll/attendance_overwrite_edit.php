@@ -75,57 +75,57 @@
 
 						$time_ot = ($pre_time_out < $time_out_dbs) ? 0 : 1;
 								
-						if($time_ot == 1) {
-							// hr
-							$time_in = new DateTime($time_check_in);
-							$time_out = new DateTime($time_check_out);
+							if($time_ot == 1) {
+								// hr
+								$time_in = new DateTime($time_check_in);
+								$time_out = new DateTime($time_check_out);
 
-							$interval = $time_in->diff($time_out);
-							$hrs = $interval->format('%h');
-							$mins = $interval->format('%i');
-							$mins = $mins/60;
-							$int = $hrs + $mins;
+								$interval = $time_in->diff($time_out);
+								$hrs = $interval->format('%h');
+								$mins = $interval->format('%i');
+								$mins = $mins/60;
+								$int = $hrs + $mins;
 
-							// ot
-							$time_in_ot = new DateTime($time_out_dbs);
-							$time_out_ot = new DateTime($pre_time_out);
+								// ot
+								$time_in_ot = new DateTime($time_out_dbs);
+								$time_out_ot = new DateTime($pre_time_out);
 
-							$interval_ot = $time_in_ot->diff($time_out_ot);
-							$hrs_ot = $interval_ot->format('%h');
-							$mins_ot = $interval_ot->format('%i');
-							$mins_ot = $mins_ot/60;
-							$int_ot = $hrs_ot + $mins_ot;
+								$interval_ot = $time_in_ot->diff($time_out_ot);
+								$hrs_ot = $interval_ot->format('%h');
+								$mins_ot = $interval_ot->format('%i');
+								$mins_ot = $mins_ot/60;
+								$int_ot = $hrs_ot + $mins_ot;
 
-							$sql_wl_db = "SELECT * FROM work_load WHERE schedule_load = '$pre_day' AND employee_id = '$e_employee_id'";
-							$query_wl_db = $conn->query($sql_wl_db);
-							$row_wl_db = $query_wl_db->fetch_assoc();
-							
-
-							if ($query_wl_db->num_rows > 0 ) {
-								// Workload exists for the day
-								$time_out_load = $row_wl_db['time_load'];
-								$time_overloads = ($int_ot <= $time_out_load) ? 0  : $time_out_load;
-
-								$sql_attendance = "INSERT INTO attendance (employee_id, date, time_in,time_out, status,num_hr,num_ot) VALUES ('$pre_employee_id', '$pre_date', '$time_check_in','$time_check_out', '$logstatus','$int','$time_overloads')";
-
-								if ($conn->query($sql_attendance)) {
-									$_SESSION['success'] = 'Employee complain attendance updated successfully'.$time_overloads;
-								} else {
-									$_SESSION['error'] = $conn->error;
-								}
-
-
-							} else {
-								// No workload exists for the day
+								$sql_wl_db = "SELECT * FROM work_load WHERE schedule_load = '$pre_day' AND employee_id = '$e_employee_id'";
+								$query_wl_db = $conn->query($sql_wl_db);
+								$row_wl_db = $query_wl_db->fetch_assoc();
 								
-								$sql_attendance = "INSERT INTO attendance (employee_id, date, time_in,time_out, status,num_hr) VALUES ('$pre_employee_id', '$pre_date', '$time_check_in','$time_check_out', '$logstatus','$int')";
+
+								if ($query_wl_db->num_rows > 0 ) {
+									// Workload exists for the day
+									$time_out_load = $row_wl_db['time_load'];
+									$time_overloads = ($int_ot <= $time_out_load) ? 0  : $time_out_load;
+
+									$sql_attendance = "INSERT INTO attendance (employee_id, date, time_in,time_out, status,num_hr,num_ot) VALUES ('$pre_employee_id', '$pre_date', '$time_check_in','$time_check_out', '$logstatus','$int','$time_overloads')";
 
 									if ($conn->query($sql_attendance)) {
-										$_SESSION['success'] = 'Employee complain attendance updated successfully';
+										$_SESSION['success'] = 'Employee complain attendance updated successfully'.$time_overloads;
 									} else {
 										$_SESSION['error'] = $conn->error;
 									}
-							}
+
+
+								} else {
+									// No workload exists for the day
+									
+									$sql_attendance = "INSERT INTO attendance (employee_id, date, time_in,time_out, status,num_hr) VALUES ('$pre_employee_id', '$pre_date', '$time_check_in','$time_check_out', '$logstatus','$int')";
+
+										if ($conn->query($sql_attendance)) {
+											$_SESSION['success'] = 'Employee complain attendance updated successfully';
+										} else {
+											$_SESSION['error'] = $conn->error;
+										}
+								}
 
 							
 						} else {
@@ -146,8 +146,19 @@
 								$_SESSION['error'] = $conn->error;
 							}
 						}
+
 					} else {
+
+						$status = 'Rejected';
+						$comments = 'No Schedule';
+						$comment = $pre_comment."<br>----------------<br>Rejected by : ".$user['firstname'].' '.$user['lastname'] ." <br><br><br>".$comments ."<br><br><br>"."Check Date : ". date("Y-m-d");
+						$sqlns = "UPDATE pre_attendance SET status = '$status', comment = '$comment' WHERE id = '$id'";
 						$_SESSION['error'] = 'No Schedule';
+						if($conn->query($sqlns)) {
+
+						}else{
+							$_SESSION['error'] = $conn->error;
+						}
 					}
 				} else {
 					$_SESSION['error'] = $conn->error;

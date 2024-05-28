@@ -50,9 +50,12 @@
         $grossot = $row['ot'] * $row['total_ot'];
         //allowance
 
-
+        $sqlallowance = "SELECT SUM(amount) AS total_amount FROM allowance";
+        $allowancequery = $conn->query($sqlallowance);
+        $allowancerow = $allowancequery->fetch_assoc();
+        $allowance = $allowancerow['total_amount'];
         
-		$gross = $grossn + $grossot;
+		$gross = $grossn + $grossot +$allowance;
         
         $rate = $row['rate'];
         $totalhr = $row['total_hr'];
@@ -144,8 +147,8 @@
                        
                             //PUT IN INVOINCE AND RECORD FOR BENIFITS
 							
-                            $paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id,rate, totalhours,otrate, othrtotal, ers, ees, totals, erp, eep, totalp, erph, eeph, totalph,loan_description,loan_amount, totalbenifitsdeduction,totaleeer,deduction_status, cashadvance, totaldeduction, gross, netpay, paystatus,generateby,datefrom,dateto)
-                            VALUES ('$invocie_id', '$name', '$employeeid','$rate', '$totalhr', '$otrate', '$othrtotal', '$ers', '$ees', '$values','$erp','$eep', '$valuep', '$erph', '$eeph',  '$valueph', '$loan_description', '$loan_amount', '$deduction','$totaleeer','$paystatus', '$cashadvance', '$total_deduction', '$gross', '$net', '$paystatus','$generateby','$from','$to')";
+                            $paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id,rate, totalhours,otrate, othrtotal, ers, ees, totals, erp, eep, totalp, erph, eeph, totalph,loan_description,loan_amount, totalbenifitsdeduction,totaleeer,deduction_status, cashadvance, totaldeduction, gross,allowance, netpay, paystatus,generateby,datefrom,dateto)
+                            VALUES ('$invocie_id', '$name', '$employeeid','$rate', '$totalhr', '$otrate', '$othrtotal', '$ers', '$ees', '$values','$erp','$eep', '$valuep', '$erph', '$eeph',  '$valueph', '$loan_description', '$loan_amount', '$deduction','$totaleeer','$paystatus', '$cashadvance', '$total_deduction', '$gross','$allowance', '$net', '$paystatus','$generateby','$from','$to')";
                             if($conn->query($paysql)){
                                 $_SESSION['success'] = 'Payroll Generate added successfully';
                             }
