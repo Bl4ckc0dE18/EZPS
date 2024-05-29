@@ -6,8 +6,10 @@
         $username = $_POST['username'];
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
         $position = $_POST['position'];
+		
         
 		$sql = "SELECT * FROM admin WHERE id = $id";
 		$query = $conn->query($sql);
@@ -20,7 +22,7 @@
 			$password = password_hash($password, PASSWORD_DEFAULT);
 		}
 
-		$sql = "UPDATE admin SET username ='$username',firstname = '$firstname', lastname = '$lastname',position ='$position'  WHERE id = '$id'";
+		$sql = "UPDATE admin SET username ='$username',firstname = '$firstname', lastname = '$lastname', email = '$email',position ='$position'  WHERE id = '$id'";
 		if($conn->query($sql)){
 			
 

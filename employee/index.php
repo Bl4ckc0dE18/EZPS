@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(isset($_SESSION['employees'])){
-    header('location:home.php');
+    header('location:home');
   }
 ?>
 <?php include 'includes/header.php'; ?>
@@ -27,7 +27,7 @@
           </div>
 		  <div class="form-group has-feedback">
            
-			<a href='#forgot' data-toggle='modal'><i class='fa fa-edit'></i> Forgot password?</a>
+			<a href='forgot_password' ><i class='fa fa-edit'></i> Forgot password?</a>
           </div>
       		<div class="row">
     			<div class="col-xs-4">

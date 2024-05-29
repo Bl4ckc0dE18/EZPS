@@ -7,7 +7,7 @@
 		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
-		
+		$email = $_POST['email'];
 		$filename = $_FILES['photo']['name'];
 		$position = $_POST['position']; 	
 		//$position = "User"; 	
@@ -16,7 +16,7 @@
 			move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);	
 		}
 		
-		$sql = "INSERT INTO admin (username, password, firstname, lastname, photo, position, created_on) VALUES ('$username', '$password', '$firstname', '$lastname', '$filename',  '$position','$member')";
+		$sql = "INSERT INTO admin (username, password, firstname, lastname,email, photo, position, created_on) VALUES ('$username', '$password', '$firstname', '$lastname','$email', '$filename',  '$position','$member')";
 		if($conn->query($sql)){
 			
 

@@ -27,6 +27,6 @@
 		$_SESSION['error'] = 'Input employee credentials first';
 	}
 
-	header('location: index.php');
+	header('location: index');
 
 ?>

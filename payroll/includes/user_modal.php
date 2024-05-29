@@ -35,6 +35,13 @@ include 'includes/conn.php';
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
 
                     <div class="col-sm-9">
@@ -57,15 +64,7 @@ include 'includes/conn.php';
                         <option value="Admin">Admin</option>
                         <option value="Accountant">Accountant</option>
                         <option value="Human Resources">Human Resources</option>
-                        <!-- <?php
-                          $sql = "SELECT * FROM admin_position";
-                          $query = $conn->query($sql);
-                          while($prow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$prow['position']."'>".$prow['position']."</option>
-                            ";
-                          }
-                        ?> -->
+                        
                       </select>
                     </div>
                 </div>
@@ -113,7 +112,13 @@ include 'includes/conn.php';
                       <input type="text" class="form-control" id="edit_lastname" name="lastname">
                     </div>
                 </div>
-                
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_email" name="email" required>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="edit_position" class="col-sm-3 control-label">Position</label>
@@ -124,14 +129,7 @@ include 'includes/conn.php';
                         <option value="Admin">Admin</option>
                         <option value="Accountant">Accountant</option>
                         <option value="Human Resources">Human Resources</option>
-                        <!-- <?php
-                          $sql = "SELECT * FROM admin_position";
-                          $query = $conn->query($sql);
-                          while($prow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$prow['position']."'>".$prow['position']."</option>";
-                          }
-                        ?> -->
+                        
                       </select>
                     </div>
                 </div>

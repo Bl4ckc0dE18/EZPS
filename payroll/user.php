@@ -55,6 +55,7 @@
                   <th>Username</th>
                   <th>Firstname</th>
                   <th>Lastname</th>
+                  <th>Email</th>
                   <th>Photo</th>
                   <th>Position</th>
 
@@ -75,6 +76,7 @@
                           <td>".$row['username']."</td>
                           <td>".$row['firstname']."</td>
                           <td>".$row['lastname']."</td>
+                          <td>".$row['email']."</td>
                           <td>
                             <img src='".$image."' width='30px' height='30px'>
                             <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
@@ -146,10 +148,14 @@ function getRow(id){
       $('#edit_username').val(response.username);
       $('#edit_firstname').val(response.firstname);
       $('#edit_lastname').val(response.lastname);
-      $('#edit_password').val(response.password); 
+      $('#edit_password').val(response.password);
+      $('#position_val').html(response.position).val(response.position);
+
+    
+      $('#edit_email').val(response.email); 
       $('.del_employee_name').html(response.firstname+' '+response.lastname);   
       $('.fullname').html(response.firstname+' '+response.lastname);
-      $('#position_val').html(response.position);
+      //$('#position_val').html(response.position);
     }
   });
 }
