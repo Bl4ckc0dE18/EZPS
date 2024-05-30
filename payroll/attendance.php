@@ -9,6 +9,8 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
     <section class="content-header">
       <h1>
         Attendance
@@ -116,7 +118,10 @@
       
     </section>   
   </div>
-    
+  <?php
+}else{
+ include 'includes/autorize.php';
+}?> 
   
   <?php include 'includes/attendance_modal.php'; ?>
 </div>

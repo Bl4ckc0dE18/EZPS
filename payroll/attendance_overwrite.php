@@ -8,6 +8,8 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -128,7 +130,10 @@
     </section>   
   </div>
     
-  
+  <?php
+}else{
+ include 'includes/autorize.php';
+}?> 
   <?php include 'includes/attendance_overwrite_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
