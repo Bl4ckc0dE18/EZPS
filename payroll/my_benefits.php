@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 								$contents .= '
 								<h2 align="center">EZ PAYROLL SYSTEM</h2>
 								<h4 align="center">'.$row['datefrom']." - ".$row['dateto'].'</h4>
-								<table border="" cellspacing="0" cellpadding="3">  
+								<table border="1" cellspacing="0" cellpadding="3">  
 										<tr>  
 											<td width="25%" align="left">Employee Name </td>
 											<td width="25%"><b>'.$row['employee_name'].'</b></td>
@@ -58,15 +58,18 @@ if (isset($_GET['id'])) {
 										
 										<tr> 
 											
-											<td width="25%" align="center">Deduction List </td>
-											<td width="25%" align="center">SSS </td>
-											<td width="25%" align="center">PAG-IBIG </td>
-											<td width="25%" align="center">PHILHEALTH </td>
+											<td width="20%" align="center">Deduction List </td>
+											<td width="20%" align="center">GSIS </td>
+											<td width="20%" align="center">PAG-IBIG </td>
+											<td width="20%" align="center">PHILHEALTH </td>
+											<td width="20%" align="center">PAG-IBIG </td>
+											
 										</tr>
 										
 										<tr> 
 											<td width="25%" align="center">EE </td>
-											<td width="25%" align="center">'.number_format($row['ees'], 2).' </td>
+											<td width="25%" align="center">EE </td>
+											<td width="25%" align="center">'.number_format($row['gsis_total'], 2).' </td>
 											<td width="25%" align="center">'.number_format($row['eep'], 2).' </td>
 											<td width="25%" align="center">'.number_format($row['eeph'], 2).'</td>
 										</tr>
@@ -87,7 +90,7 @@ if (isset($_GET['id'])) {
 												
 										<tr> 
                                             
-                                            <td width="25%" align="center">Total Benifits Deduction </td>
+                                            <td width="25%" align="center">Total Benefits Deduction </td>
                                             <td width="25%" align="center">'.number_format($row['totalbenifitsdeduction'], 2).'</td> 
                                             <td></td> 
 											<td></td>

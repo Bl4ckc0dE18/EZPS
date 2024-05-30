@@ -5,10 +5,10 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Add PhilHealth</b></h4>
+            	<h4 class="modal-title"><b>Add Withholding Tax</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="philhealth_add.php">
+            	<form class="form-horizontal" method="POST" action="w_tax_add.php">
           		  <div class="form-group">
                   	<label for="from" class="col-sm-3 control-label">From</label>
 
@@ -26,26 +26,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="amount" class="col-sm-3 control-label">ER %</label>
+                    <label for="a" class="col-sm-3 control-label">A</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="er" name="er" required>
+                      <input type="text" class="form-control" id="a" name="a" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="amount" class="col-sm-3 control-label">EE %</label>
+                    <label for="b" class="col-sm-3 control-label">B</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="ee" name="ee" required>
+                      <input type="text" class="form-control" id="b" name="b" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="amount" class="col-sm-3 control-label">Total %</label>
+                    <label for="c" class="col-sm-3 control-label">C</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="total" name="total" required>
+                      <input type="text" class="form-control" id="c" name="c" required>
                     </div>
                 </div>
           	</div>
@@ -65,10 +65,10 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Update PhilHealth</b></h4>
+            	<h4 class="modal-title"><b>Update Withholding Tax</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="philhealth_edit.php">
+            	<form class="form-horizontal" method="POST" action="w_tax_edit.php">
               <input type="hidden" class="decid" name="id">
                 <div class="form-group">
                     <label for="edit_from" class="col-sm-3 control-label">From</label>
@@ -87,26 +87,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="edit_er" class="col-sm-3 control-label">ER</label>
+                    <label for="edit_a" class="col-sm-3 control-label">A</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_er" name="er" required>
+                      <input type="text" class="form-control" id="edit_a" name="a" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="edit_ee" class="col-sm-3 control-label">EE</label>
+                    <label for="edit_b" class="col-sm-3 control-label">B</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_ee" name="ee" required>
+                      <input type="text" class="form-control" id="edit_b" name="b" required>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="edit_total" class="col-sm-3 control-label">Total</label>
+                    <label for="edit_c" class="col-sm-3 control-label">C</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_total" name="total" required>
+                      <input type="text" class="form-control" id="edit_c" name="c" required>
                     </div>
                 </div>
           	</div>
@@ -129,11 +129,11 @@
             	<h4 class="modal-title"><b>Deleting...</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="philhealth_delete.php">
+            	<form class="form-horizontal" method="POST" action="w_tax_delete.php">
             		<input type="hidden" class="decid" name="id">
             		<div class="text-center">
-	                	<p>DELETE PhilHealth</p>
-	                	<h2 id="philhealth_deduction" class="bold"></h2>
+	                	<p>DELETE Withholding Tax</p>
+	                	<h2 id="w_tax_deduction" class="bold"></h2>
 	            	</div>
           	</div>
           	<div class="modal-footer">

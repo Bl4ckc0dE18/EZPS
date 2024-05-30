@@ -97,7 +97,7 @@
             <li><a href="gsis"><i class="fa fa-circle-o"></i> GSIS</a></li>
             <li><a href="pagibig"><i class="fa fa-circle-o"></i> PAG-IBIG</a></li>
             <li><a href="philhealth"><i class="fa fa-circle-o"></i> PHILHEALTH</a></li> 
-            <li><a href="philhealth"><i class="fa fa-circle-o"></i> W/TAX</a></li> 
+            <li><a href="w_tax"><i class="fa fa-circle-o"></i> W/TAX</a></li> 
             <li><a href="loan"><i class="fa fa-circle-o"></i> Loan</a></li>
             <!-- <li><a href="cashadvance"><i class="fa fa-circle-o"></i> Cash Advance</a></li> -->
 
