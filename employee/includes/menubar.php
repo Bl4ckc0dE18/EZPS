@@ -32,7 +32,7 @@
         </li>
        
         <li><a href="salary"><i class="fa fa-file-text-o"></i> <span>Salary</span></a></li>
-        <li><a href="bonus"><i class="fa fa-file-text-o"></i> <span>Bonus</span></a></li>
+        <!-- <li><a href="bonus"><i class="fa fa-file-text-o"></i> <span>Bonus</span></a></li> -->
         <li><a href="benefits"><i class="fa fa-file-o"></i> <span>Deductions</span></a></li>
         <li><a href="loan"><i class="fa fa-file-o"></i> <span>Loans</span></a></li>
         <li><a href="leave"><i class="fa ion-log-out"></i> <span>Leave</span></a></li>
