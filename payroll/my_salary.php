@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
 								$contents .= '
 								<h2 align="center">EZ PAYROLL SYSTEM</h2>
 								<h4 align="center">'.$row['datefrom']." - ".$row['dateto'].'</h4>
-								<table border="1" cellspacing="0" cellpadding="3">  
+								<table border="0" cellspacing="0" cellpadding="3">  
 									<tr>  
 										<td width="25%" align="left">Employee Name </td>
 										<td width="25%"><b>'.$row['employee_name'].'</b></td>
@@ -68,65 +68,66 @@ if (isset($_GET['id'])) {
 										<td width="25%" align="left"><b>Gross Pay </b></td>
 										<td width="25%" align="right"><b>'.number_format($row['gross'], 2).'</b></td> 
 									</tr>
-									<tr> 
-										<td width="25%" ><b>Loan</b></td>
-										
-									</tr>
-									<tr> 
-										
-										<td width="25%">Loan Description</td>
-										<td width="25%" align="left">Loan Amount</td>
-										
-									</tr>
-									<tr> 
-										
-										<td width="25%">'.$row['loan_description'].'</td>   
-										<td width="25%">'.$row['loan_amount'].'</td>   
-										
-									</tr>
-									<tr> 
-										
-										<td width="25%" align="center">Deduction List </td>
-										<td width="25%" align="center">SSS </td>
-										<td width="25%" align="center">PAG-IBIG </td>
-										<td width="25%" align="center">PHILHEALTH </td>
-									</tr>
 									
 									<tr> 
-										<td width="25%" align="center">EE </td>
-										<td width="25%" align="center">'.number_format($row['ees'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['eep'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['eeph'], 2).'</td>
-									</tr>
+										<td width="25%" ></td>
 
-									<tr> 
-										<td width="25%" align="center">ER </td>
-										<td width="25%" align="center">'.number_format($row['ers'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['erp'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['erph'], 2).'</td> 
 									</tr>
-									
+									<tr> 	
+										<td border="1" width="20%" align="center">Deduction List </td>
+										<td border="1" width="20%" align="center">GSIS </td>
+										<td border="1" width="20%" align="center">W/TAX </td>
+										<td border="1" width="20%" align="center">PHILHEALTH </td>
+										<td border="1" width="20%" align="center">PAG-IBIG </td>
+											
+									</tr>
 									<tr> 
-										<td width="25%" align="center">TOTAL </td>
-										<td width="25%" align="center">'.number_format($row['totals'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['totalp'], 2).' </td>
-										<td width="25%" align="center">'.number_format($row['totalph'], 2).'</td> 
+										<td border="1"  width="20%" align="center"></td>
+										<td border="1"  width="20%" align="center">'.number_format($row['gsis_total'], 2).'</td>
+										<td border="1"  width="20%" align="center">'.number_format($row['w_tax_total'], 2).' </td>
+										<td border="1"  width="20%" align="center">'.number_format($row['eep'], 2).' </td>
+										<td border="1"  width="20%" align="center">'.number_format($row['eeph'], 2).'</td>
+									</tr>
+									<tr> 
+										<td width="25%" ></td>
+										
+									
+									</tr>
+									<tr> 
+										<td border="1" width="25%" ><b>Loan</b></td>
+										<td border="1" width="25%">Loan Description</td>
+										<td border="1" width="25%" align="left">Loan Amount</td>
+										
+									</tr>
+									<tr> 
+										<td border="1" width="25%" ><b></b></td>
+										<td border="1" width="25%">'.$row['loan_description'].'</td>   
+										<td border="1" width="25%">'.$row['loan_amount'].'</td>   
+										
+									</tr>
+									<tr> 
+										<td width="25%" ></td>
+										
+									
 									</tr>
 									<tr> 
 										
-										<td width="25%" align="center">Total Benifits Deduction </td>
-										<td width="25%" align="center">Cash Advance </td>
-										<td width="25%" align="center"><b>Total Deduction</b></td>
-										<td width="25%" align="center"><b>Net Pay</b></td>
+										<td border="1" width="25%" align="center">Total Benifits Deduction </td>
+										<td border="1" width="25%" align="center">Cash Advance </td>
+										<td border="1" width="25%" align="center"><b>Total Deduction</b></td>
+										<td border="1" width="25%" align="center"><b>Net Pay</b></td>
 									</tr>
 
 									<tr>
-										<td width="25%" align="center">'.number_format($row['totalbenifitsdeduction'], 2).'</td> 
-										<td width="25%" align="center">'.number_format($row['cashadvance'], 2).'</td> 
-										<td width="25%" align="center"><b>'.number_format($row['totaldeduction'], 2).'</b></td> 
-										<td width="25%" align="center"><b>'.number_format($row['netpay'], 2).'</b></td> 
+										<td border="1" width="25%" align="center">'.number_format($row['totalbenifitsdeduction'], 2).'</td> 
+										<td border="1" width="25%" align="center">'.number_format($row['cashadvance'], 2).'</td> 
+										<td border="1" width="25%" align="center"><b>'.number_format($row['totaldeduction'], 2).'</b></td> 
+										<td border="1" width="25%" align="center"><b>'.number_format($row['netpay'], 2).'</b></td> 
 									</tr>
+									<tr> 
+										<td width="25%" ></td>
 
+									</tr>
 									
 									<tr> 
 										<td width="25%" align="center"><b>Paid By : </b></td>

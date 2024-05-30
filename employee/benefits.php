@@ -65,7 +65,8 @@
                   <th>Invoice Number</th>
                   <th>Employee Name</th>
                   <th>Employee ID</th>
-                  <th>SSS</th>
+                  <th>INTEG-INS</th>
+                  <th>W/TAX</th>
                   <th>PAG-IBIG</th>   
                   <th>PHILHEALTH</th>   
                   <th>Status</th>                 
@@ -105,18 +106,21 @@
 
                       echo "
                         <tr>
-                          <td>".$row['invoice_id']."</td>
-                          <td>".$row['employee_name']."</td>
-                          <td>".$row['employee_id']."</td>
-                          <td>".$row['totals']."</td>
-                          <td>".$row['totalp']."</td>                        
-                          <td>".$row['totalph']."</td>
-                          <td>".$check."</td>
+                        <td>".$row['invoice_id']."</td>
+                        <td>".$row['employee_name']."</td>
+                        <td>".$row['employee_id']."</td>
+                        <td>".$row['gsis_total']."</td>
+                        <td>".$row['w_tax_total']."</td>
+                        <td>".$row['totalp']."</td>                        
+                        <td>".$row['totalph']."</td>
+                        <td>".$check."</td>
+                        
+                        
+                        <td>
+                          <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
                           
-                          
-                          <td>
-                            <a href='#edit' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
-                          </td>
+                          <a href='#edit' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
+                        </td>
                         </tr>
                       ";
                     }
