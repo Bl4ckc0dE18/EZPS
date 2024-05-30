@@ -304,7 +304,7 @@ $(function(){
 <script>
 $(function(){
   $('#select_year').change(function(){
-    window.location.href = 'home.php?year='+$(this).val();
+    window.location.href = 'home?year='+$(this).val();
   });
 });
 </script>
