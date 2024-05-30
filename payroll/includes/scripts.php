@@ -130,7 +130,7 @@ $(function(){
   //Date range picker
   $('#reservation').daterangepicker()
   //Date range picker with time picker
-  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 15, format: 'MM/DD/YYYY h:mm A' })
   //Date range as a button
   $('#daterange-btn').daterangepicker(
     {
@@ -142,7 +142,7 @@ $(function(){
         'This Month'  : [moment().startOf('month'), moment().endOf('month')],
         'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       },
-      startDate: moment().subtract(29, 'days'),
+      startDate: moment().subtract(15, 'days'),
       endDate  : moment()
     },
     function (start, end) {

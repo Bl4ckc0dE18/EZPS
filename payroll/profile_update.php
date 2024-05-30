@@ -49,6 +49,6 @@
 		$_SESSION['error'] = 'Fill up required details first';
 	}
 
-	header('location:'.$return);
+	header('location:home');
 
 ?>

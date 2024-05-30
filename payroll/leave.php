@@ -14,6 +14,8 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
     <section class="content-header">
       <h1>
         Leave Records
@@ -127,7 +129,10 @@
       </div>
     </section>   
   </div>
-    
+  <?php
+}else{
+ include 'includes/autorize.php';
+}?>    
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/leave_modal.php'; ?>
 </div>

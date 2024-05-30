@@ -19,7 +19,7 @@
         <li class="header"></li>
         <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>   
-             
+        <?php if($position == 'Admin' ||$position == 'Human Resources' ){?> 
         <li class="treeview">
           <a href="#">
             <i class="fa fa-th-list"></i>
@@ -29,12 +29,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+         
             <li><a href="attendance"><i class="fa fa-circle-o"></i> Attendance List</a></li>              
             <li><a href="attendance_overwrite"><i class="fa fa-circle-o"></i> Attendance Overwrite</a></li>        
-            <?php }?>
+            
           </ul>
         </li>
+        <?php }?>
 
         <li class="treeview">
           <a href="#">
@@ -59,6 +60,7 @@
           </ul>
         </li>
         <!--  -->
+        <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-clock-o"></i>
@@ -68,16 +70,17 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
+         
             
             <li><a href="schedule_employees"><i class="fa fa-circle-o"></i> Employee Schedules</a></li>
             <li><a href="work_load"><i class="fa fa-circle-o"></i> Work Load</a></li>
             <li><a href="schedule_employees_print"><i class="fa fa-circle-o"></i> <span> Print Schedule</span></a></li>
-            <?php }?>
+           
 
             
           </ul>
         </li>
+        <?php }?>
         <!--  -->
         <?php 
             if($position == 'Admin' ||$position == 'Accountant' ){

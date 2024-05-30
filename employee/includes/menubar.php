@@ -14,7 +14,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
-        <li class=""><a href="home.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li class=""><a href="home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         <li class="header">MANAGE</li>
         
         <li class="treeview">

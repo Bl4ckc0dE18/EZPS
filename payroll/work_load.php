@@ -8,6 +8,8 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -140,7 +142,10 @@
       </div>
     </section>   
   </div>
-    
+  <?php
+}else{
+ include 'includes/autorize.php';
+}?> 
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/work_load_modal.php'; ?>
 </div>

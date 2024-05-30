@@ -32,6 +32,11 @@
 		SUM(totaldeduction) AS total_totaldeduction,
 		SUM(allowance) AS total_allowance,
 
+		MAX(CASE WHEN DAY(datefrom) <= 15 AND DAY(dateto) >= 15 THEN netpay ELSE 0 END) AS first_half,
+    	MAX(CASE WHEN DAY(datefrom) > 15 THEN netpay ELSE 0 END) AS second_half,
+		
+		MAX(CASE WHEN DAY(datefrom) <= 15 AND DAY(dateto) >= 15 THEN invoice_id ELSE 0 END) AS invoice_id1,
+    	MAX(CASE WHEN DAY(datefrom) > 15 THEN invoice_id ELSE 0 END) AS invoice_id2
 		FROM 
 		payslip
 		WHERE 
@@ -82,8 +87,8 @@
 			$totalallowance_db_per_employee += $totalallowance; 
 
 
-			$invoice_id = $row['invoice_id'];
-			//$invoice_id2 = $row['invoice_id2'];
+			$invoice_id1 = $row['invoice_id1'];
+			$invoice_id2 = $row['invoice_id2'];
 			//$invoice_id = $row['invoice_id'];
 			// search employee 
 			$sql_employee = "SELECT * FROM employees WHERE employee_id = '$employee_id'";
@@ -107,8 +112,7 @@
 			
 			//Disallowance
 			//$sql_Disallowance = "SELECT * FROM loan_transaction WHERE description = 'Disallowance' AND loan_id = '$invoice_id'";
-			$sql_Disallowance = "SELECT SUM(loan_amount) AS total_loan_amount 
-			FROM loan_transaction WHERE description = 'Disallowance'AND loan_id '$invoice_id'";
+			$sql_Disallowance = "SELECT SUM(loan_amount) AS total_loan_amount FROM loan_transaction WHERE description = 'Disallowance' AND loan_id IN ('$invoice_id1', '$invoice_id2')";
 
 			$query_Disallowance = $conn->query($sql_Disallowance);
 			$row_Disallowance = $query_Disallowance->fetch_assoc();
@@ -144,7 +148,7 @@
 				loan_transaction 
 			WHERE 
 				description = 'Ref-Sal' 
-				AND loan_id '$invoice_id'";
+				AND loan_id IN ('$invoice_id1', '$invoice_id2')";
 			$query_RefSal = $conn->query($sql_RefSal);
 			$row_RefSal = $query_RefSal->fetch_assoc();
 			if($query_RefSal->num_rows > 0){

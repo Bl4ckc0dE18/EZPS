@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 $timezone = 'Asia/Manila';
@@ -14,14 +15,14 @@ if(isset($_POST['username_fp'])){
     $username_fp = $_POST['username_fp'];
     $email_fp = $_POST['email_fp'];
 
-    $sql = "SELECT * FROM employees WHERE employee_id = '$username_fp' AND email= '$email_fp'";
+    $sql = "SELECT * FROM admin WHERE username = '$username_fp' AND email= '$email_fp'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
     
     if ($query->num_rows > 0) {
     
-            $name = $row['firstname'].' '.$row['lastname'];
+            $name = $row['username'];
             $set = '1234567890';
             $randomNumber = substr(str_shuffle($set), 0, 6);
             $currentDateTime = date('H:i:s', strtotime('+5 minutes'));

@@ -13,6 +13,8 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Accountant' ){?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -84,7 +86,7 @@
                        
                     
                     $to = date('Y-m-d');
-                    $from = date('Y-m-d', strtotime('-30 day', strtotime($to)));
+                    $from = date('Y-m-d', strtotime('-15 day', strtotime($to)));
 
                     if(isset($_GET['range'])){
                       $range = $_GET['range'];
@@ -142,6 +144,10 @@
     </section>   
   </div>
     
+  <?php
+}else{
+ include 'includes/autorize.php';
+}?> 
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/payroll_modal.php'; ?>
   
@@ -153,10 +159,11 @@ function redirectToPage2(tdElement) {
             var tdId = tdElement.id;
 
             // Construct the URL for the next PHP page with the ID as a query parameter
-            var nextPageURL = "my_salary.php?id=" + encodeURIComponent(tdId);
+            var nextPageURL = "my_salary?id=" + encodeURIComponent(tdId);
 
             // Redirect to the next PHP page
-            window.location.href = nextPageURL;
+            
+            window.open(nextPageURL, '_blank');
         }
 $(function(){
   $('.edit').click(function(e){

@@ -9,6 +9,8 @@ include 'includes/header.php';
         include 'includes/menubar.php';
         ?>
         <div class="content-wrapper">
+        <?php $position = $user['position']; ?>
+    <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
             <section class="content-header">
                 <h1>Employee List</h1>
             </section>
@@ -120,6 +122,10 @@ include 'includes/header.php';
                 </div>
             </section>
         </div>
+        <?php
+}else{
+ include 'includes/autorize.php';
+}?> 
         <?php include 'includes/footer.php'; ?>
         <?php include 'includes/employee_modal.php'; ?>
     </div>

@@ -71,7 +71,7 @@
               <div class="icon">
                 <i class="ion ion-log-out"></i>
               </div>
-              <a href="leave.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="leave" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -95,7 +95,7 @@
               <div class="icon">
                 <i class="ion ">₱</i>
               </div>
-              <a href="loan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="loan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -120,7 +120,7 @@
               <div class="icon">
                 <i class="ion ">₱</i>
               </div>
-              <a href="benefits.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="benefits" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -261,17 +261,7 @@ $(function(){
         pointHighlightStroke: 'rgba(210, 214, 222, 1)',
         data                : <?php echo $leave; ?>
       }
-      ,
-      {
-        label               : 'Absent',
-        fillColor           : 'rgba(217, 83, 79, 1)',
-        strokeColor         : 'rgba(217, 83, 79, 1)',
-        pointColor          : 'rgba(217, 83, 79, 1)',
-        pointStrokeColor    : 'rgba(217, 83, 79, 1)',
-        pointHighlightFill  : '#fff',
-        pointHighlightStroke: 'rgba(217, 83, 79, 1)',
-        data                : <?php echo $leave; ?>
-      }
+      
 
     ]
   }
