@@ -36,6 +36,7 @@
         <li><a href="benefits"><i class="fa fa-file-o"></i> <span>Deductions</span></a></li>
         <li><a href="loan"><i class="fa fa-file-o"></i> <span>Loans</span></a></li>
         <li><a href="leave"><i class="fa ion-log-out"></i> <span>Leave</span></a></li>
+        <li><a href="schedule_employees"><i class="fa fa-clock-o"></i> Employee Schedules</a></li>
         
         <!--  -->
       </ul>

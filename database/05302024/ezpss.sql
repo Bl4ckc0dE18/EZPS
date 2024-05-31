@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 11:24 AM
+-- Generation Time: May 30, 2024 at 09:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,7 +85,7 @@ CREATE TABLE `allowance` (
 --
 
 INSERT INTO `allowance` (`id`, `description`, `amount`) VALUES
-(1, 'PERA', 2000);
+(1, 'RICE', 500);
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `attendance` (
   `time_out` time NOT NULL,
   `num_hr` double NOT NULL,
   `num_ot` double NOT NULL,
-  `num_wl` text NOT NULL
+  `num_wl` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -110,54 +110,14 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `num_ot`, `num_wl`) VALUES
-(359, 25, '2024-05-01', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(360, 25, '2024-05-02', '17:45:00', 1, '08:45:00', 8, 3, '0'),
-(361, 25, '2024-05-03', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(362, 25, '2024-05-04', '17:45:00', 0, '08:45:00', 8, 0, '0'),
-(363, 25, '2024-05-06', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(364, 25, '2024-05-07', '17:45:00', 0, '08:45:00', 8, 3, '0'),
-(365, 25, '2024-05-08', '18:45:00', 0, '19:00:00', 8, 8, '0'),
-(366, 25, '2024-05-09', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(367, 25, '2024-05-10', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(368, 25, '2024-05-13', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(369, 25, '2024-05-14', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(370, 25, '2024-05-15', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(371, 25, '2024-05-16', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(372, 25, '2024-05-17', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(373, 25, '2024-05-20', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(374, 25, '2024-05-21', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(375, 25, '2024-05-22', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(376, 25, '2024-05-23', '17:45:00', 1, '08:45:00', 8, 3, '0'),
-(377, 25, '2024-05-24', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(378, 25, '2024-05-27', '17:45:00', 0, '08:45:00', 8, 0, '0'),
-(379, 25, '2024-05-28', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(380, 25, '2024-05-29', '17:45:00', 0, '08:45:00', 8, 3, '0'),
-(381, 25, '2024-05-30', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(382, 25, '2024-05-31', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(409, 28, '2024-05-01', '18:45:00', 0, '19:00:00', 7, 0, '0'),
-(410, 28, '2024-05-02', '17:45:00', 1, '08:45:00', 8, 3, '0'),
-(411, 28, '2024-05-03', '18:45:00', 0, '19:00:00', 7, 0, '0'),
-(412, 28, '2024-05-04', '17:45:00', 0, '08:45:00', 8, 0, '0'),
-(413, 28, '2024-05-06', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(414, 28, '2024-05-07', '17:45:00', 0, '08:45:00', 7, 3, '0'),
-(415, 28, '2024-05-08', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(416, 28, '2024-05-09', '17:45:00', 1, '08:45:00', 0, 0, '0'),
-(417, 28, '2024-05-10', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(418, 28, '2024-05-13', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(419, 28, '2024-05-14', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(420, 28, '2024-05-15', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(421, 28, '2024-05-16', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(422, 28, '2024-05-17', '17:45:00', 1, '08:45:00', 7, 0, '0'),
-(423, 28, '2024-05-20', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(424, 28, '2024-05-21', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(425, 28, '2024-05-22', '18:45:00', 0, '19:00:00', 8, 3, '0'),
-(426, 28, '2024-05-23', '17:45:00', 1, '08:45:00', 8, 0, '0'),
-(427, 28, '2024-05-24', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(428, 28, '2024-05-27', '17:45:00', 0, '08:45:00', 8, 0, '0'),
-(429, 28, '2024-05-28', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(430, 28, '2024-05-29', '17:45:00', 0, '08:45:00', 8, 3, '0'),
-(431, 28, '2024-05-30', '18:45:00', 0, '19:00:00', 8, 0, '0'),
-(432, 28, '2024-05-31', '17:45:00', 1, '08:45:00', 8, 0, '0');
+(359, 25, '2024-05-01', '18:45:00', 0, '19:00:00', 50, 10, 0),
+(360, 25, '2024-05-15', '17:45:00', 1, '08:45:00', 9, 0, 0),
+(361, 25, '2024-05-16', '18:45:00', 0, '19:00:00', 40, 60, 0),
+(362, 25, '2024-05-30', '17:45:00', 1, '08:45:00', 9, 0, 0),
+(363, 25, '2024-05-06', '18:45:00', 0, '19:00:00', 50, 10, 0),
+(364, 25, '2024-05-10', '17:45:00', 1, '08:45:00', 9, 0, 0),
+(365, 25, '2024-05-18', '18:45:00', 0, '19:00:00', 40, 60, 0),
+(366, 25, '2024-05-28', '17:45:00', 1, '08:45:00', 9, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -421,24 +381,7 @@ INSERT INTO `audit_trail_record` (`id`, `audit_date`, `audit_time`, `user`, `des
 (647, '2024-05-30', '01:57:37', 'Angelo Cruz', 'User updated accountant date 2024-05-30'),
 (648, '2024-05-30', '02:02:37', 'Angelo Cruz', 'User updated 1234 date 2024-05-30'),
 (649, '2024-05-30', '02:02:41', 'Angelo Cruz', 'User updated 1234 date 2024-05-30'),
-(650, '2024-05-30', '14:16:01', 'Angelo Cruz', 'Employee updated 202328 date 2024-05-30'),
-(651, '2024-05-31', '13:58:11', 'Angelo Cruz', 'Employee deleted 202438 date 2024-05-31'),
-(652, '2024-05-31', '14:00:34', 'Angelo Cruz', 'Position updated Programmer | Rate per Hour P123.40 | Rate per Overtime P120 date 2024-05-31'),
-(653, '2024-05-31', '14:00:45', 'Angelo Cruz', 'Position updated Programmer | Rate per Hour P123.4 | Rate per Overtime P185.10 date 2024-05-31'),
-(654, '2024-05-31', '14:05:14', 'Angelo Cruz', 'Position updated HR Department | Rate per Hour P168.75 | Rate per Overtime P253.13 date 2024-05-31'),
-(655, '2024-05-31', '14:05:48', 'Angelo Cruz', 'Position updated Accounting and Finance Department | Rate per Hour P168.75 | Rate per Overtime P253.13 date 2024-05-31'),
-(656, '2024-05-31', '14:57:22', 'Angelo Cruz', 'Position updated Programmer | Rate per Hour P123.4 | Rate per Overtime P185.1 date 2024-05-31'),
-(657, '2024-05-31', '16:14:26', 'Angelo Cruz', 'Position updated Programmer | Rate per Hour P123.4 | Rate per Overtime P185.1 date 2024-05-31'),
-(658, '2024-05-31', '16:15:32', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31'),
-(659, '2024-05-31', '16:15:35', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31'),
-(660, '2024-05-31', '16:15:36', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31'),
-(661, '2024-05-31', '16:15:39', 'Angelo Cruz', 'Employee loan deleted Andrei Niko Perez date 2024-05-31'),
-(662, '2024-05-31', '16:15:41', 'Angelo Cruz', 'Employee loan deleted Jared Ivan Bruno date 2024-05-31'),
-(663, '2024-05-31', '16:22:23', 'Angelo Cruz', 'Position updated Programmer | Rate per Hour P123.4 | Rate per Overtime P185.1 date 2024-05-31'),
-(664, '2024-05-31', '10:35:44', 'Angelo Cruz', 'Attendance downloaded attendance-from-May 01 2024-to-May 31 2024.csv date 2024-05-31'),
-(665, '2024-05-31', '17:02:11', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31'),
-(666, '2024-05-31', '17:04:43', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31'),
-(667, '2024-05-31', '17:06:12', 'Angelo Cruz', 'Employee loan deleted Angelo Cruz date 2024-05-31');
+(650, '2024-05-30', '14:16:01', 'Angelo Cruz', 'Employee updated 202328 date 2024-05-30');
 
 -- --------------------------------------------------------
 
@@ -512,7 +455,8 @@ INSERT INTO `employees` (`id`, `employee_id`, `employee_rfid`, `firstname`, `las
 (26, '202326', '0411714435', 'Andrei Niko', 'Perez', '26', 'Manila City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$bGCLzHujg0Xh1EGv.nfkX.s/SrVFp7UOQZ7cvCIjhtcH9LsOZb0G.', 1, 'YES', 'SAT', 12, 'admin', 'Perez.png', '2023-07-13', '2024-07-13'),
 (27, '202327', '0411306643', 'Cyrille Jaye', 'Hilario', '27', 'Caloocan CityCaloocan CityCaloocan CityCaloocan City', '2002-01-01', '099999999999', 'Male', '', '$2y$10$zsmdlhQOIVNTGnKbgJA/8OKcWGqef.8jgNn6nKTrcvVG0EdBPURsm', 5, 'YES', 'SUN', 12, 'admin', 'Hilario.png', '2023-07-13', '2024-07-13'),
 (28, '202328', '0411698371', 'Jared Ivan', 'Bruno', '28', 'Navotas City', '2002-01-01', '099999999999', 'Male', 'jared_bruno@yahoo.com', '$2y$10$aDKcRtXY2XWjzbra8ZdDyOceMww2oVfXGjWjj4M5/U.jmm.KCx35C', 5, 'YES', 'SUN', 12, 'admin', 'Bruno.png', '2023-07-13', '2024-07-13'),
-(31, '202331', '0412382675', 'Jerard', 'Baria', '31', '319 E-Ugbo Street Velasquez Tondo, Manila', '2002-01-01', '099999999999', 'Female', 'jerard.baria@tup.edu.ph', '$2y$10$Wxx.dhbG1Z/6t1R4G11.4eguAmrLaQFxnliBrwq2XbXOq9jF/QyGm', 1, 'YES', 'SAT', 12, 'admin', 'Baria.png', '2023-07-14', '0000-11-30');
+(31, '202331', '0412382675', 'Jerard', 'Baria', '31', '319 E-Ugbo Street Velasquez Tondo, Manila', '2002-01-01', '099999999999', 'Female', 'jerard.baria@tup.edu.ph', '$2y$10$Wxx.dhbG1Z/6t1R4G11.4eguAmrLaQFxnliBrwq2XbXOq9jF/QyGm', 1, 'YES', 'SAT', 12, 'admin', 'Baria.png', '2023-07-14', '0000-11-30'),
+(38, '202438', '3988882163', '21', '21', '', '21', '2024-01-30', '12dasd', 'Male', '2121', '$2y$10$EVi1AOXvQgEcZTBQV60Wbuu7Oggd1PQ0N7vY5UUdAklllpGC.IOqS', 5, 'NO', 'WED', 12121, 'Angelo Cruz', '', '2024-01-30', '2026-06-30');
 
 -- --------------------------------------------------------
 
@@ -623,8 +567,11 @@ CREATE TABLE `loan` (
 --
 
 INSERT INTO `loan` (`id`, `employee_id`, `employee_name`, `description`, `loanamount`, `monthstopay`, `permonths`, `semiloan`, `semimonths`, `loanpay`, `loanbalance`) VALUES
-(26, 202325, 'Angelo Cruz', 'Disallowance', 5000, 12, 416.66666666667, 12, 208.33333333333, 2500.0000000001, 2499.9999999998),
-(27, 202325, 'Angelo Cruz', 'Ref-Sal', 5000, 6, 833.33333333333, 0, 416.66666666667, 4999.9999999999, 0.00000000014006218407303);
+(18, 202325, 'Angelo Cruz', 'Disallowance', 500, 1, 500, 0, 250, 500, 0),
+(19, 202325, 'Angelo Cruz', 'Ref-Sal', 500, 1, 500, 0, 250, 500, 0),
+(20, 202328, 'Jared Ivan Bruno', 'Ref-Sal', 500, 1, 500, 0, 250, 500, 0),
+(21, 202326, 'Andrei Niko Perez', 'Disallowance', 500, 1, 500, 0, 250, 500, 0),
+(22, 202325, 'Angelo Cruz', 'GSIS SOS', 15000, 6, 2500, 9, 1250, 3750, 11250);
 
 -- --------------------------------------------------------
 
@@ -670,63 +617,7 @@ INSERT INTO `loan_transaction` (`id`, `loan_id`, `description`, `loan_amount`) V
 (25, '20248163029754', 'Disallowance', '250.00'),
 (26, '20242753148069', 'GSIS SOS', '1,250.00'),
 (27, '20245276839140', 'GSIS SOS', '1,250.00'),
-(28, '20248512063794', 'GSIS SOS', '1,250.00'),
-(29, '20249108627453', 'GSIS SOS', '1,250.00'),
-(30, '20243872564190', 'GSIS SOS', '1,250.00'),
-(31, '20242896507134', 'GSIS SOS', '1,250.00'),
-(32, '20249830147625', 'GSIS SOS', '1,250.00'),
-(33, '20240879234651', 'GSIS SOS', '1,250.00'),
-(34, '20243218604957', 'GSIS SOS', '1,250.00'),
-(35, '20242079146385', 'GSIS SOS', '1,250.00'),
-(36, '20241328695740', 'GSIS SOS', '1,250.00'),
-(37, '20244592371608', 'GSIS SOS', '1,250.00'),
-(38, '20244316809275', 'Disallowance', '833.33'),
-(39, '20242487105936', 'Disallowance', '833.33'),
-(40, '20241528063794', 'Disallowance', '833.33'),
-(41, '20248432196705', 'Disallowance', '833.33'),
-(42, '20247356219408', 'Disallowance', '833.33'),
-(43, '20246502478139', 'Disallowance', '833.33'),
-(44, '20245427810369', 'Disallowance', '833.33'),
-(45, '20246504817932', 'Disallowance', '833.33'),
-(46, '20243491528670', 'Disallowance', '833.33'),
-(47, '20240769532481', 'Disallowance', '833.33'),
-(48, '20248152603794', 'Disallowance', '833.33'),
-(49, '20246157293840', 'Disallowance', '833.33'),
-(50, '20243742901586', 'Disallowance', '833.33'),
-(51, '20242510764938', 'Disallowance', '833.33'),
-(52, '20241756480329', 'Disallowance', '833.33'),
-(53, '20247864251309', 'Disallowance', '833.33'),
-(54, '20240142578639', 'Disallowance', '833.33'),
-(55, '20241325697480', 'Disallowance', '833.33'),
-(56, '20242584690317', 'Disallowance', '833.33'),
-(57, '20249064872315', 'Disallowance', '833.33'),
-(58, '20244028573691', 'Disallowance', '833.33'),
-(59, '20240431896527', 'Disallowance', '833.33'),
-(60, '20244382509716', 'Disallowance', '833.33'),
-(61, '20247953104862', 'Disallowance', '833.33'),
-(62, '20245701392864', 'Disallowance', '833.33'),
-(63, '20242573918460', 'Disallowance', '500.00'),
-(64, '20240627813594', 'Disallowance', '833.33'),
-(65, '20240361587492', 'Disallowance', '833.33'),
-(66, '20244793108526', 'Disallowance', '833.33'),
-(67, '20249764802135', 'Disallowance', '833.33'),
-(68, '20246129834750', 'Disallowance', '833.33'),
-(69, '20249037462581', 'Disallowance', '833.33'),
-(70, '20244863597012', 'Disallowance', '833.33'),
-(71, '20244597201836', 'Disallowance', '833.33'),
-(72, '20246790314258', 'Disallowance', '833.33'),
-(73, '20242106573948', 'Disallowance', '416.67'),
-(74, '20242106573948', 'Ref-Sal', '833.33'),
-(75, '20244065231987', 'Disallowance', '416.67'),
-(76, '20244065231987', 'Ref-Sal', '833.33'),
-(77, '20245136702849', 'Disallowance', '416.67'),
-(78, '20245136702849', 'Ref-Sal', '833.33'),
-(79, '20246973140582', 'Disallowance', '416.67'),
-(80, '20246973140582', 'Ref-Sal', '833.33'),
-(81, '20245360814279', 'Disallowance', '416.67'),
-(82, '20245360814279', 'Ref-Sal', '833.33'),
-(83, '20244913725068', 'Disallowance', '416.67'),
-(84, '20244913725068', 'Ref-Sal', '833.33');
+(28, '20248512063794', 'GSIS SOS', '1,250.00');
 
 -- --------------------------------------------------------
 
@@ -815,8 +706,10 @@ CREATE TABLE `payslip` (
 --
 
 INSERT INTO `payslip` (`id`, `invoice_id`, `employee_name`, `employee_id`, `rate`, `totalhours`, `otrate`, `othrtotal`, `gsis_total`, `w_tax_total`, `ers`, `ees`, `totals`, `erp`, `eep`, `totalp`, `erph`, `eeph`, `totalph`, `loan_description`, `loan_amount`, `totalbenifitsdeduction`, `totaleeer`, `deduction_status`, `dpaidby`, `cashadvance`, `totaldeduction`, `gross`, `allowance`, `netpay`, `paystatus`, `ppaidby`, `generateby`, `datefrom`, `dateto`) VALUES
-(233, 20244718605392, 'Jared Ivan Bruno', '202328', 168.75, 180, 253.13, 12, 2733.75, 3125, 0, 0, 0, 911.25, 911.25, 1822.5, 683.4375, 683.4375, 1593.5652, '', '', 7453.4375, 3416.0652, 'Pending', '', 0, 7453.4375, 35412.56, 2000, 27959.1225, 'Pending', '', 'Angelo Cruz', '2024-05-01', '2024-05-31'),
-(234, 20244913725068, 'Angelo Cruz', '202325', 123.4, 192, 185.1, 38, 2132.352, 3125, 0, 0, 0, 710.784, 710.784, 1421.568, 533.088, 533.088, 1472.697, ' <br>Disallowance <br>Ref-Sal', ' <br>416.67 <br>833.33', 6501.224, 2894.265, 'Pending', '', 0, 7751.224, 32726.6, 2000, 24975.376, 'Pending', '', 'Angelo Cruz', '2024-05-01', '2024-05-31');
+(146, 20245276839140, 'Angelo Cruz', '202325', 100, 118, 120, 20, 0, 0, 380, 202.5, 630, 441, 441, 882, 330.75, 330.75, 661.5, ' <br>GSIS SOS', ' <br>1,250.00', 974.25, 2173.5, 'Pending', 'Angelo Cruz', 0, 975.25, 14700, 500, 13724.75, 'Pending', '', 'Angelo Cruz', '2024-05-01', '2024-05-15'),
+(147, 20248512063794, 'Angelo Cruz', '202325', 100, 98, 120, 120, 0, 0, 380, 202.5, 630, 741, 741, 1482, 555.75, 555.75, 1111.5, ' <br>GSIS SOS', ' <br>1,250.00', 1499.25, 3223.5, 'Pending', '', 0, 1500.25, 24700, 500, 23199.75, 'Pending', '', 'Angelo Cruz', '2024-05-16', '2024-05-31'),
+(148, 20245276839140, 'Cruz', '202328', 100, 118, 120, 20, 0, 0, 380, 202.5, 630, 441, 441, 882, 330.75, 330.75, 661.5, ' <br>GSIS SOS', ' <br>1,250.00', 974.25, 2173.5, 'Pending', '', 0, 975.25, 14700, 500, 13724.75, 'Pending', '', 'Angelo', '2024-05-01', '2024-05-15'),
+(149, 20248512063794, 'Angelo Cruz', '202328', 100, 98, 120, 120, 0, 0, 380, 202.5, 630, 741, 741, 1482, 555.75, 555.75, 1111.5, ' <br>GSIS SOS', ' <br>1,250.00', 1499.25, 3223.5, 'Pending', '', 0, 1500.25, 24700, 500, 23199.75, 'Pending', '', 'Angelo Cruz', '2024-05-16', '2024-05-31');
 
 -- --------------------------------------------------------
 
@@ -862,9 +755,9 @@ CREATE TABLE `position` (
 --
 
 INSERT INTO `position` (`id`, `description`, `rate`, `ot`, `sg`, `step`, `monthly_salary`, `position_code`) VALUES
-(1, 'Programmer', 123.4, 185.1, '1', '8', 30000, 'Programmer_sg1_s8'),
-(5, 'HR Department', 168.75, 253.13, '3', '3', 27000, 'HR Department_sg3_s3'),
-(6, 'Accounting and Finance Department', 168.75, 253.13, '1', '1', 27000, 'Accounting and Finance Department_sg1_s1');
+(1, 'Programmer', 100, 120, '1', '8', 19744, 'Programmer_sg1_s8'),
+(5, 'HR Department', 60, 80, '3', '3', 20000, 'HR Department_sg3_s3'),
+(6, 'Accounting and Finance Department', 80, 100, '7', '7', 10000, 'Accounting and Finance Department_sg7_s7');
 
 -- --------------------------------------------------------
 
@@ -1163,13 +1056,13 @@ ALTER TABLE `allowance`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
 -- AUTO_INCREMENT for table `audit_trail_record`
 --
 ALTER TABLE `audit_trail_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=668;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=651;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
@@ -1217,13 +1110,13 @@ ALTER TABLE `leave_record`
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `loan_transaction`
 --
 ALTER TABLE `loan_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `overtime`
@@ -1241,7 +1134,7 @@ ALTER TABLE `pagibig`
 -- AUTO_INCREMENT for table `payslip`
 --
 ALTER TABLE `payslip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `philhealth`

@@ -14,8 +14,22 @@
 
 
     $generateby = $user['firstname'].' '.$user['lastname'];
+    $sql = "SELECT *, 
+    SUM(num_hr) AS total_hr,
+    SUM(num_ot) AS total_ot,
+    attendance.employee_id AS empid,
+    employees.employee_id AS employee
+FROM 
+ attendance 
+LEFT JOIN
+ employees ON employees.id=attendance.employee_id 
+LEFT JOIN 
+ position ON position.id=employees.position_id 
+WHERE date BETWEEN '$from' AND '$to' 
+GROUP BY attendance.employee_id ";
+//ORDER BY employees.lastname ASC, employees.firstname ASC";
 
-	$sql = "SELECT *, 
+	/*$sql = "SELECT *, 
                
                SUM(num_hr) AS total_hr,
                SUM(num_ot) AS total_ot,
@@ -70,7 +84,8 @@
         $grossn = $row['rate'] * $row['total_hr'];
        // $grossl = $row['rate'] * $row['total_leave_hr'];
         $grossot = $row['ot'] * $row['total_ot'];
-        
+        // Basic Salary
+        $basic_salary = $row['monthly_salary']*12;
         //allowance
 
         $sqlallowance = "SELECT SUM(amount) AS total_amount FROM allowance";
@@ -86,15 +101,27 @@
         $othrtotal = $row['total_ot'];
 
 
-        $ssql = "SELECT * FROM sss WHERE t >= $grossn AND f <= $grossn";
+        $ssql = "SELECT * FROM w_tax WHERE t >= $basic_salary AND f <= $basic_salary";
         $squery = $conn->query($ssql);
         $employeeid = $row['employee'];
         while ($srow = $squery->fetch_assoc()) {
             // Check if the value is within the desired range
                 // The value is within the range
-                $ers = $srow['er'];
-                $ees = $srow['ee'];
-                $values = $srow['total'];
+                $a = $srow['a'];
+                $b = $srow['b'];
+                $c = $srow['c'];
+                $bp = $b/100;
+                //total
+                $totalvalues = $a+($bp*$c);
+                $totalvaluess = $totalvalues / 12;
+                $w_tax_total = $totalvaluess;
+
+                $sqlgsis = "SELECT SUM(percent) AS percent_total FROM gsis";
+                $gsisequery = $conn->query($sqlgsis);
+                $gsisrow = $gsisequery->fetch_assoc();
+                $percent_total = $gsisrow['percent_total'];
+                $gsis_total_deduction = (($percent_total / 100)* $grossn);
+                $gsis_total = $gsis_total_deduction;
 
                 $psql = "SELECT * FROM pagibig WHERE t >= $grossn AND f <= $grossn";
                 $pquery = $conn->query($psql);
@@ -118,7 +145,7 @@
 
 
                                             /*Loan*/
-                                            $loansql = "SELECT * FROM loan WHERE employee_id = $employeeid AND loanbalance !=0";
+                                            $loansql = "SELECT * FROM loan WHERE employee_id = $employeeid AND loanbalance > 0";
                                             $loanquery = $conn->query($loansql);
 
                                             $descriptionloan = '';  // Initialize variables to store descriptions
@@ -129,10 +156,10 @@
                                         // Check if the value is within the desired range
                                         // The value is within the range   
                                             $idloan=$loanrow['id']; 
-                                            $semiloan=$loanrow['semiloan'] - 1; 
-                                            $loanbalance=$loanrow['loanbalance'] - $loanrow['semimonths']; 
+                                            $semiloan=$loanrow['semiloan'] - 2; 
+                                            $loanbalance=$loanrow['loanbalance'] - $loanrow['permonths']; 
                                             $loanpay=$loanrow['loanpay'];
-                                            $updateloanpay=$loanpay+$loanrow['semimonths'];
+                                            $updateloanpay=$loanpay+$loanrow['permonths'];
 
                                             $sqlloan = "UPDATE loan SET semiloan = '$semiloan' , loanbalance = '$loanbalance', loanpay = '$updateloanpay' WHERE id = '$idloan'";
                                             if($conn->query($sqlloan)){
@@ -142,12 +169,12 @@
                                                 $_SESSION['error'] = $conn->error;
                                             }   
                                             $descriptionloan .= ' <br>'.$loanrow['description'];
-                                            $descriptionloanamount .= ' <br>'.number_format($loanrow['semimonths'], 2);
-                                                $totalloan_per_loan = number_format($loanrow['semimonths'], 2);
+                                            $descriptionloanamount .= ' <br>'.number_format($loanrow['permonths'], 2);
+                                                $totalloan_per_loan = number_format($loanrow['permonths'], 2);
                                                 $totalloan += $totalloan_per_loan; 
                                             // insert in loan_transanction
                                             $loan_description = $loanrow['description'];
-                                            $loan_semimonths = number_format($loanrow['semimonths'], 2);
+                                            $loan_semimonths = number_format($loanrow['permonths'], 2);
                                             
                                             $sql = "INSERT INTO loan_transaction (loan_id, description, loan_amount) VALUES ('$invocie_id', '$loan_description', '$loan_semimonths')";
                                             $conn->query($sql);
@@ -157,11 +184,11 @@
 
                                 }
 
-                                
-								$deduction = $ees + $eep + $eeph;
+                                //Benefits
+								$deduction = $gsis_total+$w_tax_total + $eep + $eeph;
                                 $loan_description = $descriptionloan;
                                 $loan_amount= $descriptionloanamount;
-								$total_deduction = $deduction + $cashadvance + $totalloan;
+								$total_deduction = $deduction + $totalloan;
 								$net = $gross - $total_deduction;
                                 $paystatus = "Pending";
                                 $totaleeer = $values+$valuep+$valueph;
@@ -170,8 +197,8 @@
                        
                             //PUT IN INVOINCE AND RECORD FOR BENIFITS
 							
-                            $paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id,rate, totalhours,otrate, othrtotal, ers, ees, totals, erp, eep, totalp, erph, eeph, totalph,loan_description,loan_amount, totalbenifitsdeduction,totaleeer,deduction_status, cashadvance, totaldeduction, gross,allowance, netpay, paystatus,generateby,datefrom,dateto)
-                            VALUES ('$invocie_id', '$name', '$employeeid','$rate', '$totalhr', '$otrate', '$othrtotal', '$ers', '$ees', '$values','$erp','$eep', '$valuep', '$erph', '$eeph',  '$valueph', '$loan_description', '$loan_amount', '$deduction','$totaleeer','$paystatus', '$cashadvance', '$total_deduction', '$gross','$allowance', '$net', '$paystatus','$generateby','$from','$to')";
+                            $paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id,rate, totalhours,otrate, othrtotal,gsis_total,w_tax_total, ers, ees, totals, erp, eep, totalp, erph, eeph, totalph,loan_description,loan_amount, totalbenifitsdeduction,totaleeer,deduction_status, cashadvance, totaldeduction, gross,allowance, netpay, paystatus,generateby,datefrom,dateto)
+                            VALUES ('$invocie_id', '$name', '$employeeid','$rate', '$totalhr', '$otrate', '$othrtotal','$gsis_total','$w_tax_total', '$ers', '$ees', '$values','$erp','$eep', '$valuep', '$erph', '$eeph',  '$valueph', '$loan_description', '$loan_amount', '$deduction','$totaleeer','$paystatus', '$cashadvance', '$total_deduction', '$gross','$allowance', '$net', '$paystatus','$generateby','$from','$to')";
                             if($conn->query($paysql)){
 
                                 $sqlf = "SELECT * FROM attendance WHERE date BETWEEN '$from' AND '$to'";
@@ -184,7 +211,7 @@
                                     
                                 }
                                 $rowf = $query->fetch_assoc();
-                                $_SESSION['success'] = 'Payroll Generate added successfully'. $ida = $rowf['id'];
+                                $_SESSION['success'] = 'Payroll Generate added successfully';
                             }
                             else{
                                 $_SESSION['error'] = $conn->error;
@@ -201,7 +228,7 @@
 
 		
 	
-    header('location: payroll');
+    header('location: payroll?range='.$range);
 
 
 ?>

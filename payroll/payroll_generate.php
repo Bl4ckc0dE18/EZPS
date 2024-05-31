@@ -15,22 +15,23 @@
 
 
 		//Mandatory deduction
-
+		$totaltotal_gsis_total_db_per_employee = 0;
+		$totaltotal_w_tax_total_db_per_employee = 0;
 		$totaltotal_eeph_db_per_employee = 0;
 		$totaltotal_eep_db_per_employee = 0;
 
 		$sql ="SELECT 
 		employee_id,
-		employee_id,
 		netpay,
-		
 		invoice_id,
 		employee_name,
+		SUM(gsis_total) AS total_gsis_total,
+		SUM(w_tax_total) AS total_w_tax_total,
 		SUM(eeph) AS total_eeph,
 		SUM(eep) AS total_eep,
-
+		
 		SUM(totaldeduction) AS total_totaldeduction,
-		SUM(allowance) AS total_allowance,
+		SUM(allowance) AS total_allowance
 
 		FROM 
 		payslip
@@ -54,18 +55,26 @@
 			$netPay = $row['netpay'];
 			$totalSalary += $netPay; 
  
-			//1st
+			/**///1st
 			$totalfirst_half_db_per_employee = 0;
 			$totalsecond_half_db_per_employee = 0;
 
-			$first_half = $row['first_half'];
+			$first_half = $row['netpay']/2;
 			$totalfirst_half_db_per_employee += $first_half; 
 			//2nd
-			$second_half = $row['second_half'];
+			$second_half = $row['netpay']/2;
 			$totalsecond_half_db_per_employee += $second_half; 
 
 			//1stand2nd
 			$totalsalaryfirstandsecond = $totalfirst_half_db_per_employee + $totalsecond_half_db_per_employee;
+
+			//Integ_ins
+			$total_gsis_total = $row['total_gsis_total'];
+			$totaltotal_gsis_total_db_per_employee += $total_gsis_total;
+
+			//W/TAX
+			$total_w_tax_total = $row['total_w_tax_total'];
+			$totaltotal_w_tax_total_db_per_employee += $total_w_tax_total;
 
 			//PHILHEALTH
 			$total_eeph = $row['total_eeph'];
@@ -108,7 +117,7 @@
 			//Disallowance
 			//$sql_Disallowance = "SELECT * FROM loan_transaction WHERE description = 'Disallowance' AND loan_id = '$invoice_id'";
 			$sql_Disallowance = "SELECT SUM(loan_amount) AS total_loan_amount 
-			FROM loan_transaction WHERE description = 'Disallowance'AND loan_id '$invoice_id'";
+			FROM loan_transaction WHERE description = 'Disallowance'AND loan_id = '$invoice_id'";
 
 			$query_Disallowance = $conn->query($sql_Disallowance);
 			$row_Disallowance = $query_Disallowance->fetch_assoc();
@@ -144,7 +153,7 @@
 				loan_transaction 
 			WHERE 
 				description = 'Ref-Sal' 
-				AND loan_id '$invoice_id'";
+				AND loan_id = '$invoice_id'";
 			$query_RefSal = $conn->query($sql_RefSal);
 			$row_RefSal = $query_RefSal->fetch_assoc();
 			if($query_RefSal->num_rows > 0){
@@ -215,7 +224,7 @@
 				<td class="bottom-border right-border"  align="right"><b>'.$Disallowance_value.'<br>'.$RefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($total_eeph, 2).'<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>'.number_format($total_gsis_total, 2).'<br>'.number_format($total_w_tax_total, 2).'<br>'.number_format($total_eeph, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>f<br>g<br>h<br>i<br>j</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -234,7 +243,7 @@
 				
 
 				<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
-				<td class="bottom-border right-border" width="5%" align="right"><b>'.number_format($row['first_half'], 2).'<br><br>'.number_format($row['second_half'], 2).'</b></td>
+				<td class="bottom-border right-border" width="5%" align="right"><b>'.number_format($first_half, 2).'<br><br>'.number_format($first_half, 2).'</b></td>
 
 
 			</tr>
@@ -273,7 +282,7 @@
 				<td class="bottom-border right-border" align="right"><b>'.$totalDisallowance_value.'<br>'.$totalRefSal_value.'<br>-<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
-				<td class="bottom-border right-border" align="right"><b>-<br>-<br>'.number_format($totaltotal_eeph_db_per_employee, 2).'<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>'.number_format($totaltotal_gsis_total_db_per_employee, 2).'<br>'.number_format($totaltotal_w_tax_total_db_per_employee, 2).'<br>'.number_format($totaltotal_eeph_db_per_employee, 2).'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>f<br>g<br>h<br>i<br>j</b></td>
 				<td class="bottom-border right-border" align="right"><b>-<br>-<br>-<br>-<br>-</b></td>
@@ -434,7 +443,7 @@
 	<h2 align="center">POWER BY EZ PAYROLL SYSTEM</h2>
 	<p align="center"><b>TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES<br>
 	Ayala Blvd. Ermita, Manila<br>
-	For the period'.$from_title." - ".$to_title.'</b></p>
+	For the period '.$from_title." - ".$to_title.'</b></p>
 	<h4 align="left">We acknowledge receipt of cash shown opposite names as full comppensation for services rendered for the period covered.<br>
 	<b>ADMINSTRATIVE SECTOR</b></h4>
 	<table border="0" cellspacing="0" cellpadding="3">  

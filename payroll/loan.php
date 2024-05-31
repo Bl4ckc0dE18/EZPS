@@ -57,7 +57,7 @@
                   <th>Loan Amount</th>
                   <th>Months To Pay</th>
                   <th>Per Months</th>
-                  <th>Per Semi Months</th>
+                 
                   <th>Loan Paid</th>
                   <th>Loan Balance</th>
                   
@@ -76,7 +76,7 @@
                           <td>".number_format($row['loanamount'], 2)."</td>
                           <td>".$row['monthstopay']."</td>
                           <td>".number_format($row['permonths'], 2)."</td>
-                          <td>".number_format($row['semimonths'], 2)."</td>
+                          
                           <td>".number_format($row['loanpay'], 2)."</td>
                           <td>".number_format($row['loanbalance'], 2)."</td>
                                                                           
