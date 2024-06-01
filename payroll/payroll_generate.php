@@ -8,10 +8,19 @@
 		
 		$totaldeduction_db_per_employee =0;
 		$totalallowance_db_per_employee = 0;
+
+		//total loan
 		$totalDisallowance =0;
 		$totaldeduction_per_employee = 0;
+		
+		//loan
 		$totaldeduction = 0;
 		$totalRefSal = 0;
+		$totalRef_Ocom =0;
+
+
+
+
 		//first and second 
 		$totalfirst_half_db_per_employee = 0;
 		$totalsecond_half_db_per_employee = 0;
@@ -148,7 +157,7 @@
 			}
 
 
-			//Disallowance
+			//Ref-Sal
 			$sql_RefSal =  "SELECT SUM(loan_amount) AS total_loan_amount 
 			FROM 
 				loan_transaction 
@@ -182,8 +191,30 @@
 				$totalRefSal_value = number_format($totalRefSal, 2);
 			}
 			
+			//Ref-Ocom
+			$sql_Ref_Ocom = "SELECT * FROM loan_transaction WHERE description = 'Ref-Ocom' AND loan_id = '$invoice_id'";
+			$query_Ref_Ocom = $conn->query($sql_Ref_Ocom);
+			$row_Ref_Ocom = $query_Ref_Ocom->fetch_assoc();
+			if($query_Ref_Ocom->num_rows > 0){
+				$Ref_Ocom_value = number_format($row_Ref_Ocom['loan_amount'], 2);
+				$Ref_Ocom = $row_Ref_Ocom['loan_amount'];
+				$netRef_Ocom = $Ref_Ocom;
+				$totalRef_Ocom += $netRef_Ocom;
+
+			}else{
+				$Ref_Ocom_value ='-';
+				$Ref_Ocom = 0; 
+				$netRef_Ocom = $Ref_Ocom;
+				$totalRef_Ocom += $netRef_Ocom;
+
+			}
+			if($totalRef_Ocom == 0){
+				$totalRef_Ocom_value = '-';
+			}else{
+				$totalRef_Ocom_value = number_format($totalRef_Ocom, 2);
+			}
 			//total deduction per employee
-			$totaldeduction_per_employee = $Disallowance +$RefSal;
+			$totaldeduction_per_employee = $Disallowance +$RefSal+$Ref_Ocom;
 
 			//total deduction
 			$totaldeduction = $totaldeduction_per_employee;
@@ -222,7 +253,7 @@
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
-				<td class="bottom-border right-border"  align="right"><b>'.$Disallowance_value.'<br>'.$RefSal_value.'<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border"  align="right"><b>'.$Disallowance_value.'<br>'.$RefSal_value.'<br>'.$Ref_Ocom_value.'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
 				<td class="bottom-border right-border" align="right"><b>'.number_format($total_gsis_total, 2).'<br>'.number_format($total_w_tax_total, 2).'<br>'.number_format($total_eeph, 2).'<br>-<br>-</b></td>
@@ -280,7 +311,7 @@
 
 				
 				<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
-				<td class="bottom-border right-border" align="right"><b>'.$totalDisallowance_value.'<br>'.$totalRefSal_value.'<br>-<br>-<br>-</b></td>
+				<td class="bottom-border right-border" align="right"><b>'.$totalDisallowance_value.'<br>'.$totalRefSal_value.'<br>'.$totalRef_Ocom_value.'<br>-<br>-</b></td>
 
 				<td class="bottom-border" align="center"><b>a<br>b<br>c<br>d<br>e</b></td>
 				<td class="bottom-border right-border" align="right"><b>'.number_format($totaltotal_gsis_total_db_per_employee, 2).'<br>'.number_format($totaltotal_w_tax_total_db_per_employee, 2).'<br>'.number_format($totaltotal_eeph_db_per_employee, 2).'<br>-<br>-</b></td>

@@ -13,7 +13,71 @@
 
 				$comment = 'For Review';
 				$sql = "UPDATE leave_record SET leave_status = '$leave_status', leave_comment = '$comment' WHERE id = '$id'";
-					if($conn->query($sql)){					
+					if($conn->query($sql)){
+						
+						
+						//search from leave record database
+						$sqlsearch = "SELECT * FROM leave_record WHERE id = '$id'";
+						$querysearch  = $conn->query($sqlsearch);
+						$rowsearch = $querysearch ->fetch_assoc();
+						$employee_ids= $rowsearch['employee_id'];//employee Id
+						$startdate = $rowsearch['datefrom'];//date start
+						$endate = $rowsearch['dateto'];//date end
+
+						//search from employee database
+						$ssearch = "SELECT * FROM employees WHERE employee_id = '$employee_ids'";
+						$qsearch  = $conn->query($ssearch);
+						$rsearch = $qsearch ->fetch_assoc();
+						$employee_id= $rsearch['employee_id'];//employee Id
+						$main_id= $rsearch['id'];//main Id
+						$schedule_id= $rsearch['schedule_id'];//schedule Id
+						$e_leave = $rsearch['e_leave'];//e_leave number
+
+						
+
+						// Convert seconds to hours
+						$num_hr =0;
+
+						$start_date = strtotime($startdate);
+						$end_date = strtotime($endate);
+						$logstatus = 3;
+						$num_ot = 0;
+
+							// Loop through each date and print it
+							for ($current_date = $start_date; $current_date <= $end_date; $current_date = strtotime('+1 day', $current_date)) {
+								$date_now = date('Y-m-d', $current_date);
+								
+
+								$esqls = "SELECT * FROM attendance WHERE employee_id = '$main_id' AND date = '$date_now' AND status ='$logstatus'";
+								$equerys = $conn->query($esqls);
+								//$erows = $equerys->fetch_assoc();
+								while($erows = $equerys->fetch_assoc()){
+								$id_attendance = $erows['id'];
+								
+
+								$sql = "DELETE FROM attendance WHERE id = '$id_attendance'";
+								if($conn->query($sql)){
+									$timezone = 'Asia/Manila';
+										date_default_timezone_set($timezone);
+										
+										$auditdate = date('Y-m-d');
+										$audittime = date('H:i:s');
+										$audituser = $user['firstname'].' '.$user['lastname'];
+										$auditdescription = 'Delete leave for employee id number '.$employee_id.' date '.$auditdate;
+
+										$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
+										VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
+											if ($conn->query($sqlaudit)) {
+												$_SESSION['success'] = 'Leave updated successfully';
+											} else {
+												$_SESSION['error'] = $conn->error;
+											}
+								}
+								else{
+									$_SESSION['error'] = $conn->error;
+								}
+							}
+							}
 							$timezone = 'Asia/Manila';
 							date_default_timezone_set($timezone);
 										
@@ -136,6 +200,75 @@
 				$sql = "UPDATE leave_record SET leave_status = '$leave_status', leave_comment = '$comment' WHERE id = '$id'";
 					if($conn->query($sql)){
 						
+						$leaveCount = 0;
+						//search from leave record database
+						$sqlsearch = "SELECT * FROM leave_record WHERE id = '$id'";
+						$querysearch  = $conn->query($sqlsearch);
+						$rowsearch = $querysearch ->fetch_assoc();
+						$employee_ids= $rowsearch['employee_id'];//employee Id
+						$startdate = $rowsearch['datefrom'];//date start
+						$endate = $rowsearch['dateto'];//date end
+
+						//search from employee database
+						$ssearch = "SELECT * FROM employees WHERE employee_id = '$employee_ids'";
+						$qsearch  = $conn->query($ssearch);
+						$rsearch = $qsearch ->fetch_assoc();
+						$employee_id= $rsearch['employee_id'];//employee Id
+						$main_id= $rsearch['id'];//main Id
+						$schedule_id= $rsearch['schedule_id'];//schedule Id
+
+						// Convert seconds to hours
+						$num_hr = 8;
+
+						$start_date = strtotime($startdate);
+						$end_date = strtotime($endate);
+						$logstatus = 3;
+						
+						$num_ot = 0;
+
+							// Loop through each date and print it
+							for ($current_date = $start_date; $current_date <= $end_date; $current_date = strtotime('+1 day', $current_date)) {
+								$date_now = date('Y-m-d', $current_date);
+								$leaveCount++;
+
+								$esqls = "SELECT * FROM attendance WHERE employee_id = '$main_id' AND date = '$date_now' AND status ='$logstatus'";
+								$equerys = $conn->query($esqls);
+								//$erows = $equerys->fetch_assoc();
+								while($erows = $equerys->fetch_assoc()){
+								$id_attendance = $erows['id'];
+									$sql = "DELETE FROM attendance WHERE id = '$id_attendance'";
+									if($conn->query($sql)){
+										$timezone = 'Asia/Manila';
+										date_default_timezone_set($timezone);
+										
+										$auditdate = date('Y-m-d');
+										$audittime = date('H:i:s');
+										$audituser = $user['firstname'].' '.$user['lastname'];
+										$auditdescription = 'Delete leave for employee id number '.$employee_id.' date '.$date_now;
+
+										$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
+										VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
+											if ($conn->query($sqlaudit)) {
+												//Edit this for Status
+												$e_leaves = $e_leave + $leaveCount;
+
+												$sqle_leave = "UPDATE employees SET e_leave = '$e_leaves' WHERE id = '$main_id'";
+													
+												$conn->query($sqle_leave);
+
+												$_SESSION['success'] = 'Leave updated successfully';
+											} else {
+												$_SESSION['error'] = $conn->error;
+											}
+										
+									}
+									else{
+										$_SESSION['error'] = $conn->error;
+									}
+								}
+								
+								
+							}
 										$timezone = 'Asia/Manila';
 										date_default_timezone_set($timezone);
 										

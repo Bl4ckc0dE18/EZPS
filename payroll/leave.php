@@ -104,14 +104,26 @@
                                   <td>".$row['dateto']."</td>                        
                                   <td>".$check."</td>
                                   <td>".$row['leave_comment']."</td>
-                                  <td>".$row['applied_on']."</td>
-                                    
-                                    
+                                  <td>".$row['applied_on']."</td>";
+                                  
+                                  
+                                  if($row['leave_status']=="Pending"){
+                                    echo "
                                     <td>
                                       <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                      
                                      
-                                    </td>
+                                    </td>";
+                                   }
+
+                                   else{
+                                    
+                                   }
+                                    
+                                    
+                                    
+                                    echo"
+
                                     
                                   </tr>
                                 "; 
