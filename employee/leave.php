@@ -89,17 +89,16 @@
                         <td>".$row['leave_comment']."</td>
                         <td>".$row['applied_on']."</td>
                         
-                          <td>
-                            
-";
-                            if($row['leave_status']=="Approved"){
-                              
-                              echo"<a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")' disabled=false;><i class='fa fa-edit'></i> Edit</a>
-                              <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>";
-                            }else{
+                        <td>
+                          ";
+                            if($row['leave_status']=="Pending"){
                               echo"
                                 <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
                                 <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-trash'></i> Delete</a>";
+                             
+                            }
+                            else{
+                              
                             }"
                           </td>
                         </tr>

@@ -66,9 +66,11 @@
                   <th>Employee Name</th>
                   <th>Employee ID</th>
                   <th>INTEG-INS</th>
-                  <th>W/TAX</th>
+                  <th>W/TAX</th>  
                   <th>PAG-IBIG</th>   
                   <th>PHILHEALTH</th>   
+                  <th>Loan Type</th>   
+                  <th>Loan Amount</th>   
                   <th>Status</th>                 
                   <th>Tools</th>
                 </thead>
@@ -111,13 +113,15 @@
                         <td>".$row['employee_id']."</td>
                         <td>".$row['gsis_total']."</td>
                         <td>".$row['w_tax_total']."</td>
-                        <td>".$row['totalp']."</td>                        
-                        <td>".$row['totalph']."</td>
+                        <td>".$row['eep']."</td>                        
+                        <td>".$row['eeph']."</td>
+                        <td>".$row['loan_description']."</td>
+                        <td>".$row['loan_amount']."</td>
                         <td>".$check."</td>
                         
                         
                         <td>
-                          <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
+                         
                           
                           <a href='#edit' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                         </td>

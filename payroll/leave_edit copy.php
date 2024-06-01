@@ -33,10 +33,23 @@
 						$schedule_id= $rsearch['schedule_id'];//schedule Id
 						$e_leave = $rsearch['e_leave'];//e_leave number
 
-						
+						//search from schedule database
+						$ssearchschedules = "SELECT * FROM schedules WHERE id = '$schedule_id'";
+						$qsearchschedules  = $conn->query($ssearchschedules);
+						$rsearchschedules = $qsearchschedules ->fetch_assoc();
+
+						$lognow= $rsearchschedules['time_in'];//time in
+						$timeoutvalue= $rsearchschedules['time_out'];//time out
+
+						// Convert time strings to Unix timestamps
+						$time_in_timestamp = strtotime($lognow);
+						$time_out_timestamp = strtotime($timeoutvalue);
+
+						// Calculate the time difference in seconds
+						$time_difference = $time_out_timestamp - $time_in_timestamp;
 
 						// Convert seconds to hours
-						$num_hr =0;
+						$num_hr = $time_difference / 3600;
 
 						$start_date = strtotime($startdate);
 						$end_date = strtotime($endate);
@@ -124,11 +137,24 @@
 						$employee_id= $rsearch['employee_id'];//employee Id
 						$main_id= $rsearch['id'];//main Id
 						$schedule_id= $rsearch['schedule_id'];//schedule Id
-						$e_leave = $rsearch['e_leave'];
-						
+
+						//search from schedule database
+						$ssearchschedules = "SELECT * FROM schedules WHERE id = '$schedule_id'";
+						$qsearchschedules  = $conn->query($ssearchschedules);
+						$rsearchschedules = $qsearchschedules ->fetch_assoc();
+
+						$lognow= $rsearchschedules['time_in'];//time in
+						$timeoutvalue= $rsearchschedules['time_out'];//time out
+
+						// Convert time strings to Unix timestamps
+						$time_in_timestamp = strtotime($lognow);
+						$time_out_timestamp = strtotime($timeoutvalue);
+
+						// Calculate the time difference in seconds
+						$time_difference = $time_out_timestamp - $time_in_timestamp;
 
 						// Convert seconds to hours
-						$num_hr = 8;
+						$num_hr = $time_difference / 3600;
 
 						$start_date = strtotime($startdate);
 						$end_date = strtotime($endate);
@@ -145,14 +171,9 @@
 									$_SESSION['error'] = 'Already added leave';
 								}
 								else{
-									$sqlattendance = "INSERT INTO attendance (employee_id, date,status, num_hr,num_ot) 
-									VALUES ('$main_id', '$date_now',  '$logstatus','$num_hr','$num_ot')";
-	//Edit this for Status
-	$e_leaves = $e_leave-1;
-
-	$sqle_leave = "UPDATE employees SET e_leave = '$e_leaves' WHERE id = '$main_id'";
-		
-	$conn->query($sqle_leave);
+									$sqlattendance = "INSERT INTO attendance (employee_id, date, time_in,status, time_out,  num_hr,num_ot) 
+									VALUES ('$main_id', '$date_now', '$lognow', '$logstatus','$timeoutvalue','$num_hr','$num_ot')";
+	
 	
 									
 									if ($conn->query($sqlattendance)) {
@@ -168,12 +189,18 @@
 
 										$sqlaudit = "INSERT INTO audit_trail_record (audit_date,audit_time, user, description) 
 										VALUES ('$auditdate', '$audittime', '$audituser', '$auditdescription')";
-										
-										if ($conn->query($sqlaudit)) {
-												
+											if ($conn->query($sqlaudit)) {
+												//Edit this for Status
+												$e_leaves = ($rsearch['e_leave'] -1);
+												$sqle_leave = "UPDATE employees SET e_leave = '$e_leaves' WHERE id = '$main_id'";
 		
-												$_SESSION['success'] = 'Leave updated successfully';
-
+		
+												if($conn->query($sqle_leave)){
+													$_SESSION['success'] = 'Leave updated successfully';
+												}
+												else{
+													$_SESSION['error'] = $conn->error;
+												}
 												
 											} else {
 												$_SESSION['error'] = $conn->error;
@@ -217,13 +244,27 @@
 						$main_id= $rsearch['id'];//main Id
 						$schedule_id= $rsearch['schedule_id'];//schedule Id
 
+						//search from schedule database
+						$ssearchschedules = "SELECT * FROM schedules WHERE id = '$schedule_id'";
+						$qsearchschedules  = $conn->query($ssearchschedules);
+						$rsearchschedules = $qsearchschedules ->fetch_assoc();
+
+						$lognow= $rsearchschedules['time_in'];//time in
+						$timeoutvalue= $rsearchschedules['time_out'];//time out
+
+						// Convert time strings to Unix timestamps
+						$time_in_timestamp = strtotime($lognow);
+						$time_out_timestamp = strtotime($timeoutvalue);
+
+						// Calculate the time difference in seconds
+						$time_difference = $time_out_timestamp - $time_in_timestamp;
+
 						// Convert seconds to hours
-						$num_hr = 8;
+						$num_hr = $time_difference / 3600;
 
 						$start_date = strtotime($startdate);
 						$end_date = strtotime($endate);
 						$logstatus = 3;
-						
 						$num_ot = 0;
 
 							// Loop through each date and print it

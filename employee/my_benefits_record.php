@@ -27,96 +27,110 @@
 	$query = $conn->query($sql);
 	while($row = $query->fetch_assoc()){
 		
-								$contents .= '
-								<h2 align="center">EZ PAYROLL SYSTEM</h2>
-								<h4 align="center">'.$row['datefrom']." - ".$row['dateto'].'</h4>
-								<table border="" cellspacing="0" cellpadding="3">  
-										<tr>  
-											<td width="25%" align="left">Employee Name </td>
-											<td width="25%"><b>'.$row['employee_name'].'</b></td>
-                                            <td width="25%" align="left">Employee ID </td>
-											<td width="25%">'.$row['employee_id'].'</td>
-										</tr>
-										
-										<tr>
-											 
-											<td width="25%" align="left">Invocie Number  </td>
-											<td width="25%" >'.$row['invoice_id'].' </td> 
-											<td width="25%" align="left">Paid By : </td>
-											<td width="25%" >'.$row['dpaidby'].' </td> 
-                                             
-											 
-										</tr>
-										
-										
-										
-										<tr> 
-											
-											<td width="25%" align="center">Deduction List </td>
-											<td width="25%" align="center">SSS </td>
-											<td width="25%" align="center">PAG-IBIG </td>
-											<td width="25%" align="center">PHILHEALTH </td>
-										</tr>
-										
-										<tr> 
-											<td width="25%" align="center">EE </td>
-											<td width="25%" align="center">'.number_format($row['ees'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['eep'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['eeph'], 2).'</td>
-										</tr>
+		$contents .= '
+		<h2 align="center">EZ PAYROLL SYSTEM</h2>
+		<h4 align="center">'.$row['datefrom']." - ".$row['dateto'].'</h4>
+		<table border="0" cellspacing="0" cellpadding="3">  
+				<tr>  
+					<td border="1" width="25%" align="left">Employee Name </td>
+					<td border="1" width="25%"><b>'.$row['employee_name'].'</b></td>
+					<td border="1" width="25%" align="left">Employee ID </td>
+					<td border="1" width="25%">'.$row['employee_id'].'</td>
+				</tr>
+				
+				<tr>
+					 
+					<td border="1" width="25%" align="left">Invocie Number  </td>
+					<td border="1" width="25%" >'.$row['invoice_id'].' </td> 
+					<td border="1" width="25%" align="left">Paid By : </td>
+					<td border="1" width="25%" >'.$row['dpaidby'].' </td> 
+					 
+					 
+				</tr>
+				
+				<tr>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>	
+				</tr>
+				
+				<tr> 
+					
+					<td border="1" width="20%" align="center">Deduction List </td>
+					<td border="1" width="20%" align="center">GSIS </td>
+					<td border="1" width="20%" align="center">W/TAX </td>
+					<td border="1" width="20%" align="center">PHILHEALTH </td>
+					<td border="1" width="20%" align="center">PAG-IBIG </td>
+					
+				</tr>
+				<tr> 
+					<td border="1"  width="20%" align="center"></td>
+					<td border="1"  width="20%" align="center">'.number_format($row['gsis_total'], 2).'</td>
+					<td border="1"  width="20%" align="center">'.number_format($row['w_tax_total'], 2).' </td>
+					<td border="1"  width="20%" align="center">'.number_format($row['eep'], 2).' </td>
+					<td border="1"  width="20%" align="center">'.number_format($row['eeph'], 2).'</td>
+				</tr>
+				<tr>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>	
+				</tr>
+				<tr> 
+					<td border="1"  width="20%" align="center">Loan List</td>
+					<td border="1"  width="20%" align="center">Description</td>
+					<td border="1"  width="20%" align="center">Amount</td>
+					
+				</tr>
+				
+				<tr> 
+					<td border="1"  width="20%" align="center"></td>
+					<td border="1"  width="20%" align="center">'.$row['loan_description'].'</td>
+					<td border="1"  width="20%" align="center">'.$row['loan_amount'].'</td>
+					
+				</tr>
+				
+				<tr>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>	
+				</tr>
 
-										<tr> 
-											<td width="25%" align="center">ER </td>
-											<td width="25%" align="center">'.number_format($row['ers'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['erp'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['erph'], 2).'</td> 
-										</tr>
-										
-										<tr> 
-											<td width="25%" align="center">TOTAL </td>
-											<td width="25%" align="center">'.number_format($row['totals'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['totalp'], 2).' </td>
-											<td width="25%" align="center">'.number_format($row['totalph'], 2).'</td> 
-										</tr>
-												
-										<tr> 
-                                            
-                                            <td width="25%" align="center">Total Benifits Deduction </td>
-                                            <td width="25%" align="center">'.number_format($row['totalbenifitsdeduction'], 2).'</td> 
-                                            <td></td> 
-											<td></td>
-										</tr>
+				<tr> 
+					
+					<td border="1"  width="25%" align="center">Total Deduction </td>
+					<td border="1"  width="25%" align="center">'.number_format($row['totaldeduction'], 2).'</td> 
+					<td border="1"  width="25%" align="center"><b>Payment Status</b></td>
+					<td border="1"  width="25%" align="center"><b> '.$row['deduction_status'].'</b></td>
+				</tr>
+				<tr>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>
+					<td width="20%" align="center"></td>	
+				</tr>
+				<tr> 
 
-										<tr> 
-											<td width="25%" align="center"><b>Total EE and ER</b></td>
-											<td width="25%" align="center"><b> '.$row['totaleeer'].'</b></td>
-                                            <td width="25%" align="center"><b>Payment Status</b></td>
-											<td width="25%" align="center"><b> '.$row['deduction_status'].'</b></td>
-                                            
-                                            
-										</tr>
-                                        <tr> 
-											
-                                           
-										<td width="25%" align="center"><b>Generate By : '.$row['generateby'].' </b></td>
-											
-                                            
-                                            
-											
-                                            
-										</tr>
+					<td  border="1"  width="100%" align="center"><b>Generated By : '.$row['generateby'].' </b></td>	                                        
+				</tr>
 
-                                        
-									</table>
-									<br><hr>
-									
-								';
-                       
-                       
-                        
-							
-    
-                		}
+				
+			</table>
+			<br><hr>
+			
+		';
+
+
+
+	
+
+}
                
             
 
