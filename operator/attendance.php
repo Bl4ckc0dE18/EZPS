@@ -210,6 +210,7 @@ if (isset($_POST['employee'])) {
 
 
         $row = $query->fetch_assoc();
+        $employee_id=$row['employee_id'];
         $id = $row['id'];
         //$output['message'] = $id;
         $date_now = date('Y-m-d');
@@ -217,7 +218,7 @@ if (isset($_POST['employee'])) {
         $time_check_log = date('H:i:s', strtotime($time_checks));
 
         // Check if there is a time-in entry for today
-        $asql = "SELECT * FROM attendance WHERE employee_id = '$id' AND date = '$date_now'";
+        $asql = "SELECT * FROM attendance WHERE employee_id = '$id'  AND date = '$date_now'";
         $aquery = $conn->query($asql);
         $arow = $aquery->fetch_assoc();
 
@@ -243,7 +244,7 @@ if (isset($_POST['employee'])) {
                 WHERE schedule_day = '$uppercaseDay'
                 AND ('$time_check_db' <= time_in OR '$time_check_db' >= time_in)
                 AND '$time_check_db' < time_out
-                AND employee_id = '$employee'";
+                AND employee_id = '$employee_id'";
                     $query_es_db = $conn->query($sql_es_db);
                     $row_es_db = $query_es_db->fetch_assoc();
                     $time_out_db = $row_es_db['time_out'];
@@ -288,7 +289,7 @@ if (isset($_POST['employee'])) {
                                 $sql_out_db = "SELECT MAX(time_out) AS max_time_out
                                 FROM employee_schedule
                                 WHERE schedule_day = '$uppercaseDay'
-                                AND employee_id = '$employee'";
+                                AND employee_id = '$employee_id'";
 
                                     $query_out_db = $conn->query($sql_out_db);
                                     $row_out_db = $query_out_db->fetch_assoc();
@@ -357,7 +358,7 @@ if (isset($_POST['employee'])) {
                                             $sql_wl_db = "SELECT *
                                             FROM work_overtime
                                             WHERE schedule_load = '$uppercaseDay'
-                                            AND employee_id = '$employee'";
+                                            AND employee_id = '$employee_id'";
                                                 $query_wl_db = $conn->query($sql_wl_db);
                                                 $row_wl_db = $query_wl_db->fetch_assoc();
 
@@ -461,7 +462,7 @@ if (isset($_POST['employee'])) {
                         WHERE schedule_day = '$uppercaseDay'
                         AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
                         AND '$time_check_log' < time_out
-                        AND employee_id = '$employee'";
+                        AND employee_id = '$employee_id'";
                         
                          // check schedule
                         $query_es = $conn->query($sql_es);
@@ -517,7 +518,7 @@ if (isset($_POST['employee'])) {
                         WHERE schedule_day = '$uppercaseDay'
                         AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
                         AND '$time_check_log' < time_out
-                        AND employee_id = '$employee'";
+                        AND employee_id = '$employee_id'";
                         
                          // check schedule
                         $query_es = $conn->query($sql_es);

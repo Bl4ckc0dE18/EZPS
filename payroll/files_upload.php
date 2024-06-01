@@ -31,17 +31,17 @@ if(isset($_POST["add"])) {
                     $file = fopen($newFilePath, "r");
                     if ($file !== false) {
                         while (($data = fgetcsv($file)) !== false) {
-                            // Assuming your CSV file columns are in the order: employee_id, date, time_in, status, time_out, num_hr, num_ot
+                            // Assuming your CSV file columns are in the order: employee_id, date, time_in, status, time_out, num_hr, num_ot, num_wl
 
                             // Check if the data already exists in the database
-                            $existing_data_query = "SELECT COUNT(*) FROM attendance WHERE employee_id = '".$data[0]."' AND date = '".$data[1]."' AND time_in = '".$data[2]."' AND status = '".$data[3]."' AND time_out = '".$data[4]."' AND num_hr = '".$data[5]."' AND num_ot = '".$data[6]."'";
+                            $existing_data_query = "SELECT COUNT(*) FROM attendance WHERE employee_id = '".$data[0]."' AND date = '".$data[1]."' AND time_in = '".$data[2]."' AND status = '".$data[3]."' AND time_out = '".$data[4]."' AND num_hr = '".$data[5]."' AND num_ot = '".$data[6]."' AND num_wl = '".$data[7]."'";
                             $existing_data_result = $conn->query($existing_data_query);
                             $existing_data_count = $existing_data_result->fetch_assoc()['COUNT(*)'];
 
                             if ($existing_data_count == 0) {
                                 // Insert data into database
-                                $sql = "INSERT INTO attendance (employee_id, date, time_in, status, time_out, num_hr, num_ot) 
-                                    VALUES ('" . $data[0] . "', '" . $data[1] . "', '" . $data[2] . "', '" . $data[3] . "', '" . $data[4] . "', '" . $data[5] . "', '" . $data[6] . "')";
+                                $sql = "INSERT INTO attendance (employee_id, date, time_in, status, time_out, num_hr, num_ot, num_wl) 
+                                    VALUES ('" . $data[0] . "', '" . $data[1] . "', '" . $data[2] . "', '" . $data[3] . "', '" . $data[4] . "', '" . $data[5] . "', '" . $data[6] . "', '" . $data[7] . "')";
 
                                 // Execute SQL query
                                 $result = $conn->query($sql);
@@ -81,5 +81,6 @@ $conn->close();
 // Redirect to home.php
 header('location: home');
 exit; // Ensure script execution stops after the redirect
+
 
 ?>

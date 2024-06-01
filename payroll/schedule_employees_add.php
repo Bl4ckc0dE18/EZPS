@@ -10,7 +10,7 @@
 		$rowe = $querye->fetch_assoc();
 		$name = $rowe['firstname'].' '.$rowe['lastname'];
 
-		
+		$schedule_type = $_POST['schedule_type'];
 		$schedule_day = $_POST['schedule_day'];
 
 		$time_in = $_POST['time_in'];
@@ -18,7 +18,7 @@
 		$time_out = $_POST['time_out'];
 		$time_out = date('H:i:s', strtotime($time_out));
 
-		$sql = "INSERT INTO employee_schedule (employee_id,name,schedule_day ,time_in, time_out) VALUES ('$employee_id','$name','$schedule_day','$time_in', '$time_out')";
+		$sql = "INSERT INTO employee_schedule (employee_id,name,schedule_day ,type ,time_in, time_out) VALUES ('$employee_id','$name','$schedule_day','$schedule_type','$time_in', '$time_out')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Schedule added successfully';
 

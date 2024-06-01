@@ -90,4 +90,15 @@
 </div>
 
 
-     
+<script>
+  // Function to redirect to the home page
+  function redirectToHome() {
+    window.location.href = 'home';
+  }
+  
+  // Listen for modal close event and redirect to home
+  $('.modal').on('hidden.bs.modal', function () {
+    redirectToHome();
+  });
+</script>
+   

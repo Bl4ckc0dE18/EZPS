@@ -70,14 +70,11 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Invoice Number</th>
-                  <th>Employee Name</th>
+                 
+                 
                   <th>Employee ID</th>
-                  <th>Gross</th>
-                  <th>Deductions</th>      
-                  <th>Status</th>
-                  <th>Net Pay</th>
-                  <th>Applied On</th>
+                  <th>Employee Name</th>
+                  <th>Total</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>
@@ -97,41 +94,37 @@
                      
                     
 
-                    //$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
-                    $sqld = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
-                     //$sqld = "SELECT * FROM payslip ";
-                    $query = $conn->query($sqld);
+                    $sql = "SELECT *, 
+               
+               SUM(num_hr) AS total_hr,
+               SUM(num_ot) AS total_ot,
+               attendance.employee_id AS empid,
+               employees.employee_id AS employee
+        FROM 
+            attendance 
+        LEFT JOIN
+            employees ON employees.id=attendance.employee_id 
+        LEFT JOIN 
+            position ON position.id=employees.position_id 
+        WHERE num_wl = 1 AND date BETWEEN '$from' AND '$to' 
+          
+        GROUP BY attendance.employee_id 
+        ORDER BY employees.lastname ASC, employees.firstname ASC";
+                    $query = $conn->query($sql);
                     //$status = ($row['paystatus'])?'<span class="label label-danger pull-right">Paid</span>':'<span class="label label-warning pull-right">Pending</span>';
                     
                     while($row = $query->fetch_assoc()){
-                      if($row['paystatus']=="Pending"){
-                        $check = '<span class="label label-warning">Pending</span>' ;
-  
-                       
-                        
-                       }
-                       else{
-                        $check = '<span class="label label-success">Paid</span>' ;
-                       }
                       echo "
                         <tr>
-                          <td>".$row['invoice_id']."</td>
-                          <td>".$row['employee_name']."</td>
-                          <td>".$row['employee_id']."</td>
-                          <td>".number_format($row['gross'], 2)."</td>
-                          <td>".number_format($row['totaldeduction'], 2)."</td>
-                          
-                         
-                          <td>".$check."</td>
-                          <td>".number_format($row['netpay'], 2)."</td>
-                          
-                          <td>".$row['datefrom']." - ".$row['dateto']."</td>
+                          <td>".$row['empid']."</td>
+                          <td>".$row['firstname']."</td>
+                          <td>".$row['total_hr']."</td>
+  
                           
                           <td>
                             <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                            <button class='btn btn-primary btn-sm btn-flat 'id='".$row['invoice_id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> View</button>
-
+                            
                           </td>
                         </tr>
                       ";

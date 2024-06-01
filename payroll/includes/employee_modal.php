@@ -39,7 +39,7 @@
                     <label for="employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
 
                     <div class="col-sm-4">
-                      <input type="text" class="form-control" id="employee_rfid" name="employee_rfid">
+                      <input type="password" class="form-control" id="employee_rfid" name="employee_rfid">
                     </div>
 
                    
@@ -230,7 +230,7 @@
                     <label for="edit_employee_rfid" class="col-sm-2 control-label">Employee RFID</label>
 
                     <div class="col-sm-4">
-                      <input type="text" class="form-control" id="edit_employee_rfid" name="employee_rfid">
+                      <input type="password" class="form-control" id="edit_employee_rfid" name="employee_rfid">
                     </div>
                 </div>
 

@@ -8,7 +8,7 @@ if(isset($_POST['datepicker_download_from'], $_POST['datepicker_download_to'])) 
     $toDate = $_POST['datepicker_download_to'];
 
     // Prepare SQL statement with placeholders
-    $sql = "SELECT employee_id, date, time_in, status, time_out, num_hr, num_ot 
+    $sql = "SELECT employee_id, date, time_in, status, time_out, num_hr, num_ot ,num_wl
             FROM attendance 
             WHERE date BETWEEN ? AND ?";
     
@@ -21,9 +21,9 @@ if(isset($_POST['datepicker_download_from'], $_POST['datepicker_download_to'])) 
     // Check if any rows were returned
     if ($result->num_rows > 0) {
         // Generate CSV file content
-        $csvData = "Employee ID,Date,Time In,Status,Time Out,Hours Worked,Overtime Hours\n";
+        $csvData = "";
         while ($row = $result->fetch_assoc()) {
-            $csvData .= $row['employee_id'] . "," . $row['date'] . "," . $row['time_in'] . "," . $row['status'] . "," . $row['time_out'] . "," . $row['num_hr'] . "," . $row['num_ot'] . "\n";
+            $csvData .= $row['employee_id'] . "," . $row['date'] . "," . $row['time_in'] . "," . $row['status'] . "," . $row['time_out'] . "," . $row['num_hr'] . "," . $row['num_ot'] ."," . $row['num_wl'] . "\n";
         }
 
         // Set headers for file download
@@ -32,7 +32,7 @@ if(isset($_POST['datepicker_download_from'], $_POST['datepicker_download_to'])) 
         $toDateFormatted = date('M d Y', strtotime($toDate));
         $filename = 'attendance-from-' . str_replace('-', '', $fromDateFormatted) . '-to-' . str_replace('-', '', $toDateFormatted) . '.csv';
         header("Content-Disposition: attachment; filename=$filename");
-
+        
         // Output the CSV data
         
         $des = 	$filename;
@@ -50,6 +50,7 @@ if(isset($_POST['datepicker_download_from'], $_POST['datepicker_download_to'])) 
         } else {
             $_SESSION['error'] = $conn->error;
         }
+        
     } else {
         $_SESSION['error'] = 'No attendance data found';
     }
