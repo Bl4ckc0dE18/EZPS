@@ -5,10 +5,10 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Add Schedule</b></h4>
+            	<h4 class="modal-title"><b>Add Overtime Work</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="work_load_add.php">
+            	<form class="form-horizontal" method="POST" action="work_overtime_add.php">
 
 				<div class="form-group">
                     <label for="employee_id" class="col-sm-3 control-label">Employee ID</label>
@@ -68,10 +68,10 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title timeid"><b>Update Schedule</b></h4>
+            	<h4 class="modal-title timeid"><b>Update Work Overtime</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="work_load_edit_delete.php">
+            	<form class="form-horizontal" method="POST" action="work_overtime_edit_delete.php">
             		<input type="hidden" id="timeid" name="id">
 					
 					
@@ -132,7 +132,7 @@
             	<h4 class="modal-title"><b>Deleting...</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="work_load_delete.php">
+            	<form class="form-horizontal" method="POST" action="work_overtime_delete.php">
             		<input type="hidden" id="del_timeid" name="id">
 					<input type="hidden" id="employee_id_delete" name="employee_id_delete">
             		<div class="text-center">

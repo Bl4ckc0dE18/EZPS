@@ -13,7 +13,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Employee Work Load Schedules
+        Employee Overtime Schedules
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -69,7 +69,7 @@
                         GROUP_CONCAT(schedule_load ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS schedule_loads,
                         GROUP_CONCAT(time_load ) AS time_loads
                         
-                    FROM work_load 
+                    FROM work_overtime 
                     GROUP BY employee_id";
 
                     
@@ -147,7 +147,7 @@
  include 'includes/autorize.php';
 }?> 
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/work_load_modal.php'; ?>
+  <?php include 'includes/work_overtime_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
@@ -170,7 +170,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'work_load_row.php',
+    url: 'work_overtime_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){

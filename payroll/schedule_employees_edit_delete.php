@@ -4,12 +4,13 @@
 	if(isset($_POST['edit'])){
 		$id = $_POST['id'];
 		$schedule_day = $_POST['schedule_day_edit'];
+		$schedule_type = $_POST['schedule_type_edit'];
 		$time_in = $_POST['time_in'];
 		$time_in = date('H:i:s', strtotime($time_in));
 		$time_out = $_POST['time_out'];
 		$time_out = date('H:i:s', strtotime($time_out));
 
-		$sql = "UPDATE employee_schedule SET schedule_day = '$schedule_day',time_in = '$time_in', time_out = '$time_out' WHERE id = '$id'";
+		$sql = "UPDATE employee_schedule SET schedule_day = '$schedule_day',type = '$schedule_type',time_in = '$time_in', time_out = '$time_out' WHERE id = '$id'";
 		if($conn->query($sql)){
 			
 

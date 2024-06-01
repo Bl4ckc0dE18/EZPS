@@ -50,7 +50,7 @@ include 'includes/header.php';
                                             <th>Name</th>
                                             <th>Position</th>
                                             <th>Work Schedule</th>
-                                            <th>Work Load</th>
+                                            <th>Work Overtime</th>
                                             <th>Regular</th>
                                             <th>Member Since</th>
                                             <th>Tools</th>
@@ -63,14 +63,14 @@ include 'includes/header.php';
                                         employees.*, 
                                         employees.id AS empid, 
                                         position.*, 
-                                        (SELECT GROUP_CONCAT(CONCAT(schedule_load , ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
-                                        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' <br> TIME IN - ', TIME_FORMAT(time_in, '%h:%i %p'), '<br>TIME OUT - ', TIME_FORMAT(time_out, '%h:%i %p')) ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br><br><br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_load , ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_overtime WHERE work_overtime.employee_id = employees.employee_id) AS work_overtimes,
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' <br> TIME IN - ', TIME_FORMAT(time_in, '%h:%i %p'), '<br>TIME OUT - ', TIME_FORMAT(time_out, '%h:%i %p'),'<br>TYPE - ',type) ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br><br><br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
                                     FROM 
                                         employees 
                                     LEFT JOIN 
                                         position ON position.id = employees.position_id
                                     ORDER BY 
-                                        work_loads,
+                                    work_overtimes,
                                         work_schedules;
                                     ";
 
@@ -97,7 +97,7 @@ include 'includes/header.php';
                                                     <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
                                                     <td><?php echo $row['description']; ?></td>
                                                     <td><?php echo $row['work_schedules']; ?></td>
-                                                    <td><?php echo $row['work_loads']; ?></td>
+                                                    <td><?php echo $row['work_overtimes']; ?></td>
                                                     <td><?php echo $row['regular']; ?></td>
                                                     <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                                                     <td>

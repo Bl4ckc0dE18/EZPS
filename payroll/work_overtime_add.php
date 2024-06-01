@@ -15,7 +15,7 @@
 		$schedule_load = $_POST['schedule_load'];
 		
 
-		$sql = "INSERT INTO work_load (employee_id,name,schedule_load ,time_load) VALUES ('$employee_id','$name','$schedule_day','$schedule_load')";
+		$sql = "INSERT INTO work_overtime (employee_id,name,schedule_load ,time_load) VALUES ('$employee_id','$name','$schedule_day','$schedule_load')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Employee Work Load added successfully';
 
@@ -44,6 +44,6 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: work_load');
+	header('location: work_overtime');
 
 ?>

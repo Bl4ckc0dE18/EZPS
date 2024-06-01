@@ -57,8 +57,10 @@
                   <th>Employee No</th>
                   <th>Name</th>
                   <th>Day</th>
+                  <th>Type</th>
                   <th>Time In</th>
                   <th>Time Out</th>
+                  
                   <th>Tools</th>
                  
                 </thead>
@@ -69,7 +71,8 @@
                    GROUP_CONCAT(id ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS ids,
                    GROUP_CONCAT(schedule_day ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS schedule_days,
                    GROUP_CONCAT(time_in ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS time_ins,
-                   GROUP_CONCAT(time_out ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS time_outs
+                   GROUP_CONCAT(time_out ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS time_outs,
+                   GROUP_CONCAT(type ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')) AS types
                   FROM employee_schedule
                   GROUP BY employee_id";
     
@@ -81,6 +84,7 @@
                       $schedule_days = explode(',', $row['schedule_days']);
                       $time_ins = explode(',', $row['time_ins']);
                       $time_outs = explode(',', $row['time_outs']);
+                      $types = explode(',', $row['types']);
                       echo "
                         <tr>
                         <td>".$row['employee_id']."</td>
@@ -93,6 +97,14 @@
                           }
                       }
                       echo "<td>";
+                          foreach ($types as $index => $type) {
+                          
+                            echo $type;
+                            if ($index < count($types) - 1) {
+                                echo "<br>";
+                            }
+                      }  
+                      echo "<td>";
                             foreach ($time_ins as $index => $time_in) {
                               $formatted_time_in = date('h:i A', strtotime($time_in));
                               echo $formatted_time_in;
@@ -100,6 +112,8 @@
                                   echo "<br>";
                               }
                           }
+                        
+
                       echo "<td>";
                           foreach ($time_outs as $index => $time_out) {
                             $formatted_time_out = date('h:i A', strtotime($time_out));
@@ -107,8 +121,9 @@
                             if ($index < count($time_outs) - 1) {
                                 echo "<br>";
                             }
-                      }    
+                      } 
                       echo "</td>
+                            
                             <td>                       
                                
                                 <a href='#delete' data-toggle='modal' class='btn btn-danger btn-sm btn-flat' data-id='".$row['employee_id']."' onclick='getRow(".$row['employee_id'].")'><i class='fa fa-trash'></i> Delete</a>               
@@ -169,7 +184,8 @@ function getRow(id){
       $('#edit_time_out').val(response.time_out);
       $('#del_timeid').val(response.id);
       $('#schedule_days').val(response.schedule_day).html(response.schedule_day);
-     
+      $('#schedule_types').val(response.type).html(response.type);
+      
       //delete
       $('#del_schedule').html(response.name);
       $('#employee_id_delete').val(response.employee_id);

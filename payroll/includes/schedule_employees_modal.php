@@ -27,7 +27,6 @@
                       </select>
                     </div>
                 </div>
-
 				<div class="form-group">
                     <label for="schedule_day" class="col-sm-3 control-label">Schedule Day</label>
                     <div class="col-sm-9">
@@ -40,6 +39,17 @@
                         <option value="THU">THU</option>
 						<option value="FRI">FRI</option>
 						<option value="SAT">SAT</option>
+                      </select>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="schedule_type" class="col-sm-3 control-label">Schedule Type</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" name="schedule_type" id="schedule_type">
+                       
+                        <option value="FTE">FTE</option>
+                        <option value="WL">WL</option>
+                       
                       </select>
                     </div>
                 </div>
@@ -82,7 +92,7 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="schedule_employees_edit_delete.php">
-            		<input type="text" id="timeid" name="id">
+            		<input type="hidden" id="timeid" name="id">
 					
 					
 					<div class="form-group">
@@ -113,7 +123,18 @@
 								<option value="SAT">SAT</option>
 							</select>
 							</div>
-                </div>	
+                		</div>	
+						<div class="form-group">
+							<label for="schedule_type_edit" class="col-sm-3 control-label">Schedule Type</label>
+							<div class="col-sm-9">
+							<select class="form-control" name="schedule_type_edit" id="schedule_type_edit">
+							<option selected id="schedule_types"></option>
+								<option value="FTE">FTE</option>
+								<option value="WL">WL</option>
+							
+							</select>
+							</div>
+						</div>
                 <div class="form-group">
                     <label for="edit_time_in" class="col-sm-3 control-label">Time In</label>
 

@@ -11,7 +11,7 @@
 		$time_out = $_POST['time_out'];
 		$time_out = date('H:i:s', strtotime($time_out));*/
 
-		$sql = "UPDATE work_load SET schedule_load = '$schedule_day',time_load = '$edit_load' WHERE id = '$id'";
+		$sql = "UPDATE work_overtime SET schedule_load = '$schedule_day',time_load = '$edit_load' WHERE id = '$id'";
 		if($conn->query($sql)){
 			
 
@@ -40,7 +40,7 @@
 
 	elseif(isset($_POST['delete'])){
 		$id = $_POST['id'];
-		$sql = "DELETE FROM work_load WHERE id = '$id'";
+		$sql = "DELETE FROM work_overtime WHERE id = '$id'";
 		
 		if($conn->query($sql)){
 			
@@ -70,6 +70,6 @@
 		$_SESSION['error'] = 'Fill up edit form first or Select item to delete first';
 	}
 
-	header('location:work_load');
+	header('location:work_overtime');
 
 ?>

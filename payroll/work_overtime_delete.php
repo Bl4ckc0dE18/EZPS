@@ -3,7 +3,7 @@
 
 	if(isset($_POST['delete'])){
 		$id = $_POST['employee_id_delete'];
-		$sql = "DELETE FROM work_load WHERE employee_id = '$id'";
+		$sql = "DELETE FROM work_overtime WHERE employee_id = '$id'";
 		
 		if($conn->query($sql)){
 			
@@ -33,6 +33,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: work_load');
+	header('location: work_overtime');
 	
 ?>

@@ -4,18 +4,18 @@
 	function generateRow($conn){
 		$contents = '';
 		
-                                    $sql = "SELECT 
+                                     $sql = "SELECT 
                                         employees.*, 
                                         employees.id AS empid, 
                                         position.*, 
-                                        (SELECT GROUP_CONCAT(CONCAT(schedule_load, ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_load WHERE work_load.employee_id = employees.employee_id) AS work_loads,
-                                        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' ', TIME_FORMAT(time_in, '%h:%i %p'), ' - ', TIME_FORMAT(time_out, '%h:%i %p')) ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_load, ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_overtime WHERE work_overtime.employee_id = employees.employee_id) AS work_overtimes,
+                                        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' ', TIME_FORMAT(time_in, '%h:%i %p'), ' - ', TIME_FORMAT(time_out, '%h:%i %p'),'<br>TYPE - ',type,'<br>') ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
                                     FROM 
                                         employees 
                                     LEFT JOIN 
                                         position ON position.id = employees.position_id
                                     ORDER BY 
-                                        work_loads,
+                                    work_overtimes,
                                         work_schedules;
                                     ";
         $query = $conn->query($sql);
@@ -34,7 +34,7 @@
                             <td>".$row['lastname'].", ".$row['firstname']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['work_schedules']."</td>
-                            <td>".$row['work_loads']."</td>
+                            <td>".$row['work_overtimes']."</td>
                            
                         </tr>
                         ";
@@ -70,7 +70,7 @@
                 <th width="20%" align="center"><b>Employee Name</b></th>
 				<th width="20%" align="center"><b>Position</b></th> 
                 <th width="30%" align="center"><b>Work Schedule</b></th>
-				<th width="15%" align="center"><b>Work Load</b></th> 
+				<th width="15%" align="center"><b>Work Overtime</b></th> 
            </tr>  
       ';  
     $content .= generateRow($conn); 

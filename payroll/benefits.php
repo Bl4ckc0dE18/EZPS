@@ -75,6 +75,8 @@
                   <th>W/TAX</th>  
                   <th>PAG-IBIG</th>   
                   <th>PHILHEALTH</th>   
+                  <th>Loan Type</th>   
+                  <th>Loan Amount</th>   
                   <th>Status</th>                 
                   <th>Tools</th>
                 
@@ -113,15 +115,17 @@
                           <td>".$row['employee_id']."</td>
                           <td>".$row['gsis_total']."</td>
                           <td>".$row['w_tax_total']."</td>
-                          <td>".$row['totalp']."</td>                        
-                          <td>".$row['totalph']."</td>
+                          <td>".$row['eep']."</td>                        
+                          <td>".$row['eeph']."</td>
+                          <td>".$row['loan_description']."</td>
+                          <td>".$row['loan_amount']."</td>
                           <td>".$check."</td>
                           
                           
                           <td>
                             <a href='#edit' data-toggle='modal' class='btn btn-success btn-sm btn-flat' data-id='".$row['id']."' onclick='getRow(".$row['id'].")'><i class='fa fa-edit'></i> Edit</a>
                             
-                            <a href='#edit' data-toggle='modal' class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
+                            <a   class='btn btn-primary btn-sm btn-flat' id='".$row['invoice_id']."' onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                           </td>
                           
                         </tr>
@@ -146,14 +150,10 @@
 <script>
 
 function redirectToPage2(tdElement) {
-            // Get the ID attribute of the clicked <td> element
             var tdId = tdElement.id;
-
-            // Construct the URL for the next PHP page with the ID as a query parameter
-            var nextPageURL = "my_benefits.php?id=" + encodeURIComponent(tdId);
-
-            // Redirect to the next PHP page
-            window.location.href = nextPageURL;
+            var nextPageURL = "my_benefits?id=" + encodeURIComponent(tdId);
+            
+            window.open(nextPageURL, '_blank');
         }
 $(function(){
   $('.edit').click(function(e){
@@ -172,7 +172,7 @@ $(function(){
 
   $("#reservation").on('change', function(){
     var range = encodeURI($(this).val());
-    window.location = 'benefits.php?range='+range;
+    window.location = 'benefits?range='+range;
   });
 
   $('#generate').click(function(e){
@@ -183,13 +183,13 @@ $(function(){
 
   $('#list').click(function(e){
     e.preventDefault();
-    $('#payForm').attr('action', 'benefits_list_generate.php');
+    $('#payForm').attr('action', 'benefits_list_generate');
     $('#payForm').submit();
   });
 
   $('#records').click(function(e){
     e.preventDefault();
-    $('#payForm').attr('action', 'benefits_records_generate.php');
+    $('#payForm').attr('action', 'benefits_records_generate');
     $('#payForm').submit();
   });
 

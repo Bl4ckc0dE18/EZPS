@@ -73,7 +73,7 @@
          
             
             <li><a href="schedule_employees"><i class="fa fa-circle-o"></i> Employee Schedules</a></li>
-            <li><a href="work_load"><i class="fa fa-circle-o"></i> Work Load</a></li>
+            <li><a href="work_overtime"><i class="fa fa-circle-o"></i> Work Overtime</a></li>
             <li><a href="schedule_employees_print"><i class="fa fa-circle-o"></i> <span> Print Schedule</span></a></li>
            
 

@@ -355,7 +355,7 @@ if (isset($_POST['employee'])) {
                                             //$output['time'] = 'OVER TIME: ' . $int_ot;
 
                                             $sql_wl_db = "SELECT *
-                                            FROM work_load
+                                            FROM work_overtime
                                             WHERE schedule_load = '$uppercaseDay'
                                             AND employee_id = '$employee'";
                                                 $query_wl_db = $conn->query($sql_wl_db);

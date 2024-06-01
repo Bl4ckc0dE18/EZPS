@@ -96,7 +96,7 @@
 								$mins_ot = $mins_ot/60;
 								$int_ot = $hrs_ot + $mins_ot;
 
-								$sql_wl_db = "SELECT * FROM work_load WHERE schedule_load = '$pre_day' AND employee_id = '$e_employee_id'";
+								$sql_wl_db = "SELECT * FROM work_overtime WHERE schedule_load = '$pre_day' AND employee_id = '$e_employee_id'";
 								$query_wl_db = $conn->query($sql_wl_db);
 								$row_wl_db = $query_wl_db->fetch_assoc();
 								
