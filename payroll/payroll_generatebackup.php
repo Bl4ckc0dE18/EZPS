@@ -307,7 +307,7 @@
 			</tr>
 		';
 
-		//footer
+//footer
 		$contents .= '
 		<style>
 			.right-border {
@@ -419,10 +419,10 @@
     $pdf->SetDefaultMonospacedFont('helvetica');  
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
     //$pdf->SetMargins(PDF_MARGIN_LEFT, '10', PDF_MARGIN_RIGHT,'10');  
-	$pdf->SetMargins('5', '8', '12');  
+	$pdf->SetMargins('3', '8', PDF_MARGIN_RIGHT);  
     $pdf->setPrintHeader(false);  
     $pdf->setPrintFooter(false);  
-    $pdf->SetAutoPageBreak(TRUE, 10);  
+    $pdf->SetAutoPageBreak(TRUE, 50);  
     $pdf->SetFont('helvetica', '', 5);  
     $pdf->AddPage();  
     $content = '';  
