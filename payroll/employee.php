@@ -40,7 +40,13 @@ include 'includes/header.php';
                         <div class="box">
                             <div class="box-header with-border">
                                 <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                                
+                                <div class="pull-right">
+                                <button class="btn btn-primary btn-sm btn-flat" onclick="redirectToPage3()"><i class="fa fa-print"></i> Print All</button>
+
+                                </div>
                             </div>
+                            
                             <div class="box-body">
                                 <table id="example1" class="table table-bordered">
                                     <thead>
@@ -106,7 +112,7 @@ include 'includes/header.php';
                                                          <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
                                                         <button class="btn btn-success btn-sm edit_employee_password btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Password</button><br><br><br>
                                                         <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
-                                                        <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i>View ID</button>
+                                                        <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</button>
                                                     </td>
                                                 </tr>
                                                 <?php
@@ -133,8 +139,16 @@ include 'includes/header.php';
     <script>
         function redirectToPage2(tdElement) {
             var tdId = tdElement.id;
-            var nextPageURL = "employee_my_id.php?id=" + encodeURIComponent(tdId);
-            window.location.href = nextPageURL;
+            var nextPageURL = "employee_my_id?id=" + encodeURIComponent(tdId);
+            
+            window.open(nextPageURL, '_blank');
+        }
+
+        function redirectToPage3() {
+           
+            var nextPageURL = "employee_records";
+            
+            window.open(nextPageURL, '_blank');
         }
 
         $(function() {
