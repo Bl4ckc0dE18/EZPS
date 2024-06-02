@@ -57,6 +57,7 @@
                   <th>Time Out</th>
                   <th>Number of Hours</th>
                   <th>Number of Overtime Hours</th>
+                  <th>Payroll Status</th>
                   
                 </thead>
                 <tbody>
@@ -80,6 +81,11 @@
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }
+                      if ($row['num_wl'] == '1') {
+                        $payroll = '<span class="label label-warning">Paid</span>';
+                      }else{
+                        $payroll = '<span class="label label-danger">Not Paid</span>';
+                      }
                     
                       echo "
                         <tr>
@@ -89,7 +95,7 @@
                           <td>".date('h:i A', strtotime($row['time_out']))."</td>
                           <td>".$row['num_hr']."</td>
                           <td>".$row['num_ot']."</td>
-                          
+                          <td>".$payroll."</td>
                         </tr>
                       ";
                     }

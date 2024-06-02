@@ -59,6 +59,7 @@
                   <th>Name</th>
                   <th>Time In</th>
                   <th>Time Out</th>
+                  <th>Payroll Status</th>
                   <!-- <th>Tools</th> -->
                 </thead>
                 <tbody>
@@ -85,6 +86,11 @@
                       } else {
                           $status = '<span class="label label-primary pull-right"></span>';
                       }
+                      if ($row['num_wl'] == '1') {
+                        $payroll = '<span class="label label-warning">Paid</span>';
+                      }else{
+                        $payroll = '<span class="label label-danger">Not Paid</span>';
+                      }
                     
                       echo "
                         <tr>
@@ -94,7 +100,7 @@
                           <td>".$row['firstname'].' '.$row['lastname']."</td>
                           <td>".date('h:i A', strtotime($row['time_in'])).$status."</td>
                           <td>".date('h:i A', strtotime($row['time_out']))."</td>
-                         
+                          <td>".$payroll."</td>
                         </tr>
                       ";
                     }

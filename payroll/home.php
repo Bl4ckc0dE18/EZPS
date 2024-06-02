@@ -55,7 +55,7 @@
       <div class="row">
      
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
+          <!-- small box <div class="small-box" style="background: #D1B188;">-->
           <div class="small-box bg-blue">
             <div class="inner">
               <?php

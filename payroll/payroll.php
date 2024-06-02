@@ -128,9 +128,9 @@
                           <td>".$row['datefrom']." - ".$row['dateto']."</td>
                           
                           <td>
-                            <button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                            <button class='btn btn-primary btn-sm btn-flat 'id='".$row['invoice_id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> View</button>
+                            <a class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</a>
+                            
+                            <a class='btn btn-primary btn-sm btn-flat 'id='".$row['invoice_id']."'onclick='redirectToPage2(this)' ><i class='fa fa-eye'></i> View</a>
 
                           </td>
                         </tr>
@@ -139,6 +139,7 @@
 
                   ?>
                 </tbody>
+                <!-- <a class='btn btn-danger btn-sm btn-flat delete' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</a> -->
               </table>
             </div>
           </div>
@@ -163,9 +164,13 @@ function redirectToPage2(tdElement) {
 
             // Construct the URL for the next PHP page with the ID as a query parameter
             var nextPageURL = "my_salary?id=" + encodeURIComponent(tdId);
-
-            // Redirect to the next PHP page
-            
+            // Redirect to the next PHP page         
+            window.open(nextPageURL, '_blank');
+        }
+        function redirectToPagePayroll() {
+            // Construct the URL for the next PHP page with the ID as a query parameter
+            var nextPageURL = "payroll_generate";
+            // Redirect to the next PHP page         
             window.open(nextPageURL, '_blank');
         }
 $(function(){

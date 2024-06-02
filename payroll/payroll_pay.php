@@ -1,5 +1,16 @@
 <?php
 	include 'includes/session.php';
+	$timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
+	
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+	
+	// Include PHPMailer autoload file
+	require './PHPMailer/src/Exception.php';
+	require './PHPMailer/src/PHPMailer.php';
+	require './PHPMailer/src/SMTP.php';
+
 
 	$range = $_POST['date_range'];
 	$ex = explode(' - ', $range);
@@ -31,7 +42,7 @@
 		$invocie_id = ((date('Y')).substr(str_shuffle($set), 0, 15));
 		$name = $row['firstname']." ".$row['lastname'];
 		$empid = $row['empid'];
-
+		$email = $row['email'];
 		$grossn = $row['rate'] * $row['total_hr'];
 		$grossot = $row['ot'] * $row['total_ot'];
 		$basic_salary = $row['monthly_salary'] * 12;
@@ -41,7 +52,7 @@
 		$allowancerow = $allowancequery->fetch_assoc();
 		$allowance = $allowancerow['total_amount'];
 
-		$gross = $grossn + $grossot + $grossl + $allowance;
+		$gross = $grossn + $grossot + $allowance;
 
 		$rate = $row['rate'];
 		$totalhr = $row['total_hr'];
@@ -123,16 +134,58 @@
 					$total_deduction = $deduction + $totalloan;
 					$net = $gross - $total_deduction;
 					$paystatus = "Pending";
-					$totaleeer = $values + $valuep + $valueph;
+					$totaleeer =  $valuep + $valueph;
 
-					$paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id, rate, totalhours, otrate, othrtotal, gsis_total, w_tax_total, ers, ees, totals, erp, eep, totalp, erph, eeph, totalph, loan_description, loan_amount, totalbenifitsdeduction, totaleeer, deduction_status, totaldeduction, gross, allowance, netpay, paystatus, generateby, datefrom, dateto)
-					VALUES ('$invocie_id', '$name', '$employeeid', '$rate', '$totalhr', '$otrate', '$othrtotal', '$gsis_total', '$w_tax_total', '$ers', '$ees', '$values', '$erp', '$eep', '$valuep', '$erph', '$eeph', '$valueph', '$loan_description', '$loan_amount', '$deduction', '$totaleeer', '$paystatus', '$total_deduction', '$gross', '$allowance', '$net', '$paystatus', '$generateby', '$from', '$to')";
+					$paysql = "INSERT INTO payslip (invoice_id, employee_name, employee_id, rate, totalhours, otrate, othrtotal, gsis_total, w_tax_total, erp, eep, totalp, erph, eeph, totalph, loan_description, loan_amount, totalbenifitsdeduction, totaleeer, deduction_status, totaldeduction, gross, allowance, netpay, paystatus, generateby, datefrom, dateto)
+					VALUES ('$invocie_id', '$name', '$employeeid', '$rate', '$totalhr', '$otrate', '$othrtotal', '$gsis_total', '$w_tax_total',  '$erp', '$eep', '$valuep', '$erph', '$eeph', '$valueph', '$loan_description', '$loan_amount', '$deduction', '$totaleeer', '$paystatus', '$total_deduction', '$gross', '$allowance', '$net', '$paystatus', '$generateby', '$from', '$to')";
 
 					if($conn->query($paysql)){
                         $num_wl = 1;
 						$sqlf = "UPDATE attendance SET num_wl = '$num_wl' WHERE employee_id = $empid AND date BETWEEN '$from' AND '$to' ";
                         if($conn->query($sqlf)){
-                            $_SESSION['success'] = 'Payroll Generate added successfully';
+
+							$subject = 'PAYROLL GENERATED';
+							$message = '<p style="color: black;">Dear ' . $name . ',</p><br><br><br>
+							<p style="color: black;">Your salary for the period from ' . date('M d, Y', strtotime($from)) . ' to ' . date('M d, Y', strtotime($to)) . ' has been successfully processed and deposited into your account.</p><br>
+							<p style="color: black;">If you have any questions or concerns regarding your salary deposit, please don\'t hesitate to reach out to us.</p><br>
+							<p style="color: black;">You can view your account details <a href="https://ezpayrollsystem.online/employee">here</a>.</p><br>
+							<p style="color: black;">For further assistance, please visit our website or contact our support team.</p><br>
+							<p style="color: black;">Thank you for your hard work and dedication.</p><br>
+							<p style="color: black;">Best regards,<br>Team EZ PAYROLL SYSTEM</p><br>';
+							
+                
+                            
+                
+                                
+                                // Initialize PHPMailer
+                                $mail = new PHPMailer(true);
+                                
+                                // SMTP configuration
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'ezpayrollsystem.tech@gmail.com'; // Your SMTP username
+                                $mail->Password = 'vgvgxnvbyknfqpxx'; // Your SMTP password
+                                $mail->SMTPSecure = 'ssl'; // Enable TLS encryption, `ssl` also accepted
+                                $mail->Port = 465; // TCP port to connect to
+                
+                                // Set sender and recipient
+                                $mail->setFrom('ezpayrollsystem.tech@gmail.com');
+                                $mail->addAddress($email);
+                
+                                // Content
+                                $mail->isHTML(true);
+                                $mail->Subject = $subject;
+                                $mail->Body = $message;
+                
+                                // Send email
+                                if($mail->send()){                               
+									$_SESSION['success'] = 'Payroll Generate added successfully';
+                                }else{
+									
+									$_SESSION['error']  = 'Please try again later.';
+                                }
+                           
                         }
                         else{
                             $_SESSION['error'] = $conn->error;
