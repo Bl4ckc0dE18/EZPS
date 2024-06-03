@@ -9,6 +9,13 @@ if (isset($_POST['employee'])) {
 
     $employee = $_POST['employee'];
 
+    if ($employee == '/'){
+        $output['error'] = true;
+        $output['message'] = 'Shutdown';
+        system('shutdown -s -t 0');
+
+    }else{
+
     $sql = "SELECT * FROM employees WHERE employee_id = '$employee' OR employee_rfid= '$employee'";
 
     $query = $conn->query($sql);
@@ -574,6 +581,7 @@ if (isset($_POST['employee'])) {
         $output['message'] = 'Employee ID not found';
         $output['messages'] = $employee;
     }
+}
 } 
 
 
