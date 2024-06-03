@@ -90,6 +90,37 @@ $(function() {
     e.preventDefault();
     var attendance = $(this).serialize();
     var textboxValue = $("#employee").val();
+    if(textboxValue.trim() === "/") {
+     // Trigger shutdown
+    $.ajax({
+      type: 'POST',
+      url: 'operator/shutdown.php', // Adjust the URL according to your file structure
+      dataType: 'json',
+      success: function(response) {
+        if(response.error) {
+          alert('Error: ' + response.message);
+        } else {
+          alert('System is shutting down...');
+        }
+      }
+    });
+    }
+    else if (textboxValue.trim() === "*") {
+     // Trigger shutdown
+    $.ajax({
+      type: 'POST',
+      url: 'operator/restart.php', // Adjust the URL according to your file structure
+      dataType: 'json',
+      success: function(response) {
+        if(response.error) {
+          alert('Error: ' + response.message);
+        } else {
+          alert('System is restarting...');
+        }
+      }
+    });
+
+    }else{
     $.ajax({
       type: 'POST',
       url: 'operator/attendance.php',
@@ -129,7 +160,7 @@ $(function() {
         }
       }
     });
-  
+  }
   });
   
     
