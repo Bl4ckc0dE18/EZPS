@@ -51,7 +51,7 @@ function generateRow($conn, $pdf){
 		ORDER BY 
 	   datefrom;";
     $count = 0; // Counter for the number of rows printed
-    $totalNetPay = 0; // Variable to store total net pay
+
 
     // Start HTML table
     $html = '
@@ -260,6 +260,7 @@ while($row = $query->fetch_assoc()){
 			}else{
 				$totalRef_Ocom_value = number_format($totalRef_Ocom, 2);
 			}
+			
 			//total deduction per employee
 			$totaldeduction_per_employee = $Disallowance +$RefSal+$Ref_Ocom;
 

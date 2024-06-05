@@ -5,6 +5,7 @@ $totalRef_Ocom =0;
 $totalNHMC =0;
 $totalMP2 =0;
 $totalGSIS_MPL =0;
+$totalGSIS_Sal =0;
 $totalGSIS_Pol =0;
 $totalGSIS_ELA =0;
 $totalGSIS_Opin =0;
@@ -162,6 +163,29 @@ if($totalGSIS_MPL == 0){
     $totalGSIS_MPL_value = '-';
 }else{
     $totalGSIS_MPL_value = number_format($totalGSIS_MPL, 2);
+}
+
+//GSIS_Sal
+$sql_GSIS_Sal = "SELECT * FROM loan_transaction WHERE description = 'GSIS Sal' AND loan_id = '$invoice_id'";
+$query_GSIS_Sal = $conn->query($sql_GSIS_Sal);
+$row_GSIS_Sal = $query_GSIS_Sal->fetch_assoc();
+if($query_GSIS_Sal->num_rows > 0){
+    $GSIS_Sal_value = number_format($row_GSIS_Sal['loan_amount'], 2);
+    $GSIS_Sal = $row_GSIS_Sal['loan_amount'];
+    $netGSIS_Sal = $GSIS_Sal;
+    $totalGSIS_Sal += $netGSIS_Sal;
+
+}else{
+    $GSIS_Sal_value ='-';
+    $GSIS_Sal = 0; 
+    $netGSIS_Sal = $GSIS_Sal;
+    $totalGSIS_Sal += $netGSIS_Sal;
+
+}
+if($totalGSIS_Pol == 0){
+    $totalGSIS_Sal_value = '-';
+}else{
+    $totalGSIS_Sal_value = number_format($totalGSIS_Sal, 2);
 }
 
 //GSIS_Pol

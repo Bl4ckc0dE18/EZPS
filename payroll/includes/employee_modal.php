@@ -177,7 +177,7 @@
 
                     <div class="col-sm-4"> 
                       <div class="date">
-                        <input type="text" class="form-control" id="datepicker_employee_add" name="datepicker_employee_add" required>
+                        <input type="text" class="form-control" id="datepicker_employee_add" name="datepicker_employee_add">
                       </div>
                     </div>
                 </div>
