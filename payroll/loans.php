@@ -182,7 +182,7 @@ if($query_GSIS_Sal->num_rows > 0){
     $totalGSIS_Sal += $netGSIS_Sal;
 
 }
-if($totalGSIS_Pol == 0){
+if($totalGSIS_Sal == 0){
     $totalGSIS_Sal_value = '-';
 }else{
     $totalGSIS_Sal_value = number_format($totalGSIS_Sal, 2);
@@ -400,22 +400,22 @@ $sql_GSIS_Ecard = "SELECT * FROM loan_transaction WHERE description = 'GSIS Ecar
 $query_GSIS_Ecard = $conn->query($sql_GSIS_Ecard);
 $row_GSIS_Ecard = $query_GSIS_Ecard->fetch_assoc();
 if($query_GSIS_Ecard->num_rows > 0){
-    $GSIS_Ecard = number_format($row_GSIS_Ecard['loan_amount'], 2);
+    $GSIS_Ecard_value = number_format($row_GSIS_Ecard['loan_amount'], 2);
     $GSIS_Ecard = $row_GSIS_Ecard['loan_amount'];
     $netGSIS_Ecard = $GSIS_Ecard;
     $totalGSIS_Ecard += $netGSIS_Ecard;
 
 }else{
-    $GSIS_Ecard ='-';
+    $GSIS_Ecard_value ='-';
     $GSIS_Ecard = 0; 
     $netGSIS_Ecard = $GSIS_Ecard;
     $totalGSIS_Ecard += $netGSIS_Ecard;
 
 }
 if($totalGSIS_Ecard == 0){
-    $totalGSIS_Ecard = '-';
+    $totalGSIS_Ecard_value = '-';
 }else{
-    $totalGSIS_Ecard = number_format($totalGSIS_Ecard, 2);
+    $totalGSIS_Ecard_value = number_format($totalGSIS_Ecard, 2);
 }
 
 //HDMF MPL
@@ -423,22 +423,22 @@ $sql_HDMF_MPL = "SELECT * FROM loan_transaction WHERE description = 'HDMF MPL' A
 $query_HDMF_MPL = $conn->query($sql_HDMF_MPL);
 $row_HDMF_MPL = $query_HDMF_MPL->fetch_assoc();
 if($query_HDMF_MPL->num_rows > 0){
-    $HDMF_MPL = number_format($row_HDMF_MPL['loan_amount'], 2);
+    $HDMF_MPL_value = number_format($row_HDMF_MPL['loan_amount'], 2);
     $HDMF_MPL = $row_HDMF_MPL['loan_amount'];
     $netHDMF_MPL = $HDMF_MPL;
     $totalHDMF_MPL += $netHDMF_MPL;
 
 }else{
-    $HDMF_MPL ='-';
+    $HDMF_MPL_value ='-';
     $HDMF_MPL = 0; 
     $netHDMF_MPL = $HDMF_MPL;
     $totalHDMF_MPL += $netHDMF_MPL;
 
 }
 if($totalHDMF_MPL == 0){
-    $totalHDMF_MPL = '-';
+    $totalHDMF_MPL_value = '-';
 }else{
-    $totalHDMF_MPL = number_format($totalHDMF_MPL, 2);
+    $totalHDMF_MPL_value = number_format($totalHDMF_MPL, 2);
 }
 
 //HDMF Res
@@ -446,22 +446,22 @@ $sql_HDMF_Res = "SELECT * FROM loan_transaction WHERE description = 'HDMF Res' A
 $query_HDMF_Res = $conn->query($sql_HDMF_Res);
 $row_HDMF_Res = $query_HDMF_Res->fetch_assoc();
 if($query_HDMF_Res->num_rows > 0){
-    $HDMF_Res = number_format($row_HDMF_Res['loan_amount'], 2);
+    $HDMF_Res_value = number_format($row_HDMF_Res['loan_amount'], 2);
     $HDMF_Res = $row_HDMF_Res['loan_amount'];
     $netHDMF_Res = $HDMF_Res;
     $totalHDMF_Res += $netHDMF_Res;
 
 }else{
-    $HDMF_Res ='-';
+    $HDMF_Res_value ='-';
     $HDMF_Res = 0; 
     $netHDMF_Res = $HDMF_Res;
     $totalHDMF_Res += $netHDMF_Res;
 
 }
 if($totalHDMF_Res == 0){
-    $totalHDMF_Res = '-';
+    $totalHDMF_Res_value = '-';
 }else{
-    $totalHDMF_Res = number_format($totalHDMF_Res, 2);
+    $totalHDMF_Res_value = number_format($totalHDMF_Res, 2);
 }
 
 //LBP
@@ -469,22 +469,22 @@ $sql_LBP = "SELECT * FROM loan_transaction WHERE description = 'LBP' AND loan_id
 $query_LBP = $conn->query($sql_LBP);
 $row_LBP = $query_LBP->fetch_assoc();
 if($query_LBP->num_rows > 0){
-    $LBP = number_format($row_LBP['loan_amount'], 2);
+    $LBP_value = number_format($row_LBP['loan_amount'], 2);
     $LBP = $row_LBP['loan_amount'];
     $netLBP = $LBP;
     $totalLBP += $netLBP;
 
 }else{
-    $LBP ='-';
+    $LBP_value ='-';
     $LBP = 0; 
     $netLBP = $LBP;
     $totalLBP += $netLBP;
 
 }
 if($totalLBP == 0){
-    $totalLBP = '-';
+    $totalLBP_value = '-';
 }else{
-    $totalLBP = number_format($totalLBP, 2);
+    $totalLBP_value = number_format($totalLBP, 2);
 }
 
 //TUPM-Cd
@@ -492,22 +492,22 @@ $sql_TUPM_Cd = "SELECT * FROM loan_transaction WHERE description = 'TUPM-Cd' AND
 $query_TUPM_Cd = $conn->query($sql_TUPM_Cd);
 $row_TUPM_Cd = $query_TUPM_Cd->fetch_assoc();
 if($query_TUPM_Cd->num_rows > 0){
-    $TUPM_Cd = number_format($row_TUPM_Cd['loan_amount'], 2);
+    $TUPM_Cd_value = number_format($row_TUPM_Cd['loan_amount'], 2);
     $TUPM_Cd = $row_TUPM_Cd['loan_amount'];
     $netTUPM_Cd = $TUPM_Cd;
     $totalTUPM_Cd += $netTUPM_Cd;
 
 }else{
-    $TUPM_Cd ='-';
+    $TUPM_Cd_value ='-';
     $TUPM_Cd = 0; 
     $netTUPM_Cd = $TUPM_Cd;
     $totalTUPM_Cd += $netTUPM_Cd;
 
 }
 if($totalTUPM_Cd == 0){
-    $totalTUPM_Cd = '-';
+    $totalTUPM_Cd_value = '-';
 }else{
-    $totalTUPM_Cd = number_format($totalTUPM_Cd, 2);
+    $totalTUPM_Cd_value = number_format($totalTUPM_Cd, 2);
 }
 
 //Fin Ass
@@ -515,22 +515,22 @@ $sql_Fin_Ass = "SELECT * FROM loan_transaction WHERE description = 'Fin Ass' AND
 $query_Fin_Ass = $conn->query($sql_Fin_Ass);
 $row_Fin_Ass = $query_Fin_Ass->fetch_assoc();
 if($query_Fin_Ass->num_rows > 0){
-    $Fin_Ass = number_format($row_Fin_Ass['loan_amount'], 2);
+    $Fin_Ass_value = number_format($row_Fin_Ass['loan_amount'], 2);
     $Fin_Ass = $row_Fin_Ass['loan_amount'];
     $netFin_Ass = $Fin_Ass;
     $totalFin_Ass += $netFin_Ass;
 
 }else{
-    $Fin_Ass ='-';
+    $Fin_Ass_value ='-';
     $Fin_Ass = 0; 
     $netFin_Ass = $Fin_Ass;
     $totalFin_Ass += $netFin_Ass;
 
 }
 if($totalFin_Ass == 0){
-    $totalFin_Ass = '-';
+    $totalFin_Ass_value = '-';
 }else{
-    $totalFin_Ass = number_format($totalFin_Ass, 2);
+    $totalFin_Ass_value = number_format($totalFin_Ass, 2);
 }
 
 //GSIS Educ
@@ -538,22 +538,22 @@ $sql_GSIS_Educ = "SELECT * FROM loan_transaction WHERE description = 'GSIS Educ'
 $query_GSIS_Educ = $conn->query($sql_GSIS_Educ);
 $row_GSIS_Educ = $query_GSIS_Educ->fetch_assoc();
 if($query_GSIS_Educ->num_rows > 0){
-    $GSIS_Educ = number_format($row_GSIS_Educ['loan_amount'], 2);
+    $GSIS_Educ_value = number_format($row_GSIS_Educ['loan_amount'], 2);
     $GSIS_Educ = $row_GSIS_Educ['loan_amount'];
     $netGSIS_Educ = $GSIS_Educ;
     $totalGSIS_Educ += $netGSIS_Educ;
 
 }else{
-    $GSIS_Educ ='-';
+    $GSIS_Educ_value ='-';
     $GSIS_Educ = 0; 
     $netGSIS_Educ = $GSIS_Educ;
     $totalGSIS_Educ += $netGSIS_Educ;
 
 }
 if($totalGSIS_Educ == 0){
-    $totalGSIS_Educ = '-';
+    $totalGSIS_Educ_value = '-';
 }else{
-    $totalGSIS_Educ = number_format($totalGSIS_Educ, 2);
+    $totalGSIS_Educ_value = number_format($totalGSIS_Educ, 2);
 }
 
 //TUPAEA
@@ -561,22 +561,22 @@ $sql_TUPAEA = "SELECT * FROM loan_transaction WHERE description = 'TUPAEA' AND l
 $query_TUPAEA = $conn->query($sql_TUPAEA);
 $row_TUPAEA = $query_TUPAEA->fetch_assoc();
 if($query_TUPAEA->num_rows > 0){
-    $TUPAEA = number_format($row_TUPAEA['loan_amount'], 2);
+    $TUPAEA_value = number_format($row_TUPAEA['loan_amount'], 2);
     $TUPAEA = $row_TUPAEA['loan_amount'];
     $netTUPAEA = $TUPAEA;
     $totalTUPAEA += $netTUPAEA;
 
 }else{
-    $TUPAEA ='-';
+    $TUPAEA_value ='-';
     $TUPAEA = 0; 
     $netTUPAEA = $TUPAEA;
     $totalTUPAEA += $netTUPAEA;
 
 }
 if($totalTUPAEA == 0){
-    $totalTUPAEA = '-';
+    $totalTUPAEA_value = '-';
 }else{
-    $totalTUPAEA = number_format($totalTUPAEA, 2);
+    $totalTUPAEA_value = number_format($totalTUPAEA, 2);
 }
 
 //TUPFA
@@ -584,22 +584,22 @@ $sql_TUPFA = "SELECT * FROM loan_transaction WHERE description = 'TUPFA' AND loa
 $query_TUPFA = $conn->query($sql_TUPFA);
 $row_TUPFA = $query_TUPFA->fetch_assoc();
 if($query_TUPFA->num_rows > 0){
-    $TUPFA = number_format($row_TUPFA['loan_amount'], 2);
+    $TUPFA_value = number_format($row_TUPFA['loan_amount'], 2);
     $TUPFA = $row_TUPFA['loan_amount'];
     $netTUPFA = $TUPFA;
     $totalTUPFA += $netTUPFA;
 
 }else{
-    $TUPFA ='-';
+    $TUPFA_value ='-';
     $TUPFA = 0; 
     $netTUPFA = $TUPFA;
     $totalTUPFA += $netTUPFA;
 
 }
 if($totalTUPFA == 0){
-    $totalTUPFA = '-';
+    $totalTUPFA_value = '-';
 }else{
-    $totalTUPFA = number_format($totalTUPFA, 2);
+    $totalTUPFA_value = number_format($totalTUPFA, 2);
 }
 
 //HDMF Eme
@@ -607,22 +607,22 @@ $sql_HDMF_Eme = "SELECT * FROM loan_transaction WHERE description = 'HDMF Eme' A
 $query_HDMF_Eme = $conn->query($sql_HDMF_Eme);
 $row_HDMF_Eme = $query_HDMF_Eme->fetch_assoc();
 if($query_HDMF_Eme->num_rows > 0){
-    $HDMF_Eme = number_format($row_HDMF_Eme['loan_amount'], 2);
+    $HDMF_Eme_value = number_format($row_HDMF_Eme['loan_amount'], 2);
     $HDMF_Eme = $row_HDMF_Eme['loan_amount'];
     $netHDMF_Eme = $HDMF_Eme;
     $totalHDMF_Eme += $netHDMF_Eme;
 
 }else{
-    $HDMF_Eme ='-';
+    $HDMF_Eme_value ='-';
     $HDMF_Eme = 0; 
     $netHDMF_Eme = $HDMF_Eme;
     $totalHDMF_Eme += $netHDMF_Eme;
 
 }
 if($totalHDMF_Eme == 0){
-    $totalHDMF_Eme = '-';
+    $totalHDMF_Eme_value = '-';
 }else{
-    $totalHDMF_Eme = number_format($totalHDMF_Eme, 2);
+    $totalHDMF_Eme_value = number_format($totalHDMF_Eme, 2);
 }
 
 ?>
