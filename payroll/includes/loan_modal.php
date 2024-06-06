@@ -37,6 +37,8 @@
                         <option value="NHMC">NHMC</option>
                         <option value="MP2">MP2</option>
                         <option value="GSIS MPL">GSIS MPL</option>
+                        <option value="GSIS CPL">GSIS CPL</option>
+                        <option value="GSIS Sal">GSIS Sal</option>
                         <option value="GSIS Pol">GSIS Pol</option>
                         <option value="GSIS ELA">GSIS ELA</option>
                         <option value="GSIS Opin">GSIS Opin</option>

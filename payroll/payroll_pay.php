@@ -198,6 +198,7 @@
 			}
 		}
 	}
+	$_SESSION['error'] ='This date from '.date('M d, Y', strtotime($from)).' to '.date('M d, Y', strtotime($to)).' already calculated';
 
 	header('location: payroll?range='.$range);
 ?>

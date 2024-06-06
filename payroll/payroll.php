@@ -125,7 +125,7 @@
                           <td>".$check."</td>
                           <td>".number_format($row['netpay'], 2)."</td>
                           
-                          <td>".$row['datefrom']." - ".$row['dateto']."</td>
+                          <td>".date('M d, Y', strtotime($row['datefrom'])) ." - ".date('M d, Y', strtotime($row['dateto']))."</td>
                           
                           <td>
                             <a class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</a>
@@ -194,10 +194,14 @@ $(function(){
   });
 
   $('#generate').click(function(e){
-    e.preventDefault();
-    $('#payForm').attr('action', 'payroll_pay');
-    $('#payForm').submit();
-  });
+  e.preventDefault();
+  $('#payForm').attr('action', 'payroll_pay');
+  $('#generate').prop('disabled', true); // Disable the button
+  $('#payForm').submit();
+  showConsoleLogMessage('Please wait while the <br>payroll is being calculating');
+
+});
+
 
   $('#payroll').click(function(e){
     e.preventDefault();
@@ -229,7 +233,55 @@ function getRow(id){
     }
   });
 }
+// MODAL
+function showConsoleLogMessage(message) {
+  // CSS style for the loading circle
+  var loadingCircleStyle = '<style>' +
+        '.loading-circle {' +
+        '    width: 200px;' +
+        '    height: 200px;' +
+        '    border: 30px solid #f3f3f3;' +
+        '    border-top: 30px solid #3498db;' +
+        '    border-radius: 50%;' +
+        '    animation: spin 2s linear infinite;' +
+        '}' +
+        '@keyframes spin {' +
+        '    0% { transform: rotate(0deg); }' +
+        '    100% { transform: rotate(360deg); }' +
+        '}' +
+        '</style>';
+    // Create a modal or a dialog box to display the console.log message
+    var modalContent = '<div id="consoleLogModal" class="modal" tabindex="-1" role="dialog">' +
+        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-body">' +
+        '<div class="text-center"><center><div class="loading-circle"></div></center></div>' + 
+        '<h1><center>' + message + '</center></h1>' +
+        '</div>' +
+       
+        '</div>' +
+        '</div>' +
+        '</div>';
 
+    // Append the modal to the body 
+    $('body').append(loadingCircleStyle + modalContent);
+
+    // Show the modal
+    var modal = $('#consoleLogModal');
+    modal.modal('show');
+
+    // Set focus to the OK button after a short delay to ensure modal rendering
+    setTimeout(function() {
+        modal.find('.modal-footer button').focus();
+    }, 100);
+
+    // Prevent modal from closing when clicking outside of it
+    $(document).on('click', function(event) {
+        if ($(event.target).closest('.modal').length === 0 && !$(event.target).hasClass('modal')) {
+            modal.modal('show');
+        }
+    });
+}
 
 </script>
 </body>
