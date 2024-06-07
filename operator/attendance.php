@@ -1,8 +1,9 @@
 <?php
+ $timezone = 'Asia/Manila';
+ date_default_timezone_set($timezone);
 if (isset($_POST['employee'])) {
     $output = array('error' => false);
-    $timezone = 'Asia/Manila';
-	date_default_timezone_set($timezone);
+   
 
     include 'conn.php';
     //include 'timezone.php';
@@ -469,7 +470,7 @@ if (isset($_POST['employee'])) {
                         WHERE schedule_day = '$uppercaseDay'
                         AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
                         AND '$time_check_log' < time_out
-                        AND employee_id = '$employee_id'";
+                        AND employee_id = '$employee_id' ORDER by time_in";
                         
                          // check schedule
                         $query_es = $conn->query($sql_es);
@@ -525,7 +526,7 @@ if (isset($_POST['employee'])) {
                         WHERE schedule_day = '$uppercaseDay'
                         AND ('$time_check_log' <= time_in OR '$time_check_log' >= time_in)
                         AND '$time_check_log' < time_out
-                        AND employee_id = '$employee_id'";
+                        AND employee_id = '$employee_id'  ORDER by time_in";
                         
                          // check schedule
                         $query_es = $conn->query($sql_es);
