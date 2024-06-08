@@ -36,9 +36,10 @@ if (isset($_GET['id'])) {
                 // Query succeeded
                 // Fetch and display data
                 while ($row = $query->fetch_assoc()) {
+                    $image = '<img src="' . (!empty($row['photo']) ? '../images/' . $row['photo'] : '../images/profile.jpg') . '" width="100px" height="100px" style="border-radius: 50%; overflow: hidden;" />';
                     $contents .= "
                         <tr>
-                            <td>".$row['employee_id']."</td>
+                            <td>".$image.'<br><br><br>'.$row['employee_id']."</td>
                             <td>".$row['lastname'].", ".$row['firstname']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['work_schedules']."</td>
@@ -74,11 +75,11 @@ if (isset($_GET['id'])) {
       	<h4 align="center">Employee Schedule</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
-           		<th width="15%" align="center"><b>Employee ID</b></th>
+           		<th width="15%" align="center"><b>Employee Photo And ID</b></th>
                 <th width="20%" align="center"><b>Employee Name</b></th>
 				<th width="20%" align="center"><b>Position</b></th> 
                 <th width="30%" align="center"><b>Work Schedule</b></th>
-				<th width="15%" align="center"><b>Work Overtime</b></th> 
+				<th width="15%" align="center"><b>Overtime Schedule</b></th> 
            </tr>  
       ';  
     $content .= generateRow($conn,$tdId); 

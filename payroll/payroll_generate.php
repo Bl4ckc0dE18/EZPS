@@ -71,7 +71,7 @@ function generateRow($conn, $pdf){
 	GROUP BY 
 		employee_id
 		ORDER BY 
-		employee_name;";
+		employee_name";
     $count = 0; // Counter for the number of rows printed
 
 

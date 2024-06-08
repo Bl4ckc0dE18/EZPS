@@ -1,30 +1,27 @@
 <?php
-// Check if the 'id' query parameter is set in the URL
-if (isset($_GET['id'])) {
-    // Retrieve the ID from the URL
-    $tdId = $_GET['id'];
 	include 'includes/session.php';
 
-	function generateRow($conn,$tdId){
-        
-        $look=$tdId;
+	function generateRow($conn){
 		$contents = '';
 		
-        $sql = "SELECT 
-        employees.*, 
-        employees.id AS empid, 
-        position.*, 
-        (SELECT GROUP_CONCAT(CONCAT(schedule_load, ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') FROM work_overtime WHERE work_overtime.employee_id = employees.employee_id) AS work_overtimes,
-        (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' ', TIME_FORMAT(time_in, '%h:%i %p'), ' - ', TIME_FORMAT(time_out, '%h:%i %p'),'<br>TYPE - ',type,'<br>') ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT')SEPARATOR ' \n <br>') FROM employee_schedule WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
-    FROM 
-        employees
-    LEFT JOIN 
-        position ON position.id = employees.position_id
-    WHERE 
-        employee_id like '$look'
-    ORDER BY 
-    work_overtimes,
-        work_schedules;";
+                                     $sql = "SELECT 
+            employees.*, 
+            employees.id AS empid, 
+            position.*, 
+            (SELECT GROUP_CONCAT(CONCAT(schedule_load, ' ', time_load) ORDER BY FIELD(schedule_load, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'), time_load SEPARATOR ' \n <br>') 
+             FROM work_overtime 
+             WHERE work_overtime.employee_id = employees.employee_id) AS work_overtimes,
+            (SELECT GROUP_CONCAT(CONCAT(schedule_day, ' ', TIME_FORMAT(time_in, '%h:%i %p'), ' - ', TIME_FORMAT(time_out, '%h:%i %p'),'<br>TYPE - ',type,'<br>') 
+             ORDER BY FIELD(schedule_day, 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT') SEPARATOR ' \n <br>') 
+             FROM employee_schedule 
+             WHERE employee_schedule.employee_id = employees.employee_id) AS work_schedules
+        FROM 
+            employees 
+        LEFT JOIN 
+            position ON position.id = employees.position_id
+        ORDER BY 
+            employees.lastname ASC;
+        ";
 
         $query = $conn->query($sql);
 
@@ -36,10 +33,9 @@ if (isset($_GET['id'])) {
                 // Query succeeded
                 // Fetch and display data
                 while ($row = $query->fetch_assoc()) {
-                    $image = '<img src="' . (!empty($row['photo']) ? '../images/' . $row['photo'] : '../images/profile.jpg') . '" width="100px" height="100px" style="border-radius: 50%; overflow: hidden;" />';
                     $contents .= "
                         <tr>
-                           <td>".$image.'<br><br><br>'.$row['employee_id']."</td>
+                            <td>".$row['employee_id']."</td>
                             <td>".$row['lastname'].", ".$row['firstname']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['work_schedules']."</td>
@@ -79,14 +75,12 @@ if (isset($_GET['id'])) {
                 <th width="20%" align="center"><b>Employee Name</b></th>
 				<th width="20%" align="center"><b>Position</b></th> 
                 <th width="30%" align="center"><b>Work Schedule</b></th>
-				<th width="15%" align="center"><b>Overtime Schedule</b></th> 
+				<th width="15%" align="center"><b>Work Overtime</b></th> 
            </tr>  
       ';  
-    $content .= generateRow($conn,$tdId); 
+    $content .= generateRow($conn); 
     $content .= '</table>';  
     $pdf->writeHTML($content);  
     $pdf->Output('schedule.pdf', 'I');
-} else {
-    echo "ID not received.";
-}
+
 ?>

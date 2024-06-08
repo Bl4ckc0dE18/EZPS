@@ -3,7 +3,7 @@
 	include 'includes/conn.php';
 
 	if(!isset($_SESSION['employees']) || trim($_SESSION['employees']) == ''){
-		header('location: index.php');
+		header('location: index');
 	}
 
 	$sql = "SELECT * FROM employees WHERE id = '".$_SESSION['employees']."'";

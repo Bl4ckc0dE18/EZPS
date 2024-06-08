@@ -60,7 +60,7 @@
                   <th>Name</th>
                   <th>Position</th>
                   <th>Work Schedule</th>
-                  <th>Work Overtime</th>
+                  <th>Overtime Schedule</th>
                   
                   <th>Tools</th>
                  

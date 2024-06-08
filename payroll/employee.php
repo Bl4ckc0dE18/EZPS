@@ -98,7 +98,7 @@ include 'includes/header.php';
                                                         <!-- Adjust this part according to your photo field -->
                                                         <img src="<?php echo (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/profile.jpg'; ?>" width="30px" height="30px">
                                                         <!-- Assuming you have an edit photo modal -->
-                                                        <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a>
+                                                        <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"onclick="getRow(<?php echo $row['empid']; ?>)"><span class="fa fa-edit"></span></a>
                                                     </td>
                                                     <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
                                                     <td><?php echo $row['description']; ?></td>
@@ -109,10 +109,10 @@ include 'includes/header.php';
                                                     <td>
                                                        
                                                         
-                                                         <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                                                        <button class="btn btn-success btn-sm edit_employee_password btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Password</button><br><br><br>
-                                                        <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
-                                                        <button class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</button>
+                                                        <a href='#edit' data-toggle='modal' class="btn btn-success btn-sm btn-flat" data-id="<?php echo $row['empid']; ?>" onclick="getRow(<?php echo $row['empid']; ?>)"><i class="fa fa-edit"></i> Edit</a>
+                                                        <a href='#edit_employee_password' data-toggle='modal' class="btn btn-success  btn-flat" data-id="<?php echo $row['empid']; ?>"onclick="getRow(<?php echo $row['empid']; ?>)"><i class="fa fa-edit"></i> Password</a><br><br><br>
+                                                        <a href='#delete' data-toggle='modal' class="btn btn-danger btn-sm btn-flat" data-id="<?php echo $row['empid']; ?>"onclick="getRow(<?php echo $row['empid']; ?>)"><i class="fa fa-trash"></i> Delete</a>
+                                                        <a class="btn btn-primary btn-sm btn-flat" id="<?php echo $row['employee_id']; ?>" onclick='redirectToPage2(this)'><i class='fa fa-eye'></i> View</a>
                                                     </td>
                                                 </tr>
                                                 <?php
