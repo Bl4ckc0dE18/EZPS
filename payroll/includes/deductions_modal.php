@@ -87,7 +87,7 @@
                     <label for="select_month" class="col-sm-3 control-label" >Month </label>
 						<div class="col-sm-9">
 							<select class="form-control input-sm" name="select_month" id="select_month">
-								<option value="" selected>- Select -</option>
+								
 								<option value="01">JAN</option>
 								<option value="02">FEB</option>
 								<option value="03">MAR</option>
@@ -103,14 +103,74 @@
 							</select>
 						</div>
                   </div>
-	
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-primary btn-flat" name="print"><i class="fa fa-print"></i> Print</button>
-            	</form>
-          	</div>
+				  
+          		</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+					<button type="submit" class="btn btn-primary btn-flat" name="prints"><i class="fa fa-print"></i> Print</button>
+					</form>
+				</div>
+			  
         </div>
     </div>
 </div>
 
+
+<!-- List -->
+<div class="modal fade" id="list">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              		<span aria-hidden="true">&times;</span></button>
+            	<h4 class="modal-title"><b>Print</b></h4>
+          	</div>
+          	<div class="modal-body">
+            	<form class="form-horizontal" method="POST" action="deduction_records_generate.php">
+					
+				<div class="form-group">
+                    <label for="select_year" class="col-sm-3 control-label" >Year </label>
+						<div class="col-sm-9">
+							<select class="form-control input-sm"  name="select_year" id="select_year">
+							<?php
+								for($i=2015; $i<=2065; $i++){
+								$selected = ($i==$year)?'selected':'';
+								echo "
+									<option value='".$i."' ".$selected.">".$i."</option>
+								";
+								}
+							?>
+							</select>
+						</div>
+				</div>
+				<div class="form-group">
+                    <label for="select_month" class="col-sm-3 control-label" >Month </label>
+						<div class="col-sm-9">
+							<select class="form-control input-sm" name="select_month" id="select_month">
+								
+								<option value="01">JAN</option>
+								<option value="02">FEB</option>
+								<option value="03">MAR</option>
+								<option value="04">APR</option>
+								<option value="05">MAY</option>
+								<option value="06">JUN</option>
+								<option value="07">JUL</option>
+								<option value="08">AUG</option>
+								<option value="09">SEP</option>
+								<option value="10">OCT</option>
+								<option value="11">NOV</option>
+								<option value="12">DEC</option>
+							</select>
+						</div>
+                  </div>
+				
+          	</div>
+          	<div class="modal-footer">
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            	<button type="submit" class="btn btn-warning btn-flat" name="list"><i class="fa fa-print"></i> List</button>
+            	</form>
+          	</div>
+			  
+        </div>
+    </div>
+</div>

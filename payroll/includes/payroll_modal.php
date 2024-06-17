@@ -84,7 +84,7 @@
                     <label for="select_month" class="col-sm-3 control-label" >Month </label>
 						<div class="col-sm-9">
 							<select class="form-control input-sm" name="select_month" id="select_month">
-								<option value="" selected>- Select -</option>
+								
 								<option value="01">JAN</option>
 								<option value="02">FEB</option>
 								<option value="03">MAR</option>

@@ -83,7 +83,7 @@
   </div>
     
   <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/w_tax_modal.php'; ?>
+  <?php include 'includes/department_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
@@ -106,20 +106,17 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'w_tax_row.php',
+    url: 'department_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
       $('.decid').val(response.id);
 
-      $('#w_tax_deduction').html(response.f + ' - ' + response.t);
+      $('#name_department').html(response.name + ' - ' + response.code);
 
       
-      $('#edit_from').val(response.f);
-      $('#edit_to').val(response.t);
-      $('#edit_a').val(response.a);
-      $('#edit_b').val(response.b);
-      $('#edit_c').val(response.c);
+      $('#name_edit').val(response.name);
+      $('#code_edit').val(response.code);
     }
   });
 }

@@ -205,7 +205,8 @@ include 'includes/header.php';
                     $('#gender_val').val(response.gender).html(response.gender);
                     $('#position_val').val(response.position_id).html(response.position_code);
                     $('#regular_val').html(response.regular);
-
+                    $('#department_val').html(response.name);
+                    
                     $('#dayoff_val').html(response.day_off);
                     $('#edit_eleave').val(response.e_leave);
                     $('#datepicker_employee_sedit').val(response.created_on);

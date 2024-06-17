@@ -1,7 +1,7 @@
 <?php
 include 'includes/session.php';
 
-if (isset($_POST['print'])) {
+if (isset($_POST['prints'])) {
     $selectedOption = $_POST['description'];
 	$select_month = $_POST['select_month'];
 	$select_year = $_POST['select_year'];

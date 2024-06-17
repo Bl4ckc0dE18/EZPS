@@ -1,8 +1,7 @@
 <?php include 'includes/session.php'; ?>
 <?php
   include '../timezone.php';
-  $range_to = date('m/d/Y');
-  $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
+  
 ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-purple sidebar-mini">
@@ -53,8 +52,11 @@
              
             <div class="box-header with-border">
             <a href="#print" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Print</a>
-              <div class="pull-right">
-                <form method="POST" class="form-inline" id="payForm">
+              
+            <a href="#list" data-toggle="modal" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-print"></i> List</a>
+           <!-- <div class="pull-right">
+              
+                 <form method="POST" class="form-inline" id="payForm">
                 
                   <div class="input-group">
                     <div class="input-group-addon">
@@ -64,10 +66,10 @@
                   </div>
                   
                   <button type="button" class="btn btn-warning btn-sm btn-flat" id="list"><span class="glyphicon glyphicon-print"></span> List</button>
-                  <!-- <button type="button" class="btn btn-primary btn-sm btn-flat" id="records"><span class="glyphicon glyphicon-print"></span> Records</button> -->
+                   <button type="button" class="btn btn-primary btn-sm btn-flat" id="records"><span class="glyphicon glyphicon-print"></span> Records</button> 
                 </form>
-              </div>
-            </div>
+              </div> 
+            </div>-->
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -177,28 +179,6 @@ $(function(){
     getRow(id);
   });
 
-  $("#reservation").on('change', function(){
-    var range = encodeURI($(this).val());
-    window.location = 'deduction?range='+range;
-  });
-
-  $('#generate').click(function(e){
-    e.preventDefault();
-    $('#payForm').attr('action', 'payroll_pay.php');
-    $('#payForm').submit();
-  });
-
-  $('#list').click(function(e){
-    e.preventDefault();
-    $('#payForm').attr('action', 'deduction_records_generate');
-    $('#payForm').submit();
-  });
-
-  $('#records').click(function(e){
-    e.preventDefault();
-    $('#payForm').attr('action', 'benefits_records_generate');
-    $('#payForm').submit();
-  });
 
 });
 

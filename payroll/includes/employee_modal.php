@@ -247,11 +247,22 @@
 
                 
                 <div class="form-group">
-                    <label for="edit_hour" class="col-sm-2 control-label">Required Hour</label>
+                <label for="department" class="col-sm-2 control-label">Department</label>
 
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control" id="edit_hour" name="edit_hour">
-                    </div> 
+                <div class="col-sm-4">
+                <select class="form-control" name="department" id="department" required>  
+                  <option selected id="department_val"></option>
+                  <?php
+                  $sql = "SELECT * FROM department";
+                  $query = $conn->query($sql);
+                  while($prow = $query->fetch_assoc()){
+                    echo "
+                    <option value='".$prow['code']."'>".$prow['name']."</option>
+                    ";
+                  }
+                  ?>
+                </select> 
+                </div> 
 
                     <label for="datepicker_edit" class="col-sm-2 control-label">Birthdate</label>
 
