@@ -1,9 +1,7 @@
 <?php
 include 'includes/session.php';
 
-	$select_month = $_POST['select_month'];
-	$select_year = $_POST['select_year'];
-function generateRow($conn, $pdf,$select_month,$select_year){
+function generateRow($conn, $pdf){
 	$totalSalary = 0;
 	$totalMonthly_Salary = 0; 
 	
@@ -54,10 +52,6 @@ function generateRow($conn, $pdf,$select_month,$select_year){
 	$totaltotal_eeph_db_per_employee = 0;
 	$totaltotal_eep_db_per_employee = 0;
 
-	$date_str = $select_year . '-' . $select_month . '-01';
-	$from = date('Y-m-d', strtotime($date_str));
-	$to = date('Y-m-d', strtotime('last day of ' . $date_str));
-
 	$sql ="SELECT 
 	employee_id,
 	netpay,
@@ -73,11 +67,6 @@ function generateRow($conn, $pdf,$select_month,$select_year){
 
 	FROM 
 	payslip
-	WHERE MONTH(datefrom) >= $select_month 
-    AND MONTH(dateto) <= $select_month 
-    AND YEAR(datefrom) = $select_year 
-    AND YEAR(dateto) = $select_year
-	
 
 	GROUP BY 
 		employee_id
@@ -88,53 +77,46 @@ function generateRow($conn, $pdf,$select_month,$select_year){
 
     // Start HTML table
     $html = '
-    <h2 align="center">POWER BY EZ PAYROLL SYSTEM</h2>
+    <h2 align="center">POWERED BY EZ PAYROLL SYSTEM<br>DEDUCTION AND LOAN RECORDS</h2>
     <p align="center"><b>TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES<br>
     Ayala Blvd. Ermita, Manila<br>
-    For the period '.date('M d, Y', strtotime($from)).' - '.date('M d, Y', strtotime($to)).' </b></p>
+    For the period </b></p>
     <h4 align="left">We acknowledge receipt of cash shown opposite names as full comppensation for services rendered for the period covered.<br>
     <b>ADMINISTRATIVE SECTOR</b></h4>
     <table border="0" cellspacing="0" cellpadding="3">
 	<tr>  
-	<th border="1" width="3%" rowspan="2" align="center"><b><br><br><br><br>NO</b></th>
-	<th border="1" width="8%" rowspan="2" align="center"><b><br><br><br><br>NAME</b></th>
-	<th border="1" width="6%" rowspan="2" align="center"><b><br><br><br><br>POSITION</b></th>
-	<th border="1" width="4%" rowspan="2" align="center"><b><br><br><br><br>EMPLO<br>YEE <br>NO</b></th>
-	<th border="1"  width="6%" rowspan="2" align="center"><b><br><br><br><br>MONTHLY SALARY</b></th>
-	<th border="1" width="12%" height="2" rowspan="1"  align="center"><b><br>OTHER COMPENSATION</b></th>
-
-	<th border="1" width="7%" rowspan="2"	align="center" ><b><br><br><br><br><br>GROSS AMOUNT <BR>EARNED</b></th>
-	<th border="1" width="42%" rowspan="1" colspan="7" align="center" ><b><br><br>DEDUCTIONS</b></th>
+	<th border="1" width="5%" rowspan="2" align="center"><b><br><br><br><br>NO</b></th>
+	<th border="1" width="10%" rowspan="2" align="center"><b><br><br><br><br>NAME</b></th>
+	<th border="1" width="10%" rowspan="2" align="center"><b><br><br><br><br>POSITION</b></th>
+	<th border="1" width="8%" rowspan="2" align="center"><b><br><br><br><br>EMPLO<br>YEE <br>NO</b></th>
+	<th border="1" width="60%" rowspan="1" colspan="7" align="center" ><b><br><br>DEDUCTIONS</b></th>
 	
-	<th border="1" width="7%" rowspan="2" align="center" ><b><br><br><br><br>TOTAL<br>DEDUCTIONS</b></th>
-	<th border="1" width="7%" rowspan="1" align="center" ><b><br><br><br><br>NET AMOUNT DUE<br> <br>. </b></th>
+	<th border="1" width="10%" rowspan="2" align="center" ><b><br><br><br><br>TOTAL<br>DEDUCTIONS</b></th>
+	
 </tr>
 
 <tr>
 		
-		<th border="1" width="6%" align="center"><b><br>PERSONAL<br>ECONOMIC<br>RELIEF<br>ALLOWANCE</b></th>
-		<th width="6%" align="center"><b><br><br>ADDITIONAL COMPENS.</b></th>
 
-		<th class="bottom-border" width="2%" align="center"><b>@<br>#<br>.<br>&<br>!</b></th>
-		<th class="bottom-border right-border" width="5%"><b>Disallowance<br>Ref-Sal<br>Ref-Ocom<br>NHMC<br>MP2</b></th>
+		<th class="bottom-border" width="3%" align="center"><b>@<br>#<br>.<br>&<br>!</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Disallowance<br>Ref-Sal<br>Ref-Ocom<br>NHMC<br>MP2</b></th>
 
-		<th class="bottom-border" width="2%" align="center"><b>a<br>b<br>c<br>d<br>e</b></th>
-		<th class="bottom-border right-border" width="5%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
+		<th class="bottom-border" width="3%" align="center"><b>a<br>b<br>c<br>d<br>e</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
 
-		<th class="bottom-border" width="2%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
-		<th class="bottom-border right-border" width="5%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GSIS GFAL</b></th>
+		<th class="bottom-border" width="3%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
+		<th class="bottom-border right-border" width="7%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GSIS GFAL</b></th>
 
-		<th class="bottom-border" width="2%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
-		<th class="bottom-border right-border" width="5%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>
+		<th class="bottom-border" width="3%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
+		<th class="bottom-border right-border" width="7%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>
 
-		<th  class="bottom-border" width="2%" align="center"><b>p<br>q<br>r<br>s<br>t</b></th>
-		<th class="bottom-border right-border" width="5%"><b>HDMF MPL<br>H\'DMF Res<br>HDMF Con<br>LBP<br>TUPM-Cd</b></th>
+		<th  class="bottom-border" width="3%" align="center"><b>p<br>q<br>r<br>s<br>t</b></th>
+		<th class="bottom-border right-border" width="7%"><b>HDMF MPL<br>H\'DMF Res<br>HDMF Con<br>LBP<br>TUPM-Cd</b></th>
 
-		<th  class="bottom-border" width="2%" align="center"><b>u<br>v<br>w<br>x<br>y</b></th>
-		<th class="bottom-border right-border" width="5%"><b>Fin Ass<br>GSIS Educ<br>TUPAEA<br>TUPFA<br>HDMF Eme</b></th>
+		<th  class="bottom-border" width="3%" align="center"><b>u<br>v<br>w<br>x<br>y</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Fin Ass<br>GSIS Educ<br>TUPAEA<br>TUPFA<br>HDMF Eme</b></th>
 
-		<th  class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></th>
-		<th class="bottom-border right-border" width="5%" align="right" ><b>1st half<br><br>2nd half</b></th>
+	
 
 		
 </tr>';
@@ -849,12 +831,7 @@ if($totalHDMF_Eme == 0){
 		<td border="1" align="left">'.$position.'<br><br>'.$step.'<br><br>'.$sg.'</td>
 
 		<td border="1" align="center">'.$row['employee_id'].'</td>
-		
-		<td border="1" align="right">'.number_format($monthly_salary, 2).'</td>
-		<td border="1" align="right">'.number_format($totalallowance, 2).'</td>
-		
-		<td border="1" align="right">-</td>
-		<td border="1" width="7%" align="right">'.number_format($netPay, 2).'</td>
+
 
 		
 		<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
@@ -876,17 +853,15 @@ if($totalHDMF_Eme == 0){
 		<td class="bottom-border right-border"  align="right"><b>'.$Fin_Ass_value.'<br>'.$GSIS_Educ_value.'<br>'.$TUPAEA_value.'<br>'.$TUPFA_value.'<br>'.$HDMF_Eme_value.'</b></td>
 
 		
-		<td border="1" width="7%" align="right">'.number_format($totaldeduction_db, 2).'</td>
+		<td border="1" width="10%" align="right">'.number_format($totaldeduction_db, 2).'</td>
 		
 
-		<td class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></td>
-		<td class="bottom-border right-border" width="5%" align="right"><b>'.number_format($first_half, 2).'<br><br>'.number_format($first_half, 2).'</b></td>
-
+		
 
 	</tr>';
 
         // Check if 4 rows have been printed
-        if ($count % 4 == 0 && $query->num_rows > $count) {
+        if ($count % 15 == 0 && $query->num_rows > $count) {
             // Display subtotal net pay for the previous four rows
             $html .= '
 			<style>
@@ -906,11 +881,7 @@ if($totalHDMF_Eme == 0){
 
 			<td border="1"  align="center"></td>
 			
-			<td border="1" align="right">'.number_format($totalMonthly_Salary, 2).'</td>
-			<td border="1" align="right">'.number_format($totalallowance_db_per_employee, 2).'</td>
 			
-			<td border="1" align="right">-</td>
-			<td border="1" width="7%" align="right">'.number_format($totalSalary, 2).'</td>
 
 			
 			<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
@@ -932,102 +903,13 @@ if($totalHDMF_Eme == 0){
 			<td class="bottom-border right-border" align="right"><b>'.$totalFin_Ass_value.'<br>'.$totalGSIS_Educ_value.'<br>'.$totalTUPAEA_value.'<br>'.$totalTUPFA_value.'<br>'.$totalHDMF_Eme_value.'</b></td>
 
 			
-			<td border="1" width="7%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
+			<td border="1" width="10%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
 			
 
-			<td class="bottom-border" width="2%" align="center"><b><br><br>*<br><br>.<br></b></td>
-			<td class="bottom-border right-border" width="5%"align="right"><b>'.number_format($totalsalaryfirstandsecond, 2).'<br><br>'.number_format($totalfirst_half_db_per_employee , 2).'<br><br><br>'.number_format($totalsecond_half_db_per_employee , 2).'</b></td>
-
+		
 		</tr>';
 				//footer
-				$html .= '
-				<style>
-					.right-border {
-					border-right: 1px solid black; 
-					}
-					.bottom-border {	
-					border-bottom: 1px solid black;		
-					}
-					.left-border {	
-						border-left: 1px solid black;		
-					}
-					.top-border {	
-							border-top: 1px solid black;		
-					}
-				</style>
-					<tr>
-						<td border="1" rowspan="1"  align="center">A</td>
-						<td colspan="9" align="left">CERTIFIED: Service duly rendered as stated</td>
-		
-						<td border="1"colspan="1" align="center">C</td>
-						<td class="right-border" colspan="12" align="left">  APPROVED FOR PAYMENT:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________________ P___________________</td>
-						
-					</tr>
-		
-					<tr>
-						<td class="left-border right-border" colspan="10" align="center" ><br></td>
-						<td class="right-border" colspan="13" align="center" ><br></td>
-					</tr>
-					<tr>
-						
-						<td class="left-border bottom-border" colspan="2" align="center" ><br></td>
-						<td class="bottom-border right-border "colspan="8" align="left"><b>ATTY. CHRISTOPHER M. MORTEL</b>
-						<br>Supervising Adminstrative Officer, HRMS</td>
-		
-						<td class="left-border bottom-border" colspan="3" align="center" ><br></td>
-						<td class="bottom-border right-border "colspan="10" align="left"><b>PURABELLA R. ARGON</b>
-						<br>Vice President for Adminstrative and Finance</td>
-					</tr>
-		
-					<tr>
-						<td border="1" rowspan="1"  align="center">B</td>
-						<td colspan="9" align="left">CERTIFIED: Supporting documents complete and proper;
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						and crash available in the amount of P</td>
-						
-						<td border="1" rowspan="1"  align="center">D</td>
-						<td colspan="13" class="right-border" align="left">CERTIFIED: Each employee whom name appears shown has been 
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						paid the amount indicated opposite is/her name.</td>
-					</tr>
-		
-					<tr>
-						<td class="left-border" rowspan="1"  align="center"></td>
-						<td colspan="9" align="left"></td>
-						
-						<td class="left-border" rowspan="1"  align="center"></td>
-						<td colspan="9" align="left"></td>
-		
-						<td colspan="1" align="left">OR No.</td>
-						<td colspan="3" class="right-border" align="left">_________________</td>
-		
-					</tr>
-		
-					<tr>
-						<td colspan="2" class="left-border bottom-border" rowspan="1"  align="center"></td>
-						<td colspan="8" class="bottom-border" align="left"><b>CATALINO A. FORTES JR.</b>
-						<br>Head, Accountant Services</td>
-						
-						<td class="left-border bottom-border" rowspan="1"  align="center"></td>
-							<td class="bottom-border" colspan="9" align="left"> __________________________________________________________________<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							S.D.O
-						</td>
-		
-						<td class="bottom-border" colspan="1" align="left">Date:</td>
-						<td colspan="3" class="bottom-border right-border" align="left">_________________</td>
-		
-					</tr>
-					
-					
-					
-				';
+				
            // Reset subtotal net pay for the next set of four rows
 		   $totalSalary = 0;
 		   $totalMonthly_Salary = 0; 
@@ -1084,56 +966,49 @@ if($totalHDMF_Eme == 0){
             $pdf->AddPage(); // Add a new page after the subtotal
             // Reset HTML content for the new page
             $html = '
-            <h2 align="center">POWER BY EZ PAYROLL SYSTEM</h2>
-            <p align="center"><b>TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES<br>
-            Ayala Blvd. Ermita, Manila<br>
-            For the period '.date('M d, Y', strtotime($from)).' - '.date('M d, Y', strtotime($to)).' </b></p>
-            <h4 align="left">We acknowledge receipt of cash shown opposite names as full comppensation for services rendered for the period covered.<br>
-            <b>ADMINISTRATIVE SECTOR</b></h4>
-            <table border="0" cellspacing="0" cellpadding="3">
-			<tr>  
-			<th border="1" width="3%" rowspan="2" align="center"><b><br><br><br><br>NO</b></th>
-			<th border="1" width="8%" rowspan="2" align="center"><b><br><br><br><br>NAME</b></th>
-			<th border="1" width="6%" rowspan="2" align="center"><b><br><br><br><br>POSITION</b></th>
-			<th border="1" width="4%" rowspan="2" align="center"><b><br><br><br><br>EMPLO<br>YEE <br>NO</b></th>
-			<th border="1"  width="6%" rowspan="2" align="center"><b><br><br><br><br>MONTHLY SALARY</b></th>
-			<th border="1" width="12%" height="2" rowspan="1"  align="center"><b><br>OTHER COMPENSATION</b></th>
+    <h2 align="center">POWERED BY EZ PAYROLL SYSTEM<br>DEDUCTION AND LOAN RECORDS</h2>
+    <p align="center"><b>TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES<br>
+    Ayala Blvd. Ermita, Manila<br>
+    For the period </b></p>
+    <h4 align="left">We acknowledge receipt of cash shown opposite names as full comppensation for services rendered for the period covered.<br>
+    <b>ADMINISTRATIVE SECTOR</b></h4>
+    <table border="0" cellspacing="0" cellpadding="3">
+	<tr>  
+	<th border="1" width="5%" rowspan="2" align="center"><b><br><br><br><br>NO</b></th>
+	<th border="1" width="10%" rowspan="2" align="center"><b><br><br><br><br>NAME</b></th>
+	<th border="1" width="10%" rowspan="2" align="center"><b><br><br><br><br>POSITION</b></th>
+	<th border="1" width="8%" rowspan="2" align="center"><b><br><br><br><br>EMPLO<br>YEE <br>NO</b></th>
+	<th border="1" width="60%" rowspan="1" colspan="7" align="center" ><b><br><br>DEDUCTIONS</b></th>
 	
-			<th border="1" width="7%" rowspan="2"	align="center" ><b><br><br><br><br><br>GROSS AMOUNT <BR>EARNED</b></th>
-			<th border="1" width="42%" rowspan="1" colspan="7" align="center" ><b><br><br>DEDUCTIONS</b></th>
-			
-			<th border="1" width="7%" rowspan="2" align="center" ><b><br><br><br><br>TOTAL<br>DEDUCTIONS</b></th>
-			<th border="1" width="7%" rowspan="1" align="center" ><b><br><br><br><br>NET AMOUNT DUE<br> <br>. </b></th>
-		</tr>
+	<th border="1" width="10%" rowspan="2" align="center" ><b><br><br><br><br>TOTAL<br>DEDUCTIONS</b></th>
 	
-		<tr>
-				
-				<th border="1" width="6%" align="center"><b><br>PERSONAL<br>ECONOMIC<br>RELIEF<br>ALLOWANCE</b></th>
-				<th width="6%" align="center"><b><br><br>ADDITIONAL COMPENS.</b></th>
+</tr>
+
+<tr>
+		
+
+		<th class="bottom-border" width="3%" align="center"><b>@<br>#<br>.<br>&<br>!</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Disallowance<br>Ref-Sal<br>Ref-Ocom<br>NHMC<br>MP2</b></th>
+
+		<th class="bottom-border" width="3%" align="center"><b>a<br>b<br>c<br>d<br>e</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
+
+		<th class="bottom-border" width="3%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
+		<th class="bottom-border right-border" width="7%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GSIS GFAL</b></th>
+
+		<th class="bottom-border" width="3%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
+		<th class="bottom-border right-border" width="7%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>
+
+		<th  class="bottom-border" width="3%" align="center"><b>p<br>q<br>r<br>s<br>t</b></th>
+		<th class="bottom-border right-border" width="7%"><b>HDMF MPL<br>H\'DMF Res<br>HDMF Con<br>LBP<br>TUPM-Cd</b></th>
+
+		<th  class="bottom-border" width="3%" align="center"><b>u<br>v<br>w<br>x<br>y</b></th>
+		<th class="bottom-border right-border" width="7%"><b>Fin Ass<br>GSIS Educ<br>TUPAEA<br>TUPFA<br>HDMF Eme</b></th>
+
 	
-				<th class="bottom-border" width="2%" align="center"><b>@<br>#<br>.<br>&<br>!</b></th>
-				<th class="bottom-border right-border" width="5%"><b>Disallowance<br>Ref-Sal<br>Ref-Ocom<br>NHMC<br>MP2</b></th>
-	
-				<th class="bottom-border" width="2%" align="center"><b>a<br>b<br>c<br>d<br>e</b></th>
-				<th class="bottom-border right-border" width="5%"><b>Integ-Ins<br>W/tax<br>Philhealth<br>GSIS MPL<br>GSIS Sal</b></th>
-	
-				<th class="bottom-border" width="2%" align="center"><b>f<br>g<br>h<br>i<br>j</b></th>
-				<th class="bottom-border right-border" width="5%"><b>GSIS Pol<br>GSIS ELA<br>GSIS Opin<br>GSIS OpLo<br>GSIS GFAL</b></th>
-	
-				<th class="bottom-border" width="2%" align="center"><b>k<br>l<br>m<br>n<br>o</b></th>
-				<th class="bottom-border right-border" width="5%"><b>GSIS HIP<br>GSIS CPL<br>GSIS SOS<br>GSIS Eplan<br>GSIS Ecard</b></th>
-	
-				<th  class="bottom-border" width="2%" align="center"><b>p<br>q<br>r<br>s<br>t</b></th>
-				<th class="bottom-border right-border" width="5%"><b>HDMF MPL<br>H\'DMF Res<br>HDMF Con<br>LBP<br>TUPM-Cd</b></th>
-	
-				<th  class="bottom-border" width="2%" align="center"><b>u<br>v<br>w<br>x<br>y</b></th>
-				<th class="bottom-border right-border" width="5%"><b>Fin Ass<br>GSIS Educ<br>TUPAEA<br>TUPFA<br>HDMF Eme</b></th>
-	
-				<th  class="bottom-border" width="2%" align="center"><b>*<br><br>.<br></b></th>
-				<th class="bottom-border right-border" width="5%" align="right" ><b>1st half<br><br>2nd half</b></th>
-	
-				
-		</tr>';
+
+		
+</tr>';
         }
 		
     }
@@ -1156,11 +1031,7 @@ if($totalHDMF_Eme == 0){
 
 			<td border="1"  align="center"></td>
 			
-			<td border="1" align="right">'.number_format($totalMonthly_Salary, 2).'</td>
-			<td border="1" align="right">'.number_format($totalallowance_db_per_employee, 2).'</td>
-			
-			<td border="1" align="right">-</td>
-			<td border="1" width="7%" align="right">'.number_format($totalSalary, 2).'</td>
+		
 
 			
 			<td class="bottom-border" align="center"><b>@<br>#<br>.<br>&<br>!</b></td>
@@ -1182,109 +1053,20 @@ if($totalHDMF_Eme == 0){
 			<td class="bottom-border right-border" align="right"><b>'.$totalFin_Ass_value.'<br>'.$totalGSIS_Educ_value.'<br>'.$totalTUPAEA_value.'<br>'.$totalTUPFA_value.'<br>'.$totalHDMF_Eme_value.'</b></td>
 
 			
-			<td border="1" width="7%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
+			<td border="1" width="10%" align="right">'.number_format($totaldeduction_db_per_employee, 2).'</td>
 			
 
-			<td class="bottom-border" width="2%" align="center"><b><br><br>*<br><br>.<br></b></td>
-			<td class="bottom-border right-border" width="5%"align="right"><b>'.number_format($totalsalaryfirstandsecond, 2).'<br><br>'.number_format($totalfirst_half_db_per_employee , 2).'<br><br><br>'.number_format($totalsecond_half_db_per_employee , 2).'</b></td>
-
+		
 		</tr>';
 		//footer
-		$html .= '
-		<style>
-			.right-border {
-			border-right: 1px solid black; 
-			}
-			.bottom-border {	
-			border-bottom: 1px solid black;		
-			}
-			.left-border {	
-				border-left: 1px solid black;		
-			}
-			.top-border {	
-					border-top: 1px solid black;		
-			}
-		</style>
-			<tr>
-				<td border="1" rowspan="1"  align="center">A</td>
-				<td colspan="9" align="left">CERTIFIED: Service duly rendered as stated</td>
-
-				<td border="1"colspan="1" align="center">C</td>
-				<td class="right-border" colspan="12" align="left">  APPROVED FOR PAYMENT:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________________ P___________________</td>
-				
-			</tr>
-
-			<tr>
-				<td class="left-border right-border" colspan="10" align="center" ><br></td>
-				<td class="right-border" colspan="13" align="center" ><br></td>
-			</tr>
-			<tr>
-				
-				<td class="left-border bottom-border" colspan="2" align="center" ><br></td>
-				<td class="bottom-border right-border "colspan="8" align="left"><b>ATTY. CHRISTOPHER M. MORTEL</b>
-				<br>Supervising Adminstrative Officer, HRMS</td>
-
-				<td class="left-border bottom-border" colspan="3" align="center" ><br></td>
-				<td class="bottom-border right-border "colspan="10" align="left"><b>PURABELLA R. ARGON</b>
-				<br>Vice President for Adminstrative and Finance</td>
-			</tr>
-
-			<tr>
-				<td border="1" rowspan="1"  align="center">B</td>
-				<td colspan="9" align="left">CERTIFIED: Supporting documents complete and proper;
-				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				and crash available in the amount of P</td>
-				
-				<td border="1" rowspan="1"  align="center">D</td>
-				<td colspan="13" class="right-border" align="left">CERTIFIED: Each employee whom name appears shown has been 
-				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				paid the amount indicated opposite is/her name.</td>
-			</tr>
-
-			<tr>
-				<td class="left-border" rowspan="1"  align="center"></td>
-				<td colspan="9" align="left"></td>
-				
-				<td class="left-border" rowspan="1"  align="center"></td>
-				<td colspan="9" align="left"></td>
-
-				<td colspan="1" align="left">OR No.</td>
-				<td colspan="3" class="right-border" align="left">_________________</td>
-
-			</tr>
-
-			<tr>
-				<td colspan="2" class="left-border bottom-border" rowspan="1"  align="center"></td>
-				<td colspan="8" class="bottom-border" align="left"><b>CATALINO A. FORTES JR.</b>
-				<br>Head, Accountant Services</td>
-				
-				<td class="left-border bottom-border" rowspan="1"  align="center"></td>
-					<td class="bottom-border" colspan="9" align="left"> __________________________________________________________________<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					S.D.O
-				</td>
-
-				<td class="bottom-border" colspan="1" align="left">Date:</td>
-				<td colspan="3" class="bottom-border right-border" align="left">_________________</td>
-
-			</tr>
-			
-			
-			
-		';
+		
     $html .= '</table>'; // Close HTML table
 
     $pdf->writeHTML($html); // Write HTML content to PDF
 }
 
 require_once('../tcpdf/tcpdf.php');  
-    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
+    $pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
     $pdf->SetCreator(PDF_CREATOR);  
     $pdf->SetTitle('EZ PAYROLL SYSTEM');  
     $pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
@@ -1300,7 +1082,7 @@ require_once('../tcpdf/tcpdf.php');
     $pdf->SetFont('helvetica', '', 5);   
 
 $pdf->AddPage();
-generateRow($conn, $pdf,$select_month,$select_year);  
+generateRow($conn, $pdf);  
 
-$pdf->Output('payroll.pdf', 'I');
+$pdf->Output('deduction_and_loan_records.pdf', 'I');
 ?>

@@ -53,8 +53,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
+              <a href="#pay" id="paybtn" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-peso-sign">₱</i> Generate</a>
+
               <div class="pull-right">
-                <form method="POST" class="form-inline" id="payForm">
+              <a href="#print" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Print</a>
+                <!-- <form method="POST" class="form-inline" id="payForm">
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
@@ -64,7 +67,7 @@
                   <button type="button" class="btn btn-success btn-sm btn-flat" id="generate"><span class="glyphicon glyphicon-print"></span> Generate</button>
                   <button type="button" class="btn btn-warning btn-sm btn-flat" id="payroll"><span class="glyphicon glyphicon-print"></span> Payroll</button>
                   <button type="button" class="btn btn-primary btn-sm btn-flat" id="payslip"><span class="glyphicon glyphicon-print"></span> Payslip</button>
-                </form>
+                </form> -->
               </div>
             </div>
             <div class="box-body">
@@ -85,7 +88,7 @@
                   <?php
                        
                     
-                    $to = date('Y-m-d');
+                    /*$to = date('Y-m-d');
                     $from = date('Y-m-d', strtotime('-15 day', strtotime($to)));
 
                     if(isset($_GET['range'])){
@@ -93,12 +96,12 @@
                       $ex = explode(' - ', $range);
                       $from = date('Y-m-d', strtotime($ex[0]));
                       $to = date('Y-m-d', strtotime($ex[1]));
-                    }
+                    }*/
                      
                     
 
                     //$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
-                    $sqld = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
+                    $sqld = "SELECT * FROM payslip";
                      //$sqld = "SELECT * FROM payslip ";
                     $query = $conn->query($sqld);
                     //$status = ($row['paystatus'])?'<span class="label label-danger pull-right">Paid</span>':'<span class="label label-warning pull-right">Pending</span>';
@@ -193,11 +196,12 @@ $(function(){
     window.location = 'payroll?range='+range;
   });
 
-  $('#generate').click(function(e){
+  $('#pays').click(function(e){
   e.preventDefault();
-  $('#payForm').attr('action', 'payroll_pay');
-  $('#generate').prop('disabled', true); // Disable the button
-  $('#payForm').submit();
+  $('#pays').prop('disabled', true); // Disable the button
+  $('#paybtn').prop('disabled', true); // Disable the button
+  $('#pay').modal('hide')
+  $('#paysForm').submit();
   showConsoleLogMessage('Please wait while the <br>payroll is being calculating');
 
 });

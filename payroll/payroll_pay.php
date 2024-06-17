@@ -11,14 +11,24 @@
 	require './PHPMailer/src/PHPMailer.php';
 	require './PHPMailer/src/SMTP.php';
 
+	$selectedOption = $_POST['description'];
+	$select_month = $_POST['select_month'];
+	$select_year = $_POST['select_year'];
 
-	$range = $_POST['date_range'];
+	/*$range = $_POST['date_range'];
 	$ex = explode(' - ', $range);
 	$from = date('Y-m-d', strtotime($ex[0]));
 	$to = date('Y-m-d', strtotime($ex[1]));
+	*/
+	$select_month = $_POST['select_month']; // Assuming select_month is a select input from a form
+	$select_year = $_POST['select_year']; // Assuming select_year is a select input from a form
 
-	$from_title = date('M d, Y', strtotime($ex[0]));
-	$to_title = date('M d, Y', strtotime($ex[1]));
+	// Convert $select_month to a two-digit format if necessary
+	$select_month = str_pad($select_month, 2, '0', STR_PAD_LEFT);
+
+	$date_str = $select_year . '-' . $select_month . '-01';
+	$from = date('Y-m-d', strtotime($date_str));
+	$to = date('Y-m-d', strtotime('last day of ' . $date_str));
 
 	$generateby = $user['firstname'].' '.$user['lastname'];
 	$sql = "SELECT *, 
@@ -32,7 +42,11 @@
 			employees ON employees.id=attendance.employee_id 
 			LEFT JOIN 
 			position ON position.id=employees.position_id 
-			WHERE num_wl = 0 AND date BETWEEN '$from' AND '$to' 
+			WHERE num_wl = 0 
+			AND MONTH(date) >= $select_month 
+    		AND MONTH(date) <= $select_month 
+    		AND YEAR(date) = $select_year 
+    		AND YEAR(date) = $select_year
 			GROUP BY attendance.employee_id
 			ORDER BY employees.lastname ASC, employees.firstname ASC";
 
@@ -198,7 +212,8 @@
 			}
 		}
 	}
+
 	$_SESSION['error'] ='This date from '.date('M d, Y', strtotime($from)).' to '.date('M d, Y', strtotime($to)).' already calculated';
 
-	header('location: payroll?range='.$range);
+	header('location: payroll');
 ?>

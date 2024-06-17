@@ -95,7 +95,7 @@
           </a>
           <ul class="treeview-menu">
 
-            <li><a href="benefits"><i class="fa fa-circle-o"></i> Benefit Records</a></li>
+            <li><a href="deduction"><i class="fa fa-circle-o"></i> Deduction Records</a></li>
             <!-- <li><a href="sss"><i class="fa fa-circle-o"></i> SSS</a></li> -->
             <li><a href="gsis"><i class="fa fa-circle-o"></i> GSIS</a></li>
             <li><a href="pagibig"><i class="fa fa-circle-o"></i> PAG-IBIG</a></li>
@@ -113,7 +113,23 @@
         <!--  -->
         
         <?php if($position == 'Admin' ||$position == 'Human Resources' ){?>
-        <li><a href="position"><i class="fa fa-building"></i> <span>Positions</span></a></li>
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-building"></i>
+            <span>Organization</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+            
+            <li><a href="position"><i class="fa fa-circle-o"></i> <span>Positions</span></a></li>
+            <li><a href="department"><i class="fa fa-circle-o"></i> <span>Departments</span></a></li>
+
+          </ul>
+        </li>
+       
         <?php } if($position == 'Admin' ){?>
         <li><a href="user"><i class="fa fa-user"></i> <span>User</span></a></li>
         <?php }?>

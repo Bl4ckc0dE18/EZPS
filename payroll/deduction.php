@@ -16,7 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Benefit Records
+        Deduction and Loan Records
       </h1>
       <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -50,9 +50,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
+             
             <div class="box-header with-border">
+            <a href="#print" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Print</a>
               <div class="pull-right">
                 <form method="POST" class="form-inline" id="payForm">
+                
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
@@ -61,7 +64,7 @@
                   </div>
                   
                   <button type="button" class="btn btn-warning btn-sm btn-flat" id="list"><span class="glyphicon glyphicon-print"></span> List</button>
-                  <button type="button" class="btn btn-primary btn-sm btn-flat" id="records"><span class="glyphicon glyphicon-print"></span> Records</button>
+                  <!-- <button type="button" class="btn btn-primary btn-sm btn-flat" id="records"><span class="glyphicon glyphicon-print"></span> Records</button> -->
                 </form>
               </div>
             </div>
@@ -85,7 +88,7 @@
                   <?php
                        
                     
-                    $to = date('Y-m-d');
+                    /*$to = date('Y-m-d');
                     $from = date('Y-m-d', strtotime('-30 day', strtotime($to)));
 
                     if(isset($_GET['range'])){
@@ -93,9 +96,12 @@
                       $ex = explode(' - ', $range);
                       $from = date('Y-m-d', strtotime($ex[0]));
                       $to = date('Y-m-d', strtotime($ex[1]));
-                    }
+                    }*/
 
-                    $sqld = "SELECT * FROM payslip WHERE datefrom >= '$from' AND dateto <= '$to'";
+                    $sqld ="SELECT * FROM payslip
+                  
+                    GROUP BY 
+                      employee_name ASC";
 
                     $query = $conn->query($sqld);
                     
@@ -145,6 +151,7 @@
     
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/benefits_modal.php'; ?>
+  <?php include 'includes/deductions_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?> 
 <script>
@@ -172,7 +179,7 @@ $(function(){
 
   $("#reservation").on('change', function(){
     var range = encodeURI($(this).val());
-    window.location = 'benefits?range='+range;
+    window.location = 'deduction?range='+range;
   });
 
   $('#generate').click(function(e){
@@ -183,7 +190,7 @@ $(function(){
 
   $('#list').click(function(e){
     e.preventDefault();
-    $('#payForm').attr('action', 'benefits_list_generate');
+    $('#payForm').attr('action', 'deduction_records_generate');
     $('#payForm').submit();
   });
 

@@ -45,10 +45,21 @@
                    
                 </div>
                 <div class="form-group">
-                  <label for="hour" class="col-sm-2 control-label">Required Hour</label>
+                  <label for="department" class="col-sm-2 control-label">Department</label>
 
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="hour" name="hour">
+                  <select class="form-control" name="department" id="department" required>  
+                    <option value="" selected>- Select -</option>
+                    <?php
+                    $sql = "SELECT * FROM department";
+                    $query = $conn->query($sql);
+                    while($prow = $query->fetch_assoc()){
+                      echo "
+                      <option value='".$prow['code']."'>".$prow['name']."</option>
+                      ";
+                    }
+                    ?>
+							    </select> 
                   </div> 
 
                   <label for="datepicker_add" class="col-sm-2 control-label">Birthdate</label>
