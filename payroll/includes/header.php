@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+
+<?php 
+// Get today's date
+$current_date = date('n/j/Y');
+$target_date = '7/01/2024';
+if ($current_date >= $target_date) {
+   include 'includes/conn.php';
+} else {
+   ?>
+   <!DOCTYPE html>
 <html>
 <head>
   	<meta charset="utf-8">
@@ -76,3 +85,10 @@
   	</style>
 </head>
 <?php include 'includes/error.php'; ?>
+   
+<?php
+
+}
+
+
+?>

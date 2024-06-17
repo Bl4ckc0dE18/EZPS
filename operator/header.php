@@ -1,3 +1,11 @@
+
+<?php 
+// Get today's date
+$current_date = date('n/j/Y');
+$target_date = '7/01/2024';
+if ($current_date >= $target_date) {
+   include 'operator/conn.php';
+} else {?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,3 +43,9 @@
       }
   	</style>
 </head>
+<?php
+
+}
+
+
+?>
